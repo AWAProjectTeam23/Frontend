@@ -3,9 +3,9 @@ import Mainpage from "./MainSide/Mainpage";
 import Customerpage from "./CustomerSide/Customerpage";
 import Managerpage from "./ManagerSide/Managerpage";
 
-class App {
+class App extends React.Component{
   constructor(props){
-    super(props)
+    super(props);
     this.state={
       LoginMode:0
     }
@@ -14,20 +14,22 @@ class App {
 
   
 render(){
-  if(LoginMode==0)
-  {return (
+  if(this.state.LoginMode===0)
+  {
+    return (
     <div>
         <Mainpage/>
     </div>
-  );}
-  if(LoginMode==1){
+  );
+}
+  if(this.state.LoginMode===1){
     return (
       <div>
           <Customerpage/>
       </div>
     );
   }
-  if(LoginMode==2){
+  if(this.state.LoginMode===2){
     return (
       <div>
           <Managerpage/>

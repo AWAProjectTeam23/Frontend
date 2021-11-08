@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function Managerbody() {
-    return (
-        <div>
-            
-        </div>
-    )
+export default class Managerbody extends Component {
+    render() {
+        return (
+            <div>
+                
+            </div>
+        )
+    }
 }

@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Managerbar from './Managerbar'
 import Managerbody from './Managerbody'
 
-export default function Managerpage() {
-    return (
-        <div>
+export default class Managerpage extends Component {
+    constructor(props){
+
+    }
+
+    render(){
+        return (
             <div>
-                <Managerbar/>
+                <div>
+                    <Managerbar/>
+                </div>
+                <div>
+                    <Managerbody/>
+                </div>
             </div>
-            <div>
-                <Managerbody/>
-            </div>
-        </div>
-    )
+        )
+    }
+    
 }

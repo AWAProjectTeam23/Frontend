@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function Customerbody() {
-    return (
-        <div>
-            
-        </div>
-    )
+export default class Customerbody extends Component {
+    render() {
+        return (
+            <div>
+                
+            </div>
+        )
+    }
 }
+

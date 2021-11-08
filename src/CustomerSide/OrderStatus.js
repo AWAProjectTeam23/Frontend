@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Managerbar() {
+export default function OrderStatus() {
     return (
         <div>
-           managerbar 
+            
         </div>
     )
 }

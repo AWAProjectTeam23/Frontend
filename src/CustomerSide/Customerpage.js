@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Customerbar from './Customerbar'
 import Customerbody from './Customerbody'
 
-export default function Customerpage() {
-    return (
-        <div>
+export default class Customerpage extends Component {
+    constructor(props){
+
+    }
+    render(){
+        return (
             <div>
-                <Customerbar/>
+                <div>
+                    <Customerbar/>
+                </div>
+                <div>
+                    <Customerbody/>
+                </div>
             </div>
-            <div>
-                <Customerbody/>
-            </div>
-        </div>
-    )
+        )
+    }
+    
 }

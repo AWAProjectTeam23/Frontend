@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Managerbar() {
+export default function CreateProduct() {
     return (
         <div>
-           managerbar 
+            
         </div>
     )
 }

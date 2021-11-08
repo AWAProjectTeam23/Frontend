@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Managerbar() {
+export default function RestaurantMenu() {
     return (
         <div>
-           managerbar 
+            
         </div>
     )
 }
