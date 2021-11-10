@@ -1,19 +1,19 @@
 import React from 'react'
-import './Main.css'
+import style from'./Main.module.css'
 import { Link } from 'react-router-dom'
 
 export default function Mainbar() {
     return (
-        <div className="MainBar">
-            <div className="Logo_margin">
-                <Link to="/Main/"><div style={{color:"white"}}>Logo</div></Link>
+        <div className={style.MainBar}>
+            <div className={style.Logo_margin}>
+                <Link to="/Main/" ><div  style={{color:"white"}}>Logo</div></Link>
             </div>
-            <div className="searchbar_margin">
-                searchbar
+            <div className={style.searchbar_margin}>
+                <input style={{height:"20px",width:"400px"}} type="text"/>
             </div>
-            <div className="button_margin">
-                <Link to="/Main/CreateAccount"><button className="button_left">createaccount</button></Link>
-                <Link to="/Main/Login"><button className="button_left">Login</button></Link>
+            <div className={style.button_margin}>
+                <Link to="/Main/CreateAccount"><button className={style.button_left}>createaccount</button></Link>
+                <Link to="/Main/Login"><button className={style.button_left}>Login</button></Link>
             </div>
         </div>
     )

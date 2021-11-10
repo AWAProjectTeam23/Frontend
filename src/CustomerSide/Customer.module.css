@@ -1,0 +1,23 @@
+.CustomerBar{
+    display: flex;
+    background-color: blue;
+    height: 40px;
+}
+.button_margin{
+    margin-left: 43%;
+    margin-top: 2px;
+}
+.button_left{
+    font-size: medium;
+    height: 35px;
+    margin-left: 20px;
+}
+.Logo_margin{
+    margin-top: 5px;
+    padding-left: 20px;
+    color: white;
+}
+.searchbar_margin{
+    margin-top: 7px;
+    margin-left: 20%;
+}
