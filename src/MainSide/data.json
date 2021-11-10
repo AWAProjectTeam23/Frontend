@@ -1,0 +1,52 @@
+{
+    "items": [
+      {
+        "id": 1,
+        "name": "nimi",
+        "address": "jokuosoite",
+        "type":"tyyppi",
+        "opening hours": "aikataulut",
+        "price": 10
+      },
+      {
+        "id": 2,
+        "name": "nimi",
+        "address": "jokuosoite",
+        "type":"tyyppi",
+        "opening hours": "aikataulut",
+        "price": 10
+      },
+      {
+        "id": 3,
+        "name": "nimi",
+        "address": "jokuosoite",
+        "type":"tyyppi",
+        "opening hours": "aikataulut",
+        "price": 10      
+    },
+      {
+        "id":4,
+        "name": "nimi",
+        "address": "jokuosoite",
+        "type":"tyyppi",
+        "opening hours": "aikataulut",
+        "price": 10
+      },
+      {
+        "id":5,
+        "name": "nimi",
+        "address": "jokuosoite",
+        "type":"tyyppi",
+        "opening hours": "aikataulut",
+        "price": 10
+            },
+        {
+            "id":6,
+            "name": "nimi",
+            "address": "jokuosoite",
+            "type":"tyyppi",
+            "opening hours": "aikataulut",
+            "price": 10
+            }
+    ]
+  }
