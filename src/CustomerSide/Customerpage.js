@@ -4,7 +4,7 @@ import Customerbody from './Customerbody'
 
 export default class Customerpage extends Component {
     constructor(props){
-
+        super(props)
     }
     render(){
         return (

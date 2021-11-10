@@ -1,36 +1,22 @@
 import { render } from '@testing-library/react';
 import React from 'react'
+import {Routes,Route} from "react-router-dom"
+import RestaurantBody from './RestaurantBody';
+import RestaurantMenu from './RestaurantMenu';
+import CreateAccount from './CreateAccount';
+import LoginAccount from './LoginAccount';
 
-export default class Mainbody extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-        }
-    }
-    
-    render(){
-        if(this.props.mode===0){
-            return (
-                <div>
-                    restaurant
-                </div>
-            )
-        }
-        if(this.props.mode===1){
-            return (
-                <div>
-                    createaccount
-                </div>
-            )
-        }
-        if(this.props.mode===2){
-            return (
-                <div>
-                    loginaccount
-                </div>
-            )
-        }
-        
-    }
-    
+export default function Mainbody (){
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<RestaurantBody/>}/>
+                <Route path="/RestaurantMenu" element={<RestaurantMenu/>}/>
+                <Route path="/CreateAccount" element={<CreateAccount/>}/>
+                <Route path="/Login" element={<LoginAccount/>}/>
+            </Routes>
+        </div>
+ )     
 }
+    
+

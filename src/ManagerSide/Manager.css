@@ -1,0 +1,14 @@
+.ManagerBar{
+    display: flex;
+    background-color: blue;
+    height: 30px;
+}
+.button_margin{
+    margin-left: 50%;
+}
+.button_left{
+    margin-left: 5px;
+}
+.Logo_margin{
+    margin-left: 10px;
+}
