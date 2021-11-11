@@ -1,0 +1,36 @@
+
+.box{
+    background-color: white;
+    border: solid 1px black;
+    width: 30%;
+    height: 400px;
+    margin-left: 35%;
+    margin-top: 5%;
+}
+.input_margin{
+    margin-top: 20%;
+    margin-left: 20%;
+}
+.input_size{
+    margin-top: 5px;
+    width: 70%;
+    height: 25px;
+}
+.button_margin{
+    margin-left: 60px;
+    margin-top: 110px;
+}
+.button_size{
+    width: 30%;
+    height: 40px;
+    font-size: large;
+    margin-left: 50px;
+}
+.head_style{
+    font-weight: bold;
+    font-size: large;
+}
+.lower_style{
+    margin-top: 20px;
+    margin-right: 50px;
+}

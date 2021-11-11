@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import Managerbar from './Managerbar'
 import Managerbody from './Managerbody'
+import data from './data.json'
+import historyData from './History.json'
 
 export default class Managerpage extends Component {
     constructor(props){
         super(props);
+        this.state={
+            item: data.order,
+            history: historyData.history
+        }
     }
 
     render(){
@@ -14,7 +20,7 @@ export default class Managerpage extends Component {
                 <Managerbar/>
                 </div>
                 <div>
-                <Managerbody/>
+                <Managerbody items={this.state.item} history={this.state.history}/>
                 </div>
             </div>
             
