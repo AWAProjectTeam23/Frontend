@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Grilled Pork Chops with Plums",
+      "restaurant": "Mykonos's Restaurant",
+      "image": "product1.png",
+      "price": "12,99 €"
+    },
+    {
+      "id": 2,
+      "name": "Grilled Vegetable Salad",
+      "restaurant": "Coffeestop cafe",
+      "image": "product2.png",
+      "price": "8,50 €"
+    },
+    {
+      "id": 3,
+      "name": "Teriyaki Chicken Kebab",
+      "restaurant": "Red Dragon",
+      "image": "product3.png",
+      "price": "11,80 €"     
+  },
+    {
+      "id":4,
+      "name": "One-Pan Chicken with Couscous",
+      "restaurant": "Special place",
+      "image": "product4.png",
+      "price": "10,35 €"
+    },
+    {
+      "id":5,
+      "name": "Barbecue Chuck Roast",
+      "restaurant": "Gourme ala carte",
+      "image": "product5.png",
+      "price": "15,99 €"
+          },
+    {
+      "id":6,
+      "name": "Braised Zucchini",
+      "restaurant": "Luxurious Dining",
+      "image": "product6.png",
+      "price": "8,99 €"
+          }
+  ]
+}

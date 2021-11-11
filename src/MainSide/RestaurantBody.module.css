@@ -4,35 +4,33 @@
   margin-top: 20px;
   margin-bottom: 5px;
   font-size: 18px;
-  font-family: Arial, Helvetica, sans-serif;
+
   width: 325px;
 }
 .price
 {
-    font-weight: 700;
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: lighter;
+    font-weight: 500;
+    font-size: 20px;
+    width: 325px;
+
+    font-weight: initial;
 }
 .openinghours
 {
     font-weight: 700;
-    margin-top: 20px;
-    margin-bottom: 5px;
     font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 325px;
+    width: 180px;
   font-weight: lighter;
   display: -webkit-box;
-     -webkit-line-clamp: 4; 
+     -webkit-line-clamp: 3; 
 }
 .type
 {
     font-weight: 700;
-    margin-top: 20px;
-    margin-bottom: 5px;
+
     font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
+margin-bottom: 7px;
+  
     width: 325px;
   font-weight: lighter;
   display: -webkit-box;
@@ -41,10 +39,9 @@
 .address
 {
     font-weight: 700;
-    margin-top: 20px;
-    margin-bottom: 5px;
+
     font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
+
     width: 325px;
   font-weight: lighter;
   display: -webkit-box;
@@ -69,4 +66,9 @@ input
   width: 33.33%;
   box-sizing: border-box;
   padding: 30px;
+}
+.image
+{
+  width: 325;
+  height: 325;
 }
