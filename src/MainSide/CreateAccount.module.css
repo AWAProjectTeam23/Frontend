@@ -1,0 +1,35 @@
+.header {
+    font-size: 30px;
+    margin-left: 38%;
+    margin-right: 10px;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 700px;
+    }
+    
+    .container {
+        background-color:pink;
+        width: 40%;
+        height: 300px;
+        color: black;
+        padding: 20px;
+        margin-left: 28%;
+        margin-right: 10px;
+        margin-bottom: 12px;
+        margin-top: 100px;
+    }
+
+.some {
+    font-size: 30px;
+    font-style: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(109, 205, 230);
+    font-weight: 1000px;
+}
+
+.much {
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: black;
+
+}
