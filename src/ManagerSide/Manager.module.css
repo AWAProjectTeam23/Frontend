@@ -1,0 +1,25 @@
+.ManagerBar{
+    display: flex;
+    background-color: blue;
+    height: 40px;
+}
+.button_margin{
+    margin-left: 10%;
+}
+.button_left{
+    margin-top: 2px;
+    font-size: medium;
+    height: 35px;
+    margin-left: 140px;
+    width: 150px;
+}
+.Logo_margin{
+    margin-top: 8px;
+    margin-left: 10px;
+}
+.Log_out_margin{
+    font-size: medium;
+    font-weight: bold;
+    margin-left: 430px;
+    height: 35px;
+}

@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Routes,Route } from 'react-router'
-import { BrowserRouter } from 'react-router-dom'
 import Managerbar from './Managerbar'
 import Managerbody from './Managerbody'
 
