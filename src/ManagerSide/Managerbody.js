@@ -6,13 +6,13 @@ import CreateRestaurant from './CreateRestaurant'
 import CreateCategory from './CreateCategory'
 import {Routes,Route} from "react-router-dom"
 
-export default function Managerbody () {
+export default function Managerbody (props) {
      
         return (
             <div>
                 <Routes>
-                    <Route path="/" element={<ReceiveOrder/>}/>
-                    <Route path="/History" element={<OrderHistory/>}/>
+                    <Route path="/" element={props.items.map(elememt=><ReceiveOrder {...elememt}/>)}/>
+                    <Route path="/History" element={props.history.map(element=><OrderHistory {...element}/>)}/>
                     <Route path="/CreateProduct" element={<CreateProduct/>}/>
                     <Route path="/CreateCategory" element={<CreateCategory/>}/>
                     <Route path="/CreateRestaurant" element={<CreateRestaurant/>}/>

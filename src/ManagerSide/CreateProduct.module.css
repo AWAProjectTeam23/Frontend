@@ -1,0 +1,45 @@
+.box{
+    background-color: white;
+    border: solid 1px black;
+    width: 70%;
+    height: 600px;
+    display: flex;
+}
+.box_margin{
+    margin-left: 20%;
+    margin-top: 5%;
+    
+}
+.input_margin{
+    margin-top: 6%;
+    margin-left: 20px;
+}
+.input_size{
+    margin-top: 2px;
+    width: 400px;
+    height: 20px;
+}
+.desc_input{
+    margin-top: 2px;
+    width: 500px;
+    height: 70px;
+}
+.button_margin{
+    display: flex;
+    margin-left: 28%;
+    margin-top: 49%;
+}
+.button_size{
+    margin-left: 20px;
+    width: 90px;
+    height: 50px;
+}
+.head_style{
+    margin-top: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: large;
+}
+.lower_style{
+    font-weight: bold;
+}
