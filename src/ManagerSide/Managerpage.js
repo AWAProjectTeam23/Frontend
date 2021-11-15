@@ -9,15 +9,21 @@ export default class Managerpage extends Component {
         super(props);
         this.state={
             item: data.order,
-            history: historyData.history
+            history: historyData.history,
+            selectValue:[{name:"a"},{name:"b"},{name:"c"},{name:"d"}],
+            selectedValue:""
         }
+    }
+
+    selectChange=(value)=>{
+        this.setState({selectedValue:value});
     }
 
     render(){
         return (
             <div>
                 <div>
-                <Managerbar/>
+                     <Managerbar selectValue={this.state.selectValue} selectChange={this.selectChange} selectedValue={this.state.selectedValue}/>
                 </div>
                 <div>
                 <Managerbody items={this.state.item} history={this.state.history}/>
