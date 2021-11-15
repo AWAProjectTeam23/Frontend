@@ -1,24 +1,25 @@
 import React from 'react'
-import styles from './CreateAccount.module.css';
+import style from './CreateAccount.module.css';
+import { Link } from 'react-router-dom'
 
 
 export default function CreateAccount(props) {
-
-        
     return (
-        <div>
-            
-        <div className= { styles.container }>
-
-        <span className={ styles.header }>{ props.topic }Create account</span> { props.body }
-        <div>
-<span className={ styles.much}>{ props.topic }Account name</span> { props.body }
-<div>
-
-<span className={ styles.much}>{ props.topic } Password </span> { props.body }
-</div>
-</div>
-        </div>
+        <div className={style.back_color}>
+            <div className={style.box}>
+                <div className={style.input_margin}>
+                    <div className={style.header}> Create account</div>
+                   <div className={style.secondheader}> Account name</div>
+                    <input className={style.input_type}></input>
+                    <div className={style.secondheader}> Password</div>
+                    <input className={style.input_type_password}></input>
+                </div>
+                
+                <div className={style.button_margin}>
+                    <button className={style.button_size}>Register</button>
+                    <Link to="/Main/" ><button className={style.button_size}>Cancel</button></Link>
+                </div>
+            </div>
         </div>
     )
 }
