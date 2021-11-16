@@ -2,15 +2,17 @@
     display: flex;
     background-color: blue;
     height: 40px;
+    
 }
 .button_margin{
-    margin-left: 10%;
+    margin-left: 5%;
 }
 .button_left{
     margin-top: 2px;
     font-size: medium;
     height: 35px;
-    margin-left: 140px;
+    margin-left: 110px;
+    margin-right: auto;
     width: 150px;
 }
 .Logo_margin{
@@ -20,6 +22,15 @@
 .Log_out_margin{
     font-size: medium;
     font-weight: bold;
-    margin-left: 420px;
+    margin-left: 290px;
+    margin-right: auto;
     height: 35px;
+}
+.select_margin{
+    margin-left: 10%;
+    margin-top: 4px;
+}
+.select_size{
+    width: 150px;
+    height: 30px;
 }

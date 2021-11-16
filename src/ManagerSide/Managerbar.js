@@ -2,11 +2,16 @@ import React from 'react'
 import style from './Manager.module.css'
 import { Link } from 'react-router-dom'
 
-export default function Managerbar() {
+export default function Managerbar(props) {
     return (
         <div className={style.ManagerBar}>
             <div className={style.Logo_margin}>
                 <Link to="/Manager/"><div style={{color:"white"}}>LOGO</div></Link>
+            </div>
+            <div className={style.select_margin}>
+                <select className={style.select_size} value={props.selectedValue} onChange={()=>props.selectChange()}>
+                    {props.selectValue.map((option)=>(<option value={option.name}>{option.name}</option>))}
+                </select>
             </div>
             <div className={style.button_margin}>
                 <Link to="/Manager/History"><button className={style.button_left}>History</button></Link>
