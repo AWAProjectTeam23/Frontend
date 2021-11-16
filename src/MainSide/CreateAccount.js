@@ -10,13 +10,16 @@ export default function CreateAccount(props) {
                 <div className={style.input_margin}>
                     <div className={style.header}> Create account</div>
                    <div className={style.secondheader}> Account name</div>
-                    <input className={style.input_type}></input>
+                   <input className={style.input_type}
+                    type="text"
+                    value={props.CreateAccountInputs}
+                    onChange={props.InputChange}/>
                     <div className={style.secondheader}> Password</div>
                     <input className={style.input_type_password}></input>
                 </div>
                 
                 <div className={style.button_margin}>
-                    <button className={style.button_size}>Register</button>
+                    <button className={style.button_size} onClick={()=>props.AccountCreate()}>Register</button>
                     <Link to="/Main/" ><button className={style.button_size}>Cancel</button></Link>
                 </div>
             </div>

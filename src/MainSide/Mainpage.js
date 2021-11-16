@@ -9,10 +9,17 @@ export default class Mainpage extends React.Component{
         super(props);
         this.state = {
             items: data.items,
-            product: products.items
+            product: products.items,
+            CreateAccountInputValue:""
     }
 }
-
+InputChange=(event)=>{
+    this.setState({CreateAccountInputValue:event.target.value})
+    console.log(event.target.value)
+}
+AccountCreate=()=>{
+    console.log(this.state.CreateAccountInputValue)
+}
     render(){
         return (
             <div>
