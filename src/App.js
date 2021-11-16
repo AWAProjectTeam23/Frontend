@@ -30,13 +30,13 @@ render(){
     <BrowserRouter>
       <Routes>
         <Route path="/Main" element={<Mainpage/>}>
-          <Route path="/Main/Restaurants" element={<RestaurantBody/>}/>
+          <Route path="/Main/" element={<RestaurantBody/>}/>
           <Route path="/Main/RestaurantMenu" element={<RestaurantMenu/>}/>
           <Route path="/Main/CreateAccount" element={<CreateAccount/>}/>
           <Route path="/Main/Login" element={<LoginAccount/>}/>
         </Route>
         <Route path="/Customer" element={<Customerpage/>}>
-          <Route path="/Customer/Restaurants" element={<CRestaurantbody/>}/>
+          <Route path="/Customer/" element={<CRestaurantbody/>}/>
           <Route path="/Customer/RestaurantMenu" element={<CRestaurantMenu/>}/>
           <Route path="/Customer/OrderHistory" element={<COrderHistory/>}/>
         </Route>
