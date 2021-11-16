@@ -1,0 +1,50 @@
+.header {
+    font-size: 30px;
+    margin-left: 15%;
+    margin-bottom: 80px;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 700px;
+    }
+    
+.secondheader {
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: black;
+
+}
+.box{
+    background-color: white;
+    border: solid 3px black;
+    width: 30%;
+    height: 500px;
+    margin-left: 35%;
+    margin-top: 5%;
+}
+.input_margin{
+    margin-top: 20%;
+    margin-left: 20%;
+}
+.input_type{
+    font-size: 20px;
+    margin-top: 5px;
+    width: 70%;
+    height: 25px;
+}
+.button_margin{
+    margin-left: 60px;
+    margin-top: 110px;
+}
+.button_size{
+    width: 30%;
+    height: 40px;
+    font-size: large;
+    margin-left: 50px;
+}
+.input_type_password{
+    font-size: 20px;
+    margin-top: 5px;
+    width: 70%;
+    height: 25px;
+    -webkit-text-security: disc;
+}
