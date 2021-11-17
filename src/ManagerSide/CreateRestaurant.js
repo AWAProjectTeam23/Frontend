@@ -42,19 +42,15 @@ export default function CreateRestaurant(props) {
                     </div>
                     <div className={style.input_margin}>
                     <div className={style.lower_style}>restaurant type</div>
-                        <input className={style.input_size} 
-                        type="text"
-                        name="RestaurantType" 
-                        value={props.RestaurantInputs[0].RestaurantType}
-                        onChange={props.InputChange}/>
+                        <select className={style.input_size} type="text" name="RestaurantType" value={props.RestaurantInputs[0].RestaurantType} onChange={props.InputChange}>
+                            {props.RestaurantType.map((option)=>(<option value={option.Type}>{option.Type}</option>))}
+                        </select>
                     </div>
                     <div className={style.input_margin}>
                         <div className={style.lower_style}>price level</div>
-                        <input className={style.input_size} 
-                        type="text"
-                        name="PriceLevel" 
-                        value={props.RestaurantInputs[0].PriceLevel}
-                        onChange={props.InputChange}/>
+                        <select className={style.input_size} type="text" name="PriceLevel" value={props.RestaurantInputs[0].PriceLevel} onChange={props.InputChange}>
+                            {props.PriceLevel.map((option)=>(<option value={option.Level}>{option.Level}</option>))}
+                        </select>
                     </div>
                 </div>
                 <div className={style.button_margin}>
