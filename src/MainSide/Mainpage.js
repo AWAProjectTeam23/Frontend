@@ -17,7 +17,7 @@ InputChange=(event)=>{
     this.setState({CreateAccountInputValue:event.target.value})
     console.log(event.target.value)
 }
-AccountCreate=()=>{
+CategoryCreate=()=>{
     console.log(this.state.CreateAccountInputValue)
 }
     render(){
@@ -27,7 +27,12 @@ AccountCreate=()=>{
                     <Mainbar/>
                 </div>
                 <div>
-                    <Mainbody items={this.state.items} products={this.state.product}/>
+                    <Mainbody 
+                    items={this.state.items} 
+                    products={this.state.product}
+                    CreateAccountInputs={this.state.CreateAccountInputValue}
+                    AccountCreate={this.AccountCreate}
+                    />
                 </div>
             </div>
         )
