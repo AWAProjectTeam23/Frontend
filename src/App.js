@@ -41,8 +41,8 @@ render(){
           <Route path="/Customer/OrderHistory" element={<COrderHistory/>}/>
         </Route>
         <Route path="/Manager" element={<Managerpage/>}>
+          <Route path="/Manager/" element={<ReceiveOrder/>}/>
           <Route path="/Manager/History" element={<MOrderHistory/>}/>
-          <Route path="/Manager/ReceiveOrder" element={<ReceiveOrder/>}/>
           <Route path="/Manager/CreateProduct" element={<CreateProduct/>}/>
           <Route path="/Manager/CreateRestaurant" element={<CreateRestaurant/>}/>
           <Route path="/Manager/CreateCategory" element={<CreateCategory/>}/>

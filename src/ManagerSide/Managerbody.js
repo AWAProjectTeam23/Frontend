@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import OrderHistory from './OrderHistory'
 import ReceiveOrder from './ReceiveOrder'
 import CreateProduct from'./CreateProduct'
@@ -13,9 +13,15 @@ export default function Managerbody (props) {
                 <Routes>
                     <Route path="/" element={props.items.map(elememt=><ReceiveOrder {...elememt}/>)}/>
                     <Route path="/History" element={props.history.map(element=><OrderHistory {...element}/>)}/>
-                    <Route path="/CreateProduct" element={<CreateProduct/>}/>
-                    <Route path="/CreateCategory" element={<CreateCategory/>}/>
-                    <Route path="/CreateRestaurant" element={<CreateRestaurant/>}/>
+                    <Route path="/CreateProduct" element={<CreateProduct ProductCreate={props.ProductCreate}
+                     ProductInputs={props.ProductInputs}
+                     InputChange={props.ProductInputChange}/>}/>
+                    <Route path="/CreateCategory" element={<CreateCategory CategoryCreate={props.CategoryCreate} 
+                    CategoryInputs={props.CategoryInputs}
+                    InputChange={props.InputChange}/>}/>
+                    <Route path="/CreateRestaurant" element={<CreateRestaurant RestaurantCreate={props.RestaurantCreate} 
+                    RestaurantInputs={props.RestaurantInputs}
+                    InputChange={props.RestaurantInputChange}/>}/>
                 </Routes>
             </div>
         );
