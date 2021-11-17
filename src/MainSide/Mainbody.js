@@ -17,8 +17,14 @@ export default function Mainbody (props){
                 <Route path="/RestaurantMenu" element={<RestaurantMenuView items={props.products}/>}/>
                 <Route path="/CreateAccount" element={<CreateAccount AccountCreate={props.AccountCreate} 
                     CreateAccountInputs={props.CreateAccountInputs}
-                    InputChange={props.InputChange}/>}/>
-                <Route path="/Login" element={<LoginAccount/>}/>
+                    CreateAccountPassword={props.CreateAccountPassword}
+                    CreateNameInput={props.CreateNameAccount}
+                    CreatePasswordInput={props.CreatePasswordInput}/>}/>
+                <Route path="/Login" element={<LoginAccount Login={props.Login}
+                    LoginInput={props.LoginInput}
+                    LoginPasswordInputs={props.LoginPasswordInputs}
+                    LoginNameInput={props.LoginName}
+                    LoginPasswordInput={props.LoginPasswordInput}/>}/>
             </Routes>
         </div>
  );     

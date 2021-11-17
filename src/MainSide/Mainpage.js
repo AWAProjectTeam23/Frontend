@@ -10,16 +10,37 @@ export default class Mainpage extends React.Component{
         this.state = {
             items: data.items,
             product: products.items,
-            CreateAccountInputValue:""
+            CreateAccountNameValue:"",
+            CreateAccountPasswordValue: "",
+            LoginNameValue:"",
+            LoginPasswordValue: ""
     }
 }
-InputChange=(event)=>{
-    this.setState({CreateAccountInputValue:event.target.value})
+CreateNameAccount=(event)=>{
+    this.setState({CreateAccountNameValue:event.target.value})
     console.log(event.target.value)
 }
-CategoryCreate=()=>{
-    console.log(this.state.CreateAccountInputValue)
+CreatePasswordInput=(event)=>{
+    this.setState({CreateAccountPasswordValue:event.target.value})
+    console.log(event.target.value)
 }
+AccountCreate=()=>{
+    console.log(this.state.CreateAccountNameValue)
+    console.log(this.state.CreateAccountPasswordValue)
+}
+LoginName=(event)=>{
+    this.setState({LoginNameValue:event.target.value})
+    console.log(event.target.value)
+}
+LoginPasswordInput=(event)=>{
+    this.setState({LoginPasswordValue:event.target.value})
+    console.log(event.target.value)
+}
+Login=()=>{
+    console.log(this.state.LoginNameValue)
+    console.log(this.state.LoginPasswordValue)
+}
+
     render(){
         return (
             <div>
@@ -30,8 +51,16 @@ CategoryCreate=()=>{
                     <Mainbody 
                     items={this.state.items} 
                     products={this.state.product}
-                    CreateAccountInputs={this.state.CreateAccountInputValue}
+                    CreateAccountInputs={this.state.CreateAccountNameValue}
+                    CreateAccountPassword={this.state.CreateAccountPasswordValue}
                     AccountCreate={this.AccountCreate}
+                    CreateNameAccount={this.CreateNameAccount}
+                    CreatePasswordInput={this.CreatePasswordInput}
+                    LoginInputs={this.state.LoginNameValue}
+                    LoginPasswordInputs={this.state.LoginPasswordValue}
+                    Login={this.Login}
+                    LoginName={this.LoginName}
+                    LoginPasswordInput={this.LoginPasswordInput}
                     />
                 </div>
             </div>
