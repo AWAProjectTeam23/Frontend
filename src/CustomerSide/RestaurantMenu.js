@@ -5,16 +5,19 @@ export default function RestaurantMenu(props) {
 
     <div>
         <div className= {styles.product}>
-        <div> 
+            <div> 
             <img src={`/images/${props.image}`} 
             height={300}
             width={300}
           />
-          </div>
-            <div className={ styles.name }>{ props.name }</div>
-            <div className={ styles.restaurant }>{ props.restaurant }</div>
-            <div className={ styles.price}>{ props.price }</div>      
-    </div>
+            </div>
+              <div className={ styles.name }>{ props.name }</div>
+              <div className={ styles.restaurant }>{ props.restaurant }</div>
+              <div className={styles.flex}>
+                <div className={ styles.price}>{ props.price } €</div>
+                <button className={styles.button} onClick={()=>props.addToCart(props.id)}>Add to cart</button> 
+              </div>   
+        </div>
     </div>
     )
 }

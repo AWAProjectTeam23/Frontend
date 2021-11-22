@@ -4,7 +4,11 @@
     height: 40px;
 }
 .button_margin{
-    margin-left: 43%;
+    margin-left: auto;
+    margin-top: 2px;
+}
+.button_margin_open{
+    margin-left: auto;
     margin-top: 2px;
 }
 .button_left{
@@ -20,4 +24,11 @@
 .searchbar_margin{
     margin-top: 7px;
     margin-left: 20%;
+}
+.ShoppingCart{
+    margin-left: auto;
+    position: absolute;
+    margin-top: 5px;
+    background-color: white;
+    margin-left: 68%;
 }

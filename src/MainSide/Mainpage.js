@@ -14,8 +14,8 @@ export default class Mainpage extends React.Component{
             CreateAccountNameValue:"",
             CreateAccountPasswordValue: "",
             LoginNameValue:"",
-            LoginPasswordValue: ""
-            productSearchString: "",
+            LoginPasswordValue: "",
+            productSearchString:""
         }
     }
   
