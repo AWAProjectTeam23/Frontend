@@ -6,7 +6,6 @@ import OrderHistory from './OrderHistory'
 import RestaurantBodyView from './RestaurantBodyView';
 import RestaurantMenuView from './RestaurantMenuView';
  
-
 export default function Customerbody (props){
   
         return (
@@ -14,7 +13,7 @@ export default function Customerbody (props){
                 <Routes>
                     <Route path="/" element={<RestaurantBodyView items={props.items}/>}/>   
                     <Route path="/RestaurantMenu" element={<RestaurantMenuView items={props.products}/>}/>
-                    <Route path="OrderHistory" element={<OrderHistory/>}/>
+                    <Route path="/OrderHistory" element={props.history.map(element=><OrderHistory {...element}/>)}/>
                 </Routes>
             </div>
         )

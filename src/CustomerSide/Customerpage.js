@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Customerbar from './Customerbar'
 import Customerbody from './Customerbody'
 import data from './data.json'
+import historyData from './history.json'
 import products from './datamenu.json'
 import RestaurantBodyView from './RestaurantBodyView'
 
@@ -10,6 +11,7 @@ export default class Customerpage extends Component {
         super(props);
         this.state = {
             items: data.items,
+            history: historyData.history,
             product: products.items,
             productSearchString: "",
         }
@@ -31,6 +33,8 @@ export default class Customerpage extends Component {
                     <div>
                         <Customerbody items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                         products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase()))}
+                        items={this.state.item} 
+                        history={this.state.history}
                         />
                     </div>
             </div>
