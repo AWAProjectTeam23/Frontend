@@ -15,11 +15,19 @@ export default function Mainbody (props){
             <Routes>
                 <Route path="/" element={<RestaurantBodyView items={props.items}/>}/>
                 <Route path="/RestaurantMenu" element={<RestaurantMenuView items={props.products}/>}/>
-                <Route path="/CreateAccount" element={<CreateAccount/>}/>
-                <Route path="/Login" element={<LoginAccount/>}/>
+                <Route path="/CreateAccount" element={<CreateAccount AccountCreate={props.AccountCreate} 
+                    CreateAccountInputs={props.CreateAccountInputs}
+                    CreateAccountPassword={props.CreateAccountPassword}
+                    CreateNameInput={props.CreateNameAccount}
+                    CreatePasswordInput={props.CreatePasswordInput}/>}/>
+                <Route path="/Login" element={<LoginAccount Login={props.Login}
+                    LoginInput={props.LoginInput}
+                    LoginPasswordInputs={props.LoginPasswordInputs}
+                    LoginNameInput={props.LoginName}
+                    LoginPasswordInput={props.LoginPasswordInput}/>}/>
             </Routes>
         </div>
- )     
+ );     
 }
     
 
