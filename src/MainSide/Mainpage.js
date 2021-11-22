@@ -14,11 +14,11 @@ export default class Mainpage extends React.Component{
             CreateAccountNameValue:"",
             CreateAccountPasswordValue: "",
             LoginNameValue:"",
-            LoginPasswordValue: ""
-            productSearchString: "",
+            LoginPasswordValue: "",
+            productSearchString: ""
         }
     }
-  
+
 CreateNameAccount=(event)=>{
     this.setState({CreateAccountNameValue:event.target.value})
     console.log(event.target.value)
@@ -43,13 +43,15 @@ Login=()=>{
     console.log(this.state.LoginNameValue)
     console.log(this.state.LoginPasswordValue)
 }
-  
-onSearchFieldChange = (event) => {
-        console.log('Keyboard event');
-        console.log(event.target.value);
-        this.setState({ productSearchString: event.target.value });
-    }
-
+onSearchFieldChange=(event)=>{
+    console.log('Keyboard event');
+    console.log(event.target.value);
+    this.setState({ productSearchString: event.target.value });
+}
+restaurantMenuButton=(id)=>{
+   // this.setState({items:id})
+    console.log(id);
+}
     render(){
         return (
             <div>
@@ -70,6 +72,7 @@ onSearchFieldChange = (event) => {
                     Login={this.Login}
                     LoginName={this.LoginName}
                     LoginPasswordInput={this.LoginPasswordInput}
+                    restaurantMenuButton={this.restaurantMenuButton}
                     />
                  </div>
             </div>
