@@ -5,11 +5,11 @@ export default function RestaurantMenuView(props) {
 
   return (
     <div>
-      <div className={ styles.presentationModeGrid }>
-      {
-        props.items.map(item => <RestaurantMenu key={item.id} {...item} />)
-      }
-      </div>
+        <div className={ styles.presentationModeGrid }>
+        {
+          props.items.map(item => <RestaurantMenu key={item.id} {...item} />)
+        }
+        </div>
     </div>
   )
 }
