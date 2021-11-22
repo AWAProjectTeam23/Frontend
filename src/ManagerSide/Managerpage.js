@@ -13,6 +13,9 @@ export default class Managerpage extends Component {
             history: historyData.history,
             selectValue:[{name:"a"},{name:"b"}],
             selectedValue:"",
+            CategoryValues:[{Category:"r"},{Category:"a"}],
+            RestaurantType:[{Type:"Buffet"},{Type:"Fast food"},{Type:"Fast casual"},{Type:"Casual dining"},{Type:"Fine dining"}],
+            PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
             ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:"",Image:""}],
             RestaurantInputValue:[{Name:"",Address:"",OperatingHours:"",Image:"",RestaurantType:"",PriceLevel:""}],
             CategoryInputValue:""
@@ -69,6 +72,8 @@ export default class Managerpage extends Component {
         this.setState({selectedValue:value});
     }
 
+    
+
     render(){
         return (
             <div>
@@ -82,6 +87,10 @@ export default class Managerpage extends Component {
                 CategoryInputs={this.state.CategoryInputValue}
                 ProductInputs={this.state.ProductInputValue}
                 RestaurantInputs={this.state.RestaurantInputValue}
+                SelectValue={this.state.selectValue}
+                CategoryValues={this.state.CategoryValues}
+                RestaurantType={this.state.RestaurantType}
+                PriceLevel={this.state.PriceLevel}
                 CategoryCreate={this.CategoryCreate}
                 ProductCreate={this.ProductCreate}
                 RestaurantCreate={this.RestaurantCreate}
