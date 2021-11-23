@@ -11,10 +11,8 @@ export default function OrderHistory(props) {
                             <div>
                                 <span className={style.Order_text}>Order Number {props.OrderNumber}</span>
                             </div>
-                            
                                 <div className={style.box_flex}>
                                     <div>
-      
                                         <div style={{marginTop:"20px"}}>
                                             Restaurant name
                                             <div>
@@ -23,7 +21,6 @@ export default function OrderHistory(props) {
                                             
                                         </div>
                                     </div>
-                                    
                                     <div className={style.box_products}>
                                         <div style={{marginRight:"15px"}}>Products:</div>
                                     {

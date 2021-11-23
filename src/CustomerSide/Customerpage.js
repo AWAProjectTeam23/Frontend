@@ -33,7 +33,7 @@ export default class Customerpage extends Component {
                     <div>
                         <Customerbody items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                         products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase()))}
-                        items={this.state.item} 
+                        items={this.state.items} 
                         history={this.state.history}
                         />
                     </div>
