@@ -31,11 +31,12 @@ export default class Customerpage extends Component {
         }
     }
 
-    TotalCostCount=()=>{
+    TotalCostCount(){
         let Cost=0
         for(let i=0;i<this.state.ShoppingCartItems.length;i++){
-            Cost+=this.state.ShoppingCartItems[i].Price
+            Cost+=Number(this.state.ShoppingCartItems[i].Price)
         }
+        Cost=Number(Cost.toFixed(2))
         console.log(Cost)
         this.setState({TotalCost:Cost})
     }
@@ -44,11 +45,10 @@ export default class Customerpage extends Component {
         for(let i=0;i<this.state.product.length;i++){
             if(this.state.product[i].id===Id){
                 let Array=[...this.state.ShoppingCartItems]
-                Array.push({Id:this.state.product[i].id,image:this.state.product[i].image,Name:this.state.product[i].name,Description:this.state.product[i].Description,Price:this.state.product[i].price})
-                this.setState({ShoppingCartItems:Array})
-                this.TotalCostCount()
+                Array.push({Id:this.state.product[i].id,image:this.state.product[i].image,Name:this.state.product[i].name,Description:this.state.product[i].description,Price:this.state.product[i].price})
+                this.setState({ShoppingCartItems:Array},()=>{this.TotalCostCount()})
             }
-        }  
+        } 
     }
 
     removeFromShoppingCart=(idDelete)=>{
@@ -56,8 +56,7 @@ export default class Customerpage extends Component {
             if(this.state.ShoppingCartItems[i].Id===idDelete){
                 let Array=[...this.state.ShoppingCartItems]
                 Array.splice(i,1)
-                this.setState({ShoppingCartItems:Array})
-                return this.TotalCostCount()
+                return this.setState({ShoppingCartItems:Array},()=>{this.TotalCostCount()})
             }
         }
         console.log("no Item Found")
@@ -87,7 +86,6 @@ export default class Customerpage extends Component {
                     <Customerbar searchChange={this.onSearchFieldChange} 
                     openShoppingCart={this.openShoppingCart}
                     removeFromShoppingCart={this.removeFromShoppingCart}
-                    TotalCostCount={this.TotalCostCount}
                     DeliveryLocation={this.inputDeliveryLocation}
                     ConfirmOrder={this.ConfirmOrder}
                     ShoppingCartItems={this.state.ShoppingCartItems}
