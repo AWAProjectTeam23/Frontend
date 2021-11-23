@@ -39,9 +39,6 @@ export default function OrderHistory(props) {
                                     </div>
                                     </div>
                                 </div>
-                                
-                            
-                            
                     </div>
                 </div>
             </div>
