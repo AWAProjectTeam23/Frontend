@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './ReceiveOrder.module.css'
 import Product from './Product'
+import Orderstatus from './Orderstatus'
 
 export default function ReceiveOrder(props) {
     return (
@@ -25,11 +26,11 @@ export default function ReceiveOrder(props) {
                                 </div>
                                 <div className={style.status_margin}>
                                     <div>
-                                        status
+                                        <Orderstatus OrderStatus={props.OrderStatus}/>
                                     </div>
                                     <div style={{marginTop:"10px"}}>Time Order Received</div>
                                     <div style={{marginTop:"20px"}}>Total Price: {props.TotalPrice}</div>
-                                    <button className={style.button_margin}>confirm order</button>
+                                    <button className={style.button_margin} onClick={()=>props.OrderConfirmed(props.OrderNumber)}>confirm order</button>
                                 </div>
                             </div>
                             
@@ -39,4 +40,5 @@ export default function ReceiveOrder(props) {
             </div>
         </div>
     )
+    
 }

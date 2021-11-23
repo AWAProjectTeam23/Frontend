@@ -22,6 +22,20 @@ export default class Managerpage extends Component {
         }
     }
 
+    ChangeOrderStatus=()=>{
+        
+    }
+
+    OrderConfirmed=(id)=>{
+        let Array=[...this.state.item]
+        for(let i=0;i<Array.length;i++){
+            if(Array[i].OrderNumber===id){
+                Array[i].OrderConfirmed=true
+                this.setState({item:Array})
+            }
+        }
+    }
+
     InputChange=(event)=>{
         this.setState({CategoryInputValue:event.target.value})
         console.log(event.target.value)
@@ -91,6 +105,7 @@ export default class Managerpage extends Component {
                 CategoryValues={this.state.CategoryValues}
                 RestaurantType={this.state.RestaurantType}
                 PriceLevel={this.state.PriceLevel}
+                OrderConfirmed={this.OrderConfirmed}
                 CategoryCreate={this.CategoryCreate}
                 ProductCreate={this.ProductCreate}
                 RestaurantCreate={this.RestaurantCreate}
