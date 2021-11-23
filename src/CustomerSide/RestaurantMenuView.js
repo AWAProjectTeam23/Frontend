@@ -7,7 +7,7 @@ export default function RestaurantMenuView(props) {
     <div>
         <div className={ styles.presentationModeGrid }>
         {
-          props.items.map(item => <RestaurantMenu key={item.id} {...item} />)
+          props.items.map(item => <RestaurantMenu key={item.id} {...item} addToCart={props.addToCart}/>)
         }
         </div>
     </div>
