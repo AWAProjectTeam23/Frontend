@@ -1,0 +1,48 @@
+.Orderbox{
+    background-color: white;
+    border: solid 1px black;
+    max-width: 95%;
+    max-height: 20%;
+    min-width: 50%;
+    font-weight: 700;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: lighter;
+}
+.box_margin{
+    margin-left: 5%;
+    margin-top: 2%;
+}
+.box_content{
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.Order_text{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.text_style{
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.box_flex{
+    margin-top: 5px;
+    display: flex;
+}
+.box_products{
+    margin-top: 35px;
+    display: flex;
+    margin-left: 20px;
+    max-width: 80%;
+    width: 70%;
+}
+.status_margin{
+    margin-right: 3%;
+    margin-left: 5%;
+}
+.button_margin{
+    margin-top: 40px;
+}
