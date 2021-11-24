@@ -19,12 +19,18 @@ export default function Mainbody (props){
                     CreateAccountInputs={props.CreateAccountInputs}
                     CreateAccountPassword={props.CreateAccountPassword}
                     CreateNameInput={props.CreateNameAccount}
-                    CreatePasswordInput={props.CreatePasswordInput}/>}/>
+                    CreatePasswordInput={props.CreatePasswordInput}
+                    createManagerCheck={props.createManagerCheck}
+                    managerCheckChange={props.managerCheckChange}
+                   />}/>
                 <Route path="/Login" element={<LoginAccount Login={props.Login}
                     LoginInput={props.LoginInput}
                     LoginPasswordInputs={props.LoginPasswordInputs}
                     LoginNameInput={props.LoginName}
-                    LoginPasswordInput={props.LoginPasswordInput}/>}/>
+                    LoginPasswordInput={props.LoginPasswordInput} 
+                    loginManagerCheck={props.loginManagerCheck}
+                    managerLoginCheckChange={props.managerLoginCheckChange}
+                    />}/>
             </Routes>
         </div>
  );     
