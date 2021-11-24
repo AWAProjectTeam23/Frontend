@@ -78,6 +78,9 @@ export default class Customerpage extends Component {
         console.log(event.target.value);
         this.setState({ productSearchString: event.target.value });
     }
+    restaurantMenuButton=(id)=>{
+         console.log(id);
+     }
         render(){
         <>
           <RestaurantBodyView/>
@@ -100,6 +103,7 @@ export default class Customerpage extends Component {
                         items={this.state.items} 
                         history={this.state.history}
                         addToShoppingCart={this.addToShoppingCart}
+                        restaurantMenuButton={this.restaurantMenuButton}
                         />
                     </div>
             </div>

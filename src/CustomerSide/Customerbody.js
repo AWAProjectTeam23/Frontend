@@ -11,7 +11,7 @@ export default function Customerbody (props){
         return (
             <div>
                 <Routes>
-                    <Route path="/" element={<RestaurantBodyView items={props.items}/>}/>   
+                    <Route path="/" element={<RestaurantBodyView items={props.items} restaurantMenuButton={props.restaurantMenuButton}/>}/> 
                     <Route path="/RestaurantMenu" element={<RestaurantMenuView items={props.products} addToCart={props.addToShoppingCart}/>}/>
                     <Route path="/OrderHistory" element={props.history.map(element=><OrderHistory {...element}/>)}/>
                 </Routes>

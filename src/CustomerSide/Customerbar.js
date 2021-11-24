@@ -25,6 +25,7 @@ export default function Customerbar(props) {
                     />
             </div>
             <div className={style.button_margin_open}>
+                <Link to="/Customer/OrderHistory"><button className={style.button_left}>Order history</button></Link>
                 <button className={style.button_left} onClick={()=>props.openShoppingCart()}>shoppingcart</button>
                 <Link to="/Main/"><button style={{fontWeight:"bold"}} className={style.button_left}>Log out</button></Link>
             </div>
@@ -41,6 +42,7 @@ export default function Customerbar(props) {
                     <input style={{height:"20px",width:"400px"}} type="text"onChange={props.searchChange} />
                 </div>
                 <div className={style.button_margin}>
+                    <Link to="/Customer/OrderHistory"><button className={style.button_left}>Order history</button></Link>
                     <button className={style.button_left} onClick={()=>props.openShoppingCart()}>shoppingcart</button>
                     <Link to="/Main/"><button style={{fontWeight:"bold"}} className={style.button_left}>Log out</button></Link>
                 </div>
