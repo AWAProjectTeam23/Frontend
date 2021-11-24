@@ -5,7 +5,8 @@
             "Address":"some address",
             "CustomerName":"Pertti Kuja",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"pihvi","Price":"7€"},{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"kala","Price":"5€"}],
-            "OrderStatus":"Received",
+            "OrderStatus":"Waiting Confirmation",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"20€",
             "OrderConfirmed":false
         },
@@ -14,7 +15,8 @@
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"}],
-            "OrderStatus":"Received",
+            "OrderStatus":"Waiting Confirmation",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€",
             "OrderConfirmed":false
         },
@@ -23,7 +25,8 @@
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"keitto","Price":"6€"}],
-            "OrderStatus":"Received",
+            "OrderStatus":"Waiting Confirmation",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€",
             "OrderConfirmed":false
         },
@@ -32,7 +35,8 @@
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"}],
-            "OrderStatus":"Received",
+            "OrderStatus":"Waiting Confirmation",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€",
             "OrderConfirmed":false
         },
@@ -41,9 +45,25 @@
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"raaste","Price":"4€"}],
-            "OrderStatus":"Received",
+            "OrderStatus":"Waiting Confirmation",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€",
             "OrderConfirmed":false
+        }
+    ],
+    "Category":[{
+        "Category":"Lunch"
+    },
+    {
+        "Category":"Drinks"
+    }
+    ],
+    "Restaurants":[
+        {
+            "name":"MCdonalnds"
+        },
+        {
+            "name":"Kings"
         }
     ]
 }

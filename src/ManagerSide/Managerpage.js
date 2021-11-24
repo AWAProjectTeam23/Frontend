@@ -9,11 +9,11 @@ export default class Managerpage extends Component {
     constructor(props){
         super(props);
         this.state={
-            item: data.order,
-            history: historyData.history,
-            selectValue:[{name:"a"},{name:"b"}],
+            item: [],
+            history: [],
+            selectValue: data.Restaurants,
             selectedValue:"",
-            CategoryValues:[{Category:"r"},{Category:"a"}],
+            CategoryValues:data.Category,
             RestaurantType:[{Type:"Buffet"},{Type:"Fast food"},{Type:"Fast casual"},{Type:"Casual dining"},{Type:"Fine dining"}],
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
             ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:"",Image:""}],
@@ -22,8 +22,28 @@ export default class Managerpage extends Component {
         }
     }
 
-    ChangeOrderStatus=()=>{
-        
+    componentDidMount=()=>{
+        this.getReceiveOrder()
+    }
+
+    getHistory=()=>{
+        this.setState({history:historyData.history})
+    }
+
+    getReceiveOrder=()=>{
+        this.setState({item:data.order})
+    }
+
+    ChangeOrderStatus=(id)=>{
+        let Array=[...this.state.item]
+        for(let i=0;i<this.state.item.length;i++){
+            if(this.state.item[i].OrderNumber===id){
+                if(this.state.item[i].OrderStatus==="Waiting Confirmation"){
+                    Array[i].OrderStatus="Received"
+                    this.setState({item:Array})
+                }
+            }
+        }
     }
 
     OrderConfirmed=(id)=>{
@@ -31,7 +51,7 @@ export default class Managerpage extends Component {
         for(let i=0;i<Array.length;i++){
             if(Array[i].OrderNumber===id){
                 Array[i].OrderConfirmed=true
-                this.setState({item:Array})
+                this.setState({item:Array},()=>this.ChangeOrderStatus(id))
             }
         }
     }
@@ -83,7 +103,7 @@ export default class Managerpage extends Component {
     }
 
     selectChange=(value)=>{
-        this.setState({selectedValue:value});
+        this.setState({selectedValue:value},()=>{this.getReceiveOrder()});
     }
 
     
@@ -92,7 +112,11 @@ export default class Managerpage extends Component {
         return (
             <div>
                 <div>
-                     <Managerbar selectValue={this.state.selectValue} selectChange={this.selectChange} selectedValue={this.state.selectedValue}/>
+                     <Managerbar selectValue={this.state.selectValue} 
+                     selectChange={this.selectChange} 
+                     selectedValue={this.state.selectedValue}
+                     getHistory={this.getHistory}
+                     getReceiveOrder={this.getReceiveOrder}/>
                 </div>
                 <div>
                 <Managerbody 
