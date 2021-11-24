@@ -15,7 +15,9 @@ export default class Mainpage extends React.Component{
             CreateAccountPasswordValue: "",
             LoginNameValue:"",
             LoginPasswordValue: "",
-            productSearchString: ""
+            productSearchString: "",
+            createManagerCheck:false,
+            loginManagerCheck:false
         }
     }
 
@@ -28,8 +30,16 @@ CreatePasswordInput=(event)=>{
     console.log(event.target.value)
 }
 AccountCreate=()=>{
-    console.log(this.state.CreateAccountNameValue)
-    console.log(this.state.CreateAccountPasswordValue)
+    if(this.state.createManagerCheck===true){
+        console.log(this.state.CreateAccountNameValue)
+        console.log(this.state.CreateAccountPasswordValue)
+        console.log('Restaurant manager account')
+        console.log(this.state.createManagerCheck) 
+    }
+    else{
+        console.log(this.state.CreateAccountNameValue)
+        console.log(this.state.CreateAccountPasswordValue)
+    }
 }
 LoginName=(event)=>{
     this.setState({LoginNameValue:event.target.value})
@@ -40,8 +50,16 @@ LoginPasswordInput=(event)=>{
     console.log(event.target.value)
 }
 Login=()=>{
-    console.log(this.state.LoginNameValue)
-    console.log(this.state.LoginPasswordValue)
+    if(this.state.loginManagerCheck===true){
+        console.log(this.state.LoginNameValue)
+        console.log(this.state.LoginPasswordValue)
+        console.log('Restaurant manager account')
+        console.log(this.state.loginManagerCheck) 
+    }
+    else{
+        console.log(this.state.LoginNameValue)
+        console.log(this.state.LoginPasswordValue)
+    }
 }
 onSearchFieldChange=(event)=>{
     console.log('Keyboard event');
@@ -49,8 +67,23 @@ onSearchFieldChange=(event)=>{
     this.setState({ productSearchString: event.target.value });
 }
 restaurantMenuButton=(id)=>{
-   // this.setState({items:id})
     console.log(id);
+}
+managerCheckChange=()=>{
+    if(this.state.createManagerCheck===false){
+    this.setState({createManagerCheck:true})
+    }
+    else{
+        this.setState({createManagerCheck:false})
+    }
+}
+managerLoginCheckChange=()=>{
+    if(this.state.loginManagerCheck===false){
+    this.setState({loginManagerCheck:true})
+    }
+    else{
+        this.setState({loginManagerCheck:false})
+    }
 }
     render(){
         return (
@@ -73,6 +106,10 @@ restaurantMenuButton=(id)=>{
                     LoginName={this.LoginName}
                     LoginPasswordInput={this.LoginPasswordInput}
                     restaurantMenuButton={this.restaurantMenuButton}
+                    createManagerCheck={this.state.createManagerCheck}
+                    managerCheckChange={this.managerCheckChange}
+                    loginManagerCheck={this.state.loginManagerCheck}
+                    managerLoginCheckChange={this.managerLoginCheckChange}
                     />
                  </div>
             </div>
