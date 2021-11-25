@@ -11,6 +11,7 @@ import CreateCategory from './ManagerSide/CreateCategory'
 import CRestaurantbody from "./CustomerSide/Restaurantbody";
 import CRestaurantMenu from "./CustomerSide/RestaurantMenu";
 import COrderHistory from "./CustomerSide/OrderHistory";
+import CReceiveDelivery from "./CustomerSide/ReceiveDelivery";
 import RestaurantBody from './MainSide/RestaurantBody';
 import RestaurantMenu from './MainSide/RestaurantMenu';
 import CreateAccount from './MainSide/CreateAccount';
@@ -39,6 +40,7 @@ render(){
           <Route path="/Customer/" element={<CRestaurantbody/>}/>
           <Route path="/Customer/RestaurantMenu" element={<CRestaurantMenu/>}/>
           <Route path="/Customer/OrderHistory" element={<COrderHistory/>}/>
+          <Route path="/Customer/OrderStatus" element={<CReceiveDelivery/>}/>
         </Route>
         <Route path="/Manager" element={<Managerpage/>}>
           <Route path="/Manager/" element={<ReceiveOrder/>}/>
