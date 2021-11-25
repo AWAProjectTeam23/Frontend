@@ -11,7 +11,7 @@ export default function Managerbody (props) {
         return (
             <div>
                 <Routes>
-                    <Route path="/" element={props.items.map(elememt=><ReceiveOrder {...elememt}/>)}/>
+                    <Route path="/" element={props.items.map(element=><ReceiveOrder {...element} ConfirmOrder={props.OrderConfirmed}/>)}/>
                     <Route path="/History" element={props.history.map(element=><OrderHistory {...element}/>)}/>
                     <Route path="/CreateProduct" element={<CreateProduct ProductCreate={props.ProductCreate}
                      ProductInputs={props.ProductInputs}

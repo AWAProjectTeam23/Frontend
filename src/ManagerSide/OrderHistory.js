@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './OrderHistory.module.css'
 import Product from './Product'
+import Orderstatus from './Orderstatus'
 
 export default function OrderHistory(props) {
     return (
@@ -30,10 +31,10 @@ export default function OrderHistory(props) {
                                     }
                                     </div>
                                     <div className={style.status_margin}>
-                                    <div>
-                                            status
+                                        <div>
+                                            <Orderstatus OrderStatus={props.OrderStatus}/>
                                         </div>
-                                        <div style={{marginTop:"10px"}}>Receive time</div>
+                                        <div style={{marginTop:"10px"}}>Receive time: {props.Time}</div>
                                         <div style={{marginTop:"10px"}}>Total Price: {props.TotalPrice}</div>
                                     </div>
                                     </div>

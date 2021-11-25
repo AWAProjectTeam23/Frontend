@@ -5,6 +5,8 @@
             "Address":"some address",
             "CustomerName":"Pertti Kuja",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"pihvi","Price":"7€"},{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"kala","Price":"5€"}],
+            "OrderStatus":"Delivered",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"20€"
         },
         {
@@ -12,6 +14,8 @@
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"}],
+            "OrderStatus":"Delivered",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€"
         },
         {
@@ -19,6 +23,8 @@
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"keitto","Price":"6€"}],
+            "OrderStatus":"Delivered",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€"
         },
         {
@@ -26,13 +32,17 @@
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"}],
+            "OrderStatus":"Delivered",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€"
         },
         {
-            "OrderNumber":"4",
+            "OrderNumber":"5",
             "Address":"some place",
             "CustomerName":"Lassi Puu",
             "Products":[{"Image":"Capture","Name":"kala","Price":"5€"},{"Image":"Capture","Name":"raaste","Price":"4€"}],
+            "OrderStatus":"Delivered",
+            "Time":"2.5.2021:14.20",
             "TotalPrice":"30.50€"
         }
     ]
