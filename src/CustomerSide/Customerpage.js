@@ -5,20 +5,65 @@ import data from './data.json'
 import historyData from './history.json'
 import products from './datamenu.json'
 import RestaurantBodyView from './RestaurantBodyView'
+import axios from 'axios'
 
 export default class Customerpage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            items: data.items,
-            history: historyData.history.map(element => {return {...element, OrderDelivered:false, OrderStatus:"Waiting delivery"}}),
+            items: [],
+            history: [],
+            ActiveOrders:[],
             product: products.items,
             productSearchString: "",
             DeliveryLocation:"",
             ShoppingCartItems:[],
             TotalCost:0,
-            ShoppingCartOpen:false
+            ShoppingCartOpen:false,
+            CustomerID:"aa",
+            OrderInfo:""
         }
+    }
+
+    componentDidMount=()=>{
+        this.getRestaurants()
+        this.getHistory()
+        this.getActiveOrders()
+    }
+
+    getRestaurants=()=>{
+        this.setState({items:data.items})
+        /*axios.get()
+        .then(Response=>{
+            this.setState({items:Response})
+        })
+        .catch(err=>{
+            console.log(err)
+        })*/
+    }
+
+    getHistory=()=>{
+        this.setState({history:historyData.history})
+       /* axios.get(""+this.state.CustomerID)
+        .then(Response=>{
+            this.setState({history:Response})
+        })
+        .catch(err=>{
+            console.log(err)
+        })*/
+    }
+
+    getActiveOrders=()=>{
+        let a=historyData.history.map(i=>{return{...i,OrderDelivered:false}})
+
+        this.setState({ActiveOrders:a})
+        /*axios.get(""+this.state.CustomerID)
+        .then(Response=>{
+            this.setState({ActiveOrders:Response})
+        })
+        .catch(err=>{
+            console.log(err)
+        })*/
     }
 
     inputDeliveryLocation=(event)=>{
@@ -26,11 +71,26 @@ export default class Customerpage extends Component {
     }
 
     ConfirmOrder=()=>{
+        axios.post("",{
+            CustomerID:this.state.CustomerID,
+            DeliveryLocation:this.state.DeliveryLocation,
+            TotalCost:this.state.TotalCost,
+            Products:this.state.ShoppingCartItems //Array sisältää tuote tiedot
+        })
+        .then(Response=>{
+            if(Response===true){
+                this.setState({OrderInfo:"Order send succesfully"},()=>this.getActiveOrders())
+            }else{
+                this.setState({OrderInfo:"Order was not send"})
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        console.log(this.state.CustomerID)
         console.log(this.state.DeliveryLocation)
         console.log(this.state.TotalCost)
-        for(let i=0;i<this.state.ShoppingCartItems.length;i++){
-            console.log(this.state.ShoppingCartItems[i].Id)
-        }
+        console.log(this.state.ShoppingCartItems)
     }
 
     TotalCostCount(){
@@ -79,27 +139,31 @@ export default class Customerpage extends Component {
         this.setState({ productSearchString: event.target.value });
     }
     restaurantMenuButton=(id)=>{
-         console.log(id);
+        axios.get(""+id)
+        .then(Response=>{
+            this.setState({product:Response})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
      }
 
-     ChangeOrderStatus=(id)=>{
-        let Array=[...this.state.history]
-        for(let i=0;i<this.state.history.length;i++){
-            if(this.state.history[i].OrderNumber===id){
-                if(this.state.history[i].OrderStatus==="Waiting delivery"){
-                    Array[i].OrderStatus="Delivered"
-                    this.setState({history:Array})
-                }
-            }
-        }
-    }
 
     OrderDelivered=(id)=>{
-        let Array=[...this.state.history]
+        axios.post(""+id)
+        .then(Response=>{
+            console.log(Response)
+            this.getActiveOrders()
+            this.getHistory()
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        let Array=[...this.state.ActiveOrders]
         for(let i=0;i<Array.length;i++){
             if(Array[i].OrderNumber===id){
                 Array[i].OrderDelivered=true
-                this.setState({history:Array},()=>this.ChangeOrderStatus(id))
+                this.setState({ActiveOrders:Array})
             }
         }
     }
@@ -116,6 +180,7 @@ export default class Customerpage extends Component {
                     removeFromShoppingCart={this.removeFromShoppingCart}
                     DeliveryLocation={this.inputDeliveryLocation}
                     ConfirmOrder={this.ConfirmOrder}
+                    getRestaurants={this.getRestaurants}
                     ShoppingCartItems={this.state.ShoppingCartItems}
                     TotalCost={this.state.TotalCost}
                     ShoppingCartOpen={this.state.ShoppingCartOpen}/>
@@ -125,6 +190,7 @@ export default class Customerpage extends Component {
                         items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                         products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase()))}
                         history={this.state.history}
+                        ActiveOrders={this.state.ActiveOrders}
                         addToShoppingCart={this.addToShoppingCart}
                         restaurantMenuButton={this.restaurantMenuButton}
                         OrderDelivered={this.OrderDelivered}

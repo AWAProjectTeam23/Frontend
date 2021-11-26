@@ -29,7 +29,7 @@ export default function OrderHistory(props) {
                                     </div>
                                     <div className={style.status_margin}>
                                     <div>
-                                            Status:
+                                            Status: 
                                         </div>
                                         <div style={{marginTop:"10px"}}>Order time: </div>
                                         <div style={{marginTop:"10px"}}>Total Price: {props.TotalPrice}</div>
