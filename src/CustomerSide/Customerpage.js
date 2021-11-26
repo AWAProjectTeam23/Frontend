@@ -11,7 +11,7 @@ export default class Customerpage extends Component {
         super(props);
         this.state = {
             items: data.items,
-            history: historyData.history,
+            history: historyData.history.map(element => {return {...element, OrderDelivered:false, OrderStatus:"Waiting delivery"}}),
             product: products.items,
             productSearchString: "",
             DeliveryLocation:"",
@@ -81,6 +81,28 @@ export default class Customerpage extends Component {
     restaurantMenuButton=(id)=>{
          console.log(id);
      }
+
+     ChangeOrderStatus=(id)=>{
+        let Array=[...this.state.history]
+        for(let i=0;i<this.state.history.length;i++){
+            if(this.state.history[i].OrderNumber===id){
+                if(this.state.history[i].OrderStatus==="Waiting delivery"){
+                    Array[i].OrderStatus="Delivered"
+                    this.setState({history:Array})
+                }
+            }
+        }
+    }
+
+    OrderDelivered=(id)=>{
+        let Array=[...this.state.history]
+        for(let i=0;i<Array.length;i++){
+            if(Array[i].OrderNumber===id){
+                Array[i].OrderDelivered=true
+                this.setState({history:Array},()=>this.ChangeOrderStatus(id))
+            }
+        }
+    }
         render(){
         <>
           <RestaurantBodyView/>
@@ -88,7 +110,8 @@ export default class Customerpage extends Component {
         return (
             <div>
                 <div>
-                    <Customerbar searchChange={this.onSearchFieldChange} 
+                    <Customerbar 
+                    searchChange={this.onSearchFieldChange} 
                     openShoppingCart={this.openShoppingCart}
                     removeFromShoppingCart={this.removeFromShoppingCart}
                     DeliveryLocation={this.inputDeliveryLocation}
@@ -98,12 +121,13 @@ export default class Customerpage extends Component {
                     ShoppingCartOpen={this.state.ShoppingCartOpen}/>
                 </div>
                     <div>
-                        <Customerbody items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
+                        <Customerbody 
+                        items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                         products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase()))}
-                        items={this.state.items} 
                         history={this.state.history}
                         addToShoppingCart={this.addToShoppingCart}
                         restaurantMenuButton={this.restaurantMenuButton}
+                        OrderDelivered={this.OrderDelivered}
                         />
                     </div>
             </div>
