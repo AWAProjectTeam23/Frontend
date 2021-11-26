@@ -52,17 +52,21 @@
         }
     ],
     "Category":[{
+        "id":"1",
         "Category":"Lunch"
     },
     {
+        "id":"2",
         "Category":"Drinks"
     }
     ],
     "Restaurants":[
         {
+            "Id":"1",
             "name":"MCdonalnds"
         },
         {
+            "Id":"2",
             "name":"Kings"
         }
     ]

@@ -3,6 +3,7 @@ import Managerbar from './Managerbar'
 import Managerbody from './Managerbody'
 import data from './data.json'
 import historyData from './History.json'
+import axios from 'axios'
 
 
 export default class Managerpage extends Component {
@@ -12,8 +13,7 @@ export default class Managerpage extends Component {
             item: [],
             history: [],
             selectValue: data.Restaurants,
-            selectedValue:"",
-            CategoryValues:data.Category,
+            CategoryValues:[],
             RestaurantType:[{Type:"Buffet"},{Type:"Fast food"},{Type:"Fast casual"},{Type:"Casual dining"},{Type:"Fine dining"}],
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
             ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:"",Image:""}],
@@ -23,15 +23,30 @@ export default class Managerpage extends Component {
     }
 
     componentDidMount=()=>{
-        this.getReceiveOrder()
+        this.getReceiveOrder(this.state.selectValue[0].Id)
+        this.getHistory(this.state.selectValue[0].Id)
     }
 
-    getHistory=()=>{
-        this.setState({history:historyData.history})
+    getHistory=(id)=>{
+        console.log(id)
+        axios.get("http://localhost:4000/hold")
+        .then(Response=>{
+            this.setState({history:Response})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
-    getReceiveOrder=()=>{
-        this.setState({item:data.order})
+    getReceiveOrder=(id)=>{
+        console.log(id)
+        axios.get("http://localhost:4000/hold")
+        .then(Response=>{
+            this.setState({item:Response})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
     ChangeOrderStatus=(id)=>{
@@ -81,10 +96,31 @@ export default class Managerpage extends Component {
     }
 
     CategoryCreate=()=>{
+        axios.post("http://localhost:4000/hold")
+        .then(Response=>{
+            console.log(Response)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         console.log(this.state.CategoryInputValue)
     }
 
     ProductCreate=()=>{
+        axios.post("http://localhost:4000/hold",{
+            Restaurant:this.state.ProductInputValue[0].Restaurant,
+            Category:this.state.ProductInputValue[0].Category,
+            Name:this.state.ProductInputValue[0].Name,
+            Description:this.state.ProductInputValue[0].Description,
+            Price:this.state.ProductInputValue[0].Price,
+            Image:this.state.ProductInputValue[0].Image
+        })
+        .then(Response=>{
+            console.log(Response)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         console.log(this.state.ProductInputValue[0].Restaurant)
         console.log(this.state.ProductInputValue[0].Category)
         console.log(this.state.ProductInputValue[0].Name)
@@ -94,6 +130,20 @@ export default class Managerpage extends Component {
     }
 
     RestaurantCreate=()=>{
+        axios.post("http://localhost:4000/hold",{
+            Name:this.state.RestaurantInputValue[0].Name,
+            Address:this.state.RestaurantInputValue[0].Address,
+            OperatingHours:this.state.RestaurantInputValue[0].OperatingHours,
+            Image:this.state.RestaurantInputValue[0].Image,
+            RestaurantType:this.state.RestaurantInputValue[0].RestaurantType,
+            PriceLevel:this.state.RestaurantInputValue[0].PriceLevel
+        })
+        .then(Response=>{
+            console.log(Response)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         console.log(this.state.RestaurantInputValue[0].Name)
         console.log(this.state.RestaurantInputValue[0].Address)
         console.log(this.state.RestaurantInputValue[0].OperatingHours)
@@ -102,8 +152,9 @@ export default class Managerpage extends Component {
         console.log(this.state.RestaurantInputValue[0].PriceLevel)
     }
 
-    selectChange=(value)=>{
-        this.setState({selectedValue:value},()=>{this.getReceiveOrder()});
+    selectChange=(event)=>{
+        this.getReceiveOrder(event.target.value)
+        this.getHistory(event.target.value)
     }
 
     
@@ -113,8 +164,7 @@ export default class Managerpage extends Component {
             <div>
                 <div>
                      <Managerbar selectValue={this.state.selectValue} 
-                     selectChange={this.selectChange} 
-                     selectedValue={this.state.selectedValue}
+                     selectChange={this.selectChange}
                      getHistory={this.getHistory}
                      getReceiveOrder={this.getReceiveOrder}/>
                 </div>

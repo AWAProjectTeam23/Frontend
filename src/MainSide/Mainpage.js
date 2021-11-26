@@ -3,7 +3,7 @@ import Mainbar from './Mainbar'
 import Mainbody from './Mainbody'
 import data from './data.json'
 import products from './datamenu.json'
-import RestaurantBodyView from './RestaurantBodyView'
+import axios from 'axios'
 
 export default class Mainpage extends React.Component{
     constructor(props){
@@ -21,6 +21,24 @@ export default class Mainpage extends React.Component{
         }
     }
 
+componentDidMount=()=>{
+    axios.get("http://localhost:4000/hold")
+    .then((Response)=>{
+        this.setState({items:Response})
+    })
+    .catch((err)=>{console.log(err)})
+}
+
+GetRestaurantProducts=(id)=>{
+    console.log(id)
+    axios.get("http://localhost:4000/:"+id)
+    .then((Response)=>{
+        this.setState({product:Response})
+    })
+    .catch((err)=>{console.log(err)})
+}
+
+
 CreateNameAccount=(event)=>{
     this.setState({CreateAccountNameValue:event.target.value})
     console.log(event.target.value)
@@ -31,12 +49,26 @@ CreatePasswordInput=(event)=>{
 }
 AccountCreate=()=>{
     if(this.state.createManagerCheck===true){
+        axios.post("http://localhost:4000/hold")
+        .then(Response=>{
+            
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         console.log(this.state.CreateAccountNameValue)
         console.log(this.state.CreateAccountPasswordValue)
         console.log('Restaurant manager account')
         console.log(this.state.createManagerCheck) 
     }
     else{
+        axios.post("http://localhost:4000/hold")
+        .then(Response=>{
+
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
         console.log(this.state.CreateAccountNameValue)
         console.log(this.state.CreateAccountPasswordValue)
     }
@@ -51,12 +83,26 @@ LoginPasswordInput=(event)=>{
 }
 Login=()=>{
     if(this.state.loginManagerCheck===true){
+        axios.post("http://localhost:4000/hold")
+        .then(Response=>{
+
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         console.log(this.state.LoginNameValue)
         console.log(this.state.LoginPasswordValue)
         console.log('Restaurant manager account')
         console.log(this.state.loginManagerCheck) 
     }
     else{
+        axios.post("http://localhost:4000/hold")
+        .then(Response=>{
+
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         console.log(this.state.LoginNameValue)
         console.log(this.state.LoginPasswordValue)
     }
@@ -67,7 +113,7 @@ onSearchFieldChange=(event)=>{
     this.setState({ productSearchString: event.target.value });
 }
 restaurantMenuButton=(id)=>{
-    console.log(id);
+    this.GetRestaurantProducts(id)
 }
 managerCheckChange=()=>{
     if(this.state.createManagerCheck===false){
