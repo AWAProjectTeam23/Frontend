@@ -18,13 +18,24 @@ export default class Managerpage extends Component {
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
             ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:"",Image:""}],
             RestaurantInputValue:[{Name:"",Address:"",OperatingHours:"",Image:"",RestaurantType:"",PriceLevel:""}],
-            CategoryInputValue:""
+            CategoryInputValue:"",
+            ManagerID:""
         }
     }
 
     componentDidMount=()=>{
-        this.getReceiveOrder(this.state.selectValue[0].Id)
-        this.getHistory(this.state.selectValue[0].Id)
+        //this.getRestaurants(ManagerID)
+    }
+
+    getRestaurants=(id)=>{
+        axios.get(""+id)
+        .then(Response=>{
+            this.setState({selectValue:Response},()=>this.getReceiveOrder(this.state.selectValue[0].Id)
+            ,()=>this.getHistory(this.state.selectValue[0].Id))
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
     getHistory=(id)=>{
@@ -50,6 +61,13 @@ export default class Managerpage extends Component {
     }
 
     ChangeOrderStatus=(id)=>{
+        axios.post(""+id)
+        .then(Response=>{
+            
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         let Array=[...this.state.item]
         for(let i=0;i<this.state.item.length;i++){
             if(this.state.item[i].OrderNumber===id){

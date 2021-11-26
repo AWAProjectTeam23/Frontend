@@ -4,6 +4,8 @@ import Mainbody from './Mainbody'
 import data from './data.json'
 import products from './datamenu.json'
 import axios from 'axios'
+import Customerpage from '../CustomerSide/Customerpage'
+import { Link} from 'react-router-dom'
 
 export default class Mainpage extends React.Component{
     constructor(props){
@@ -82,10 +84,11 @@ LoginPasswordInput=(event)=>{
     console.log(event.target.value)
 }
 Login=()=>{
-    if(this.state.loginManagerCheck===true){
+    <Link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
+    /*if(this.state.loginManagerCheck===true){
         axios.post("http://localhost:4000/hold")
         .then(Response=>{
-
+            <link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
         })
         .catch(err=>{
             console.log(err)
@@ -105,7 +108,7 @@ Login=()=>{
         })
         console.log(this.state.LoginNameValue)
         console.log(this.state.LoginPasswordValue)
-    }
+    }*/
 }
 onSearchFieldChange=(event)=>{
     console.log('Keyboard event');
@@ -140,7 +143,6 @@ managerLoginCheckChange=()=>{
                 <div>
                     <Mainbody items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                     products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase()))} 
-                    products={this.state.product}
                     CreateAccountInputs={this.state.CreateAccountNameValue}
                     CreateAccountPassword={this.state.CreateAccountPasswordValue}
                     AccountCreate={this.AccountCreate}
