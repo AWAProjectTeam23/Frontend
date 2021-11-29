@@ -4,8 +4,7 @@ import Mainbody from './Mainbody'
 import data from './data.json'
 import products from './datamenu.json'
 import axios from 'axios'
-import Customerpage from '../CustomerSide/Customerpage'
-import { Link} from 'react-router-dom'
+
 
 export default class Mainpage extends React.Component{
     constructor(props){
@@ -15,11 +14,8 @@ export default class Mainpage extends React.Component{
             product: products.items,
             CreateAccountNameValue:"",
             CreateAccountPasswordValue: "",
-            LoginNameValue:"",
-            LoginPasswordValue: "",
             productSearchString: "",
             createManagerCheck:false,
-            loginManagerCheck:false
         }
     }
 
@@ -75,41 +71,7 @@ AccountCreate=()=>{
         console.log(this.state.CreateAccountPasswordValue)
     }
 }
-LoginName=(event)=>{
-    this.setState({LoginNameValue:event.target.value})
-    console.log(event.target.value)
-}
-LoginPasswordInput=(event)=>{
-    this.setState({LoginPasswordValue:event.target.value})
-    console.log(event.target.value)
-}
-Login=()=>{
-    <Link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
-    /*if(this.state.loginManagerCheck===true){
-        axios.post("http://localhost:4000/hold")
-        .then(Response=>{
-            <link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-        console.log(this.state.LoginNameValue)
-        console.log(this.state.LoginPasswordValue)
-        console.log('Restaurant manager account')
-        console.log(this.state.loginManagerCheck) 
-    }
-    else{
-        axios.post("http://localhost:4000/hold")
-        .then(Response=>{
 
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-        console.log(this.state.LoginNameValue)
-        console.log(this.state.LoginPasswordValue)
-    }*/
-}
 onSearchFieldChange=(event)=>{
     console.log('Keyboard event');
     console.log(event.target.value);
@@ -126,14 +88,7 @@ managerCheckChange=()=>{
         this.setState({createManagerCheck:false})
     }
 }
-managerLoginCheckChange=()=>{
-    if(this.state.loginManagerCheck===false){
-    this.setState({loginManagerCheck:true})
-    }
-    else{
-        this.setState({loginManagerCheck:false})
-    }
-}
+
     render(){
         return (
             <div>
@@ -148,16 +103,15 @@ managerLoginCheckChange=()=>{
                     AccountCreate={this.AccountCreate}
                     CreateNameAccount={this.CreateNameAccount}
                     CreatePasswordInput={this.CreatePasswordInput}
-                    LoginInputs={this.state.LoginNameValue}
-                    LoginPasswordInputs={this.state.LoginPasswordValue}
-                    Login={this.Login}
-                    LoginName={this.LoginName}
-                    LoginPasswordInput={this.LoginPasswordInput}
+                    LoginInputs={this.props.LoginNameChange}
+                    LoginPasswordInputs={this.props.LoginPassword}
+                    Login={this.props.Login}
+                    LoginName={this.props.LoginName}
+                    LoginPasswordInput={this.props.LoginPasswordChange}
                     restaurantMenuButton={this.restaurantMenuButton}
                     createManagerCheck={this.state.createManagerCheck}
                     managerCheckChange={this.managerCheckChange}
-                    loginManagerCheck={this.state.loginManagerCheck}
-                    managerLoginCheckChange={this.managerLoginCheckChange}
+                    managerLoginCheckChange={this.props.Managercheck}
                     />
                  </div>
             </div>

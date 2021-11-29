@@ -6,7 +6,8 @@ export default function LoginAccount(props) {
     const [checked, setChecked] = React.useState(false);
     const handleChange = () => {
     setChecked(!checked);
-    props.managerLoginCheckChange()}
+    props.managerLoginCheckChange()
+    }
 
     return (
         <div className={style.back_color}>
@@ -33,13 +34,12 @@ export default function LoginAccount(props) {
                             onChange={handleChange}
                             />
                             <div className={style.checkheader}>
-                            {()=>props.loginManagerCheck()}
                             Create account as a restaurant manager</div>
                         </div>
                     </div>
                 <div className={style.button_margin}>
-                <button className={style.button_size} onClick={()=>props.Login()}>Login</button>
-                    <Link to="/Main" ><button className={style.button_size}>Cancel</button></Link>
+                <Link to="/"><button className={style.button_size} onClick={()=>props.Login()}>Login</button></Link>
+                    <Link to="/" ><button className={style.button_size}>Cancel</button></Link>
                 </div>
             </div>
         </div>

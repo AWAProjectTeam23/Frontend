@@ -1,10 +1,7 @@
 import React from 'react'
 import {Routes,Route} from "react-router-dom"
-import RestaurantBody from './RestaurantBody';
-import RestaurantMenu from './RestaurantMenu';
 import CreateAccount from './CreateAccount';
 import LoginAccount from './LoginAccount';
-import Restaurantbody from '../CustomerSide/Restaurantbody';
 import RestaurantBodyView from './RestaurantBodyView';
 import RestaurantMenuView from './RestaurantMenuView';
 
@@ -24,11 +21,10 @@ export default function Mainbody (props){
                     managerCheckChange={props.managerCheckChange}
                    />}/>
                 <Route path="/Login" element={<LoginAccount Login={props.Login}
-                    LoginInput={props.LoginInput}
+                    LoginInput={props.LoginName}
                     LoginPasswordInputs={props.LoginPasswordInputs}
-                    LoginNameInput={props.LoginName}
+                    LoginNameInput={props.LoginInputs}
                     LoginPasswordInput={props.LoginPasswordInput} 
-                    loginManagerCheck={props.loginManagerCheck}
                     managerLoginCheckChange={props.managerLoginCheckChange}
                     />}/>
             </Routes>

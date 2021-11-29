@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {Routes,Route} from "react-router-dom"
 import OrderHistory from './OrderHistory'
 import ReceiveDelivery from './ReceiveDelivery'

@@ -21,37 +21,124 @@ import LoginAccount from './MainSide/LoginAccount';
 class App extends React.Component{
   constructor(props){
     super(props);
-    
+    this.state={
+      Token:"",
+      LoggedIn:false,
+      Manager:false,
+      LoginNameValue:"",
+      LoginPasswordValue: "",
+    }
   }
 
 
+  Login=()=>{
+    this.setState({LoggedIn:true})
+    console.log("painettu")
+
+    /*if(this.state.loginManagerCheck===true){
+        axios.post("http://localhost:4000/hold")
+        .then(Response=>{
+            <link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        console.log(this.state.LoginNameValue)
+        console.log(this.state.LoginPasswordValue)
+        console.log('Restaurant manager account')
+        console.log(this.state.loginManagerCheck) 
+    }
+    else{
+        axios.post("http://localhost:4000/hold")
+        .then(Response=>{
+
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        console.log(this.state.LoginNameValue)
+        console.log(this.state.LoginPasswordValue)
+    }*/
+}
+LoginName=(event)=>{
+  this.setState({LoginNameValue:event.target.value})
+  console.log(event.target.value)
+}
+LoginPasswordInput=(event)=>{
+  this.setState({LoginPasswordValue:event.target.value})
+  console.log(event.target.value)
+}
+managerLoginCheckChange=()=>{
+  if(this.state.Manager===false){
+  this.setState({Manager:true})
+  }
+  else{
+      this.setState({Manager:false})
+  }
+  console.log(this.state.Manager)
+}
+
+Logout=()=>{
+  this.setState({LoggedIn:false})
+  this.setState({Token:""})
+  this.setState({Manager:false})
+  this.setState({LoginNameValue:""})
+  this.setState({LoginPasswordValue:""})
+}
+
   
 render(){
-    return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/Main" element={<Mainpage/>}>
-          <Route path="/Main/" element={<RestaurantBody/>}/>
-          <Route path="/Main/RestaurantMenu" element={<RestaurantMenu/>}/>
-          <Route path="/Main/CreateAccount" element={<CreateAccount/>}/>
-          <Route path="/Main/Login" element={<LoginAccount/>}/>
-        </Route>
-        <Route path="/Customer" element={<Customerpage/>}>
-          <Route path="/Customer/" element={<CRestaurantbody/>}/>
-          <Route path="/Customer/RestaurantMenu" element={<CRestaurantMenu/>}/>
-          <Route path="/Customer/OrderHistory" element={<COrderHistory/>}/>
-          <Route path="/Customer/OrderStatus" element={<CReceiveDelivery/>}/>
-        </Route>
-        <Route path="/Manager" element={<Managerpage/>}>
-          <Route path="/Manager/" element={<ReceiveOrder/>}/>
-          <Route path="/Manager/History" element={<MOrderHistory/>}/>
-          <Route path="/Manager/CreateProduct" element={<CreateProduct/>}/>
-          <Route path="/Manager/CreateRestaurant" element={<CreateRestaurant/>}/>
-          <Route path="/Manager/CreateCategory" element={<CreateCategory/>}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+  let manager=this.state.Manager
+  let LoggedIn=this.state.LoggedIn
+  let view;
+  if(manager===false && LoggedIn===true){
+    view=
+      <BrowserRouter>
+        <Routes>
+        <Route path="/" element={<Customerpage Logout={this.Logout}/>}>
+            <Route path="/" element={<CRestaurantbody/>}/>
+            <Route path="/RestaurantMenu" element={<CRestaurantMenu/>}/>
+            <Route path="/OrderHistory" element={<COrderHistory/>}/>
+            <Route path="/OrderStatus" element={<CReceiveDelivery/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    
+  }
+  else if(manager===true && LoggedIn===true){
+    view=
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Managerpage Logout={this.Logout}/>}>
+              <Route path="/" element={<ReceiveOrder/>}/>
+              <Route path="/History" element={<MOrderHistory/>}/>
+              <Route path="/CreateProduct" element={<CreateProduct/>}/>
+              <Route path="/CreateRestaurant" element={<CreateRestaurant/>}/>
+              <Route path="/CreateCategory" element={<CreateCategory/>}/>
+            </Route>
+        </Routes>
+      </BrowserRouter>
+    
+  }else{
+    view=
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Mainpage Login={this.Login}
+           LoginName={this.state.LoginNameValue}
+           LoginPassword={this.state.LoginPasswordValue}
+           LoginNameChange={this.LoginName}
+           LoginPasswordChange={this.LoginPasswordInput}
+           Managercheck={this.managerLoginCheckChange}/>}>
+            <Route path="/" element={<RestaurantBody/>}/>
+            <Route path="/RestaurantMenu" element={<RestaurantMenu/>}/>
+            <Route path="/CreateAccount" element={<CreateAccount/>}/>
+            <Route path="/Login" element={<LoginAccount/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    
+  }
+    return(<div>{view}</div>)
  }
 }
 

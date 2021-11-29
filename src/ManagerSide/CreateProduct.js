@@ -55,7 +55,7 @@ export default function CreateProduct(props) {
                 </div>
                 <div className={style.button_margin}>
                     <button className={style.button_size}onClick={()=>props.ProductCreate()}>create</button>
-                    <Link to='/Manager/'><button className={style.button_size}>cancel</button></Link>
+                    <Link to='/'><button className={style.button_size}>cancel</button></Link>
                 </div>
             </div>
             

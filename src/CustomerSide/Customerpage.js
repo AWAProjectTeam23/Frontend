@@ -181,6 +181,7 @@ export default class Customerpage extends Component {
                     DeliveryLocation={this.inputDeliveryLocation}
                     ConfirmOrder={this.ConfirmOrder}
                     getRestaurants={this.getRestaurants}
+                    Logout={this.props.Logout}
                     ShoppingCartItems={this.state.ShoppingCartItems}
                     TotalCost={this.state.TotalCost}
                     ShoppingCartOpen={this.state.ShoppingCartOpen}/>
