@@ -184,7 +184,8 @@ export default class Managerpage extends Component {
                      <Managerbar selectValue={this.state.selectValue} 
                      selectChange={this.selectChange}
                      getHistory={this.getHistory}
-                     getReceiveOrder={this.getReceiveOrder}/>
+                     getReceiveOrder={this.getReceiveOrder}
+                     Logout={this.props.Logout}/>
                 </div>
                 <div>
                 <Managerbody 

@@ -8,7 +8,7 @@ export default function RestaurantBody(props) {
     <div>
       
     <div className= {styles.product}>
-    <Link to="/Main/RestaurantMenu" >
+    <Link to="/RestaurantMenu" >
       <button className onClick={()=>props.restaurantMenuButton(props.id)}>
         <div> 
             <img src={`/images/${props.image}`} 
