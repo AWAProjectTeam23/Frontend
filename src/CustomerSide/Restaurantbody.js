@@ -14,11 +14,13 @@ export default function Restaurantbody(props) {
             <img src={`/images/${props.image}`} 
             height={300}
             width={300}/>
-            <div className={ styles.name }>{ props.name }</div>
-            <div className={ styles.type }>{ props.type }</div> 
-            <div className={ styles.address }>{ props.address }</div>
-            <div className={ styles.price}>{ props.price }</div>
-            <div className={ styles.openinghours}>{ props.openinghours }</div> 
+            <div>
+              <div className={ styles.name }>{ props.name }</div>
+              <div className={ styles.type }>{ props.type }</div> 
+              <div className={ styles.address }>{ props.address }</div>
+              <div className={ styles.price}>{ props.price }</div>
+              <div className={ styles.openinghours}>{ props.openinghours }</div>
+            </div> 
         </div>  
       </button></Link>
     </div>
