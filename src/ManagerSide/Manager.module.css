@@ -1,23 +1,23 @@
 .ManagerBar{
     display: flex;
-    background-color: blue;
-    height: 40px;
-    
+    background-image: linear-gradient(to left, rgb(228, 129, 0) ,rgb(255, 182, 46),rgb(252, 194, 87), rgb(255, 227, 190));
+    height: 55px;
 }
 .button_margin{
-    margin-left: 5%;
+    margin-left: auto;
+    margin-top: 2px;
 }
 .button_left{
     margin-top: 2px;
     font-size: medium;
-    height: 35px;
-    margin-left: 110px;
     margin-right: auto;
     width: 150px;
+    height: 45px;
+    margin-left: 100px;
 }
 .Logo_margin{
-    margin-top: 8px;
-    margin-left: 10px;
+    margin-top: 5px;
+    padding-left: 20px;
 }
 .Log_out_margin{
     font-size: medium;
@@ -28,7 +28,7 @@
 }
 .select_margin{
     margin-left: 10%;
-    margin-top: 4px;
+    margin-top: 5px;
 }
 .select_size{
     width: 150px;
