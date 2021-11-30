@@ -39,7 +39,7 @@ export default function CreateAccount(props) {
                     </div>
                 <div className={style.button_margin}>
                 <button className={style.button_size} onClick={()=>props.AccountCreate()}>Register</button>
-                    <Link to="/Main/" ><button className={style.button_size}>Cancel</button></Link>
+                    <Link to="/" ><button className={style.button_size}>Cancel</button></Link>
                 </div>
             </div>
         </div>

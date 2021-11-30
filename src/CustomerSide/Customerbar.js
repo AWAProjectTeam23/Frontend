@@ -6,7 +6,7 @@ import ShoppingCart from './ShoppingCart'
 export default function Customerbar(props) {
     const ShoppingCartState=props.ShoppingCartOpen;
 
-    if(ShoppingCartState==true){
+    if(ShoppingCartState===true){
     return (
         <div className={style.CustomerBar}>
              <div className={style.Logo_margin}>
@@ -50,7 +50,7 @@ export default function Customerbar(props) {
                     <Link to="/OrderStatus"><button className={style.button_left}>Order status</button></Link>
                     <Link to="/OrderHistory"><button className={style.button_left}>Order history</button></Link>
                     <button className={style.button_left} onClick={()=>props.openShoppingCart()}>shoppingcart</button>
-                    <button style={{fontWeight:"bold"}} className={style.button_left} onClick={()=>props.Logout()}>Log out</button>
+                    <Link to="/"><button style={{fontWeight:"bold"}} className={style.button_left} onClick={()=>props.Logout()}>Log out</button></Link>
                 </div>
             </div>
         )

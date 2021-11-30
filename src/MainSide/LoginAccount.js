@@ -1,16 +1,27 @@
 import React from 'react'
 import style from './LoginAccount.module.css';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function LoginAccount(props) {
+    let navigate=useNavigate()
     const [checked, setChecked] = React.useState(false);
     const handleChange = () => {
     setChecked(!checked);
     props.managerLoginCheckChange()
     }
 
+    async function handleLogin(){
+        if(props.Login()){
+            console.log("navigating")
+            navigate("/")
+        }
+    }
+
     return (
         <div className={style.back_color}>
+            <div className={style.warningText}>
+                {props.LoginWarning}
+            </div>
             <div className={style.box}>
                 <div className={style.input_margin}>
                     <div className={style.header}> Login</div>
@@ -38,7 +49,7 @@ export default function LoginAccount(props) {
                         </div>
                     </div>
                 <div className={style.button_margin}>
-                <Link to="/"><button className={style.button_size} onClick={()=>props.Login()}>Login</button></Link>
+                    <button className={style.button_size} onClick={()=>handleLogin()}>Login</button>
                     <Link to="/" ><button className={style.button_size}>Cancel</button></Link>
                 </div>
             </div>

@@ -22,7 +22,7 @@ export default function ShoppingCart(props) {
                         <div style={{width:"280px"}}>
                             totalcost: {props.TotalCost} €
                         </div>
-                        <div style={{marginLeft:"auto"},{marginRight:"auto"}}>
+                        <div style={{marginLeft:"auto",marginRight:"auto"}}>
                             <button style={{fontWeight:"bold"}} onClick={()=>props.ConfirmOrder()}>confirm order</button>
                         </div>
                     </div>
