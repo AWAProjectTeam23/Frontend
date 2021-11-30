@@ -9,9 +9,11 @@ export default function Customerbar(props) {
     if(ShoppingCartState==true){
     return (
         <div className={style.CustomerBar}>
-            <div className={style.Logo_margin}>
-                <Link to="/"><div style={{color:"white"}} onClick={()=>props.getRestaurants()}>Logo</div></Link>
-            </div>
+             <div className={style.Logo_margin}>
+                    <Link to="/"><div style={{color:"white"}}><img src={`/images/logo.png`} 
+                    height={50}
+                    width={190}/></div></Link>
+                </div>
             <div className={style.searchbar_margin}>
                 <input style={{height:"20px",width:"400px"}} type="text"onChange={props.searchChange} />
             </div>
@@ -36,8 +38,10 @@ export default function Customerbar(props) {
     else{
         return (
             <div className={style.CustomerBar}>
-                <div className={style.Logo_margin}>
-                    <Link to="/"><div style={{color:"white"}}>Logo</div></Link>
+                 <div className={style.Logo_margin}>
+                    <Link to="/"><div style={{color:"white"}}><img src={`/images/logo.png`} 
+                    height={50}
+                    width={190}/></div></Link>
                 </div>
                 <div className={style.searchbar_margin}>
                     <input style={{height:"20px",width:"400px"}} type="text"onChange={props.searchChange} />

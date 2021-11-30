@@ -1,7 +1,7 @@
 .CustomerBar{
     display: flex;
-    background-color: blue;
-    height: 40px;
+    background-image: linear-gradient(to left, rgb(228, 129, 0) ,rgb(255, 182, 46),rgb(252, 194, 87), rgb(255, 227, 190));
+    height: 55px;
 }
 .button_margin{
     margin-left: auto;
@@ -13,7 +13,7 @@
 }
 .button_left{
     font-size: medium;
-    height: 35px;
+    height: 45px;
     margin-left: 20px;
 }
 .Logo_margin{
@@ -22,7 +22,7 @@
     color: white;
 }
 .searchbar_margin{
-    margin-top: 7px;
+    margin-top: 12px;
     margin-left: 20%;
 }
 .ShoppingCart{
