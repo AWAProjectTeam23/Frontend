@@ -56,3 +56,7 @@ input
   width: 150px;
   height: 30px;
 }
+.description{
+  font-size: large;
+  width: 200px;
+}
