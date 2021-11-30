@@ -14,7 +14,7 @@ export default function ShoppingCartProduct(props) {
                 </div>
                 
                 <div className={style.textMargin}>
-                    <div style={{marginBottom:"auto"},{height:"100px"}}>
+                    <div style={{marginBottom:"auto",height:"100px"}}>
                         <div >{ props.Name }</div>
                         <div>Description:</div>
                         <div >{ props.Description}</div> 

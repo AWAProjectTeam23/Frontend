@@ -112,6 +112,7 @@ managerCheckChange=()=>{
                     createManagerCheck={this.state.createManagerCheck}
                     managerCheckChange={this.managerCheckChange}
                     managerLoginCheckChange={this.props.Managercheck}
+                    LoginWarning={this.props.LoginWarning}
                     />
                  </div>
             </div>

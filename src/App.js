@@ -23,42 +23,56 @@ class App extends React.Component{
     super(props);
     this.state={
       Token:"",
-      LoggedIn:false,
       Manager:false,
       LoginNameValue:"",
       LoginPasswordValue: "",
+      LoginWarning:""
     }
   }
 
+  LoginWarningText=(bool)=>{
+    if(bool===false){
+      this.setState({LoginWarning:"User name or password was wrong please try again"})
+    }else{
+      this.setState({LoginWarning:""})
+    }
+  }
 
   Login=()=>{
-    this.setState({LoggedIn:true})
+    
     console.log("painettu")
 
-    /*if(this.state.loginManagerCheck===true){
-        axios.post("http://localhost:4000/hold")
+    if(this.state.Manager===true){
+        /*axios.post("http://localhost:4000/hold")
         .then(Response=>{
             <link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
+            this.LoginWarningText(true)
+            this.LoginWarningText(false)
         })
         .catch(err=>{
             console.log(err)
-        })
+        })*/
+        this.setState({Token:"a"})
         console.log(this.state.LoginNameValue)
         console.log(this.state.LoginPasswordValue)
         console.log('Restaurant manager account')
-        console.log(this.state.loginManagerCheck) 
+        console.log(this.state.Manager)
+        return true
     }
     else{
-        axios.post("http://localhost:4000/hold")
+        /*axios.post("http://localhost:4000/hold")
         .then(Response=>{
-
+          this.LoginWarningText(false)
+          this.LoginWarningText(true)
         })
         .catch(err=>{
             console.log(err)
-        })
+        })*/
+        this.setState({Token:"a"})
         console.log(this.state.LoginNameValue)
         console.log(this.state.LoginPasswordValue)
-    }*/
+        return true
+    }
 }
 LoginName=(event)=>{
   this.setState({LoginNameValue:event.target.value})
@@ -79,7 +93,6 @@ managerLoginCheckChange=()=>{
 }
 
 Logout=()=>{
-  this.setState({LoggedIn:false})
   this.setState({Token:""})
   this.setState({Manager:false})
   this.setState({LoginNameValue:""})
@@ -89,9 +102,9 @@ Logout=()=>{
   
 render(){
   let manager=this.state.Manager
-  let LoggedIn=this.state.LoggedIn
+  let Token=this.state.Token
   let view;
-  if(manager===false && LoggedIn===true){
+  if(manager===false && Token.length>0){
     view=
       <BrowserRouter>
         <Routes>
@@ -103,9 +116,8 @@ render(){
           </Route>
         </Routes>
       </BrowserRouter>
-    
   }
-  else if(manager===true && LoggedIn===true){
+  else if(manager===true && Token.length>0){
     view=
       <BrowserRouter>
         <Routes>
@@ -118,7 +130,6 @@ render(){
             </Route>
         </Routes>
       </BrowserRouter>
-    
   }else{
     view=
       <BrowserRouter>
@@ -126,6 +137,7 @@ render(){
           <Route path="/" element={<Mainpage Login={this.Login}
            LoginName={this.state.LoginNameValue}
            LoginPassword={this.state.LoginPasswordValue}
+           LoginWarning={this.state.LoginWarning}
            LoginNameChange={this.LoginName}
            LoginPasswordChange={this.LoginPasswordInput}
            Managercheck={this.managerLoginCheckChange}/>}>
@@ -136,7 +148,6 @@ render(){
           </Route>
         </Routes>
       </BrowserRouter>
-    
   }
     return(<div>{view}</div>)
  }

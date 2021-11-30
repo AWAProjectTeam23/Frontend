@@ -21,6 +21,7 @@ export default function Mainbody (props){
                     managerCheckChange={props.managerCheckChange}
                    />}/>
                 <Route path="/Login" element={<LoginAccount Login={props.Login}
+                    LoginWarning={props.LoginWarning}
                     LoginInput={props.LoginName}
                     LoginPasswordInputs={props.LoginPasswordInputs}
                     LoginNameInput={props.LoginInputs}
