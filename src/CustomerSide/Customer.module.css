@@ -32,3 +32,8 @@
     background-color: white;
     margin-left: 68%;
 }
+.orderwarning{
+    font-weight: bold;
+    font-size: small;
+    background-color: lightgreen;
+}

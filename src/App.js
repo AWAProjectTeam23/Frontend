@@ -69,6 +69,7 @@ class App extends React.Component{
             console.log(err)
         })*/
         this.setState({Token:"a"})
+        this.LoginWarningText(true)
         console.log(this.state.LoginNameValue)
         console.log(this.state.LoginPasswordValue)
         return true

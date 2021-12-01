@@ -19,6 +19,7 @@ export default function Mainbody (props){
                     CreatePasswordInput={props.CreatePasswordInput}
                     createManagerCheck={props.createManagerCheck}
                     managerCheckChange={props.managerCheckChange}
+                    CreateWarning={props.CreateWarning}
                    />}/>
                 <Route path="/Login" element={<LoginAccount Login={props.Login}
                     LoginWarning={props.LoginWarning}
