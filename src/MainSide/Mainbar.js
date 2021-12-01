@@ -14,8 +14,8 @@ export default function Mainbar(props) {
                 <input style={{height:"20px",width:"400px"}} type="text" onChange={props.searchChange} />
             </div>
             <div className={style.button_margin}>
-                <Link to="/CreateAccount"><button className={style.button_left}>createaccount</button></Link>
-                <Link to="/Login"><button className={style.button_left}>Login</button></Link>
+                <button className={style.button_left}><Link to="/CreateAccount">createaccount</Link></button>
+                <button className={style.button_left}><Link to="/Login">Login</Link></button>
             </div>
         </div>
     )

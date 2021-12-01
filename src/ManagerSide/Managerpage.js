@@ -11,9 +11,9 @@ export default class Managerpage extends Component {
         super(props);
         this.state={
             item: [],
-            history: [],
+            history: historyData.history,
             selectValue: data.Restaurants,
-            CategoryValues:[],
+            CategoryValues:[{Category:"foobar"}],
             RestaurantType:[{Type:"Buffet"},{Type:"Fast food"},{Type:"Fast casual"},{Type:"Casual dining"},{Type:"Fine dining"}],
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
             ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:"",Image:""}],
@@ -25,6 +25,16 @@ export default class Managerpage extends Component {
 
     componentDidMount=()=>{
         //this.getRestaurants(ManagerID)
+        if(this.state.CategoryValues.length>=1){
+            let Array=[...this.state.ProductInputValue]
+            Array[0].Category=this.state.CategoryValues[0].Category
+            this.setState({ProductInputValue:Array})
+        }
+        if(this.state.selectValue.length>=1){
+            let Array=[...this.state.ProductInputValue]
+            Array[0].Restaurant=this.state.selectValue[0].name
+            this.setState({ProductInputValue:Array})
+        }
     }
 
     getRestaurants=(id)=>{
