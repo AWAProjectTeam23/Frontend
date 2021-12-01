@@ -89,6 +89,7 @@ onSearchFieldChange=(event)=>{
     this.setState({ productSearchString: event.target.value });
 }
 restaurantMenuButton=(id)=>{
+    this.clearSearchBar()
     this.GetRestaurantProducts(id)
 }
 managerCheckChange=()=>{
@@ -99,12 +100,17 @@ managerCheckChange=()=>{
         this.setState({createManagerCheck:false})
     }
 }
+clearSearchBar=()=>{
+    this.setState({ productSearchString:""});
+}
 
     render(){
         return (
             <div>
                 <div>
-                    <Mainbar searchChange={this.onSearchFieldChange}/>
+                    <Mainbar 
+                    searchChange={this.onSearchFieldChange}
+                    clearSearchBar={this.clearSearchBar}/>
                 </div>
                 <div>
                     <Mainbody items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }

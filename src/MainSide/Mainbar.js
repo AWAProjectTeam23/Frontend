@@ -6,7 +6,7 @@ export default function Mainbar(props) {
     return (
         <div className={style.MainBar}>
              <div className={style.Logo_margin}>
-                    <Link to="/"><div style={{color:"white"}}><img src={`/images/logo.png`} 
+                    <Link to="/" onClick={props.clearSearchBar}><div style={{color:"white"}}><img src={`/images/logo.png`} 
                     height={50}
                     width={190}/></div></Link>
                 </div>

@@ -150,13 +150,14 @@ export default class Customerpage extends Component {
         this.setState({ productSearchString: event.target.value });
     }
     restaurantMenuButton=(id)=>{
-        axios.get(""+id)
+        /*axios.get(""+id)
         .then(Response=>{
-            this.setState({product:Response})
+            this.setState ({product:Response})            
         })
         .catch(err=>{
             console.log(err)
-        })
+        }) */
+        this.clearSearchBar()
      }
 
 
@@ -178,6 +179,9 @@ export default class Customerpage extends Component {
             }
         }
     }
+    clearSearchBar=()=>{
+        this.setState({ productSearchString:""});
+    }
         render(){
         <>
           <RestaurantBodyView/>
@@ -197,6 +201,7 @@ export default class Customerpage extends Component {
                     TotalCost={this.state.TotalCost}
                     ShoppingCartOpen={this.state.ShoppingCartOpen}
                     OrderWarning={this.state.OrderWarning}
+                    clearSearchBar={this.clearSearchBar}
                     />
                 </div>
                     <div>
@@ -207,7 +212,7 @@ export default class Customerpage extends Component {
                         ActiveOrders={this.state.ActiveOrders}
                         addToShoppingCart={this.addToShoppingCart}
                         restaurantMenuButton={this.restaurantMenuButton}
-                        OrderDelivered={this.OrderDelivered}
+                        OrderDelivered={this.OrderDelivered}                    
                         />
                     </div>
             </div>

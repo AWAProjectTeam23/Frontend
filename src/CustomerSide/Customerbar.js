@@ -10,7 +10,7 @@ export default function Customerbar(props) {
     return (
         <div className={style.CustomerBar}>
              <div className={style.Logo_margin}>
-                    <Link to="/"><div style={{color:"white"}}><img src={`/images/logo.png`} 
+                    <Link to="/" onClick={props.clearSearchBar} > <div style={{color:"white"}}> <img src={`/images/logo.png`} 
                     height={50}
                     width={190}/></div></Link>
                 </div>
@@ -42,12 +42,12 @@ export default function Customerbar(props) {
         return (
             <div className={style.CustomerBar}>
                  <div className={style.Logo_margin}>
-                    <Link to="/"><div style={{color:"white"}}><img src={`/images/logo.png`} 
+                    <Link to="/"onClick={props.clearSearchBar} > <div style={{color:"white"}}><img src={`/images/logo.png`} 
                     height={50}
                     width={190}/></div></Link>
                 </div>
                 <div className={style.searchbar_margin}>
-                    <input style={{height:"20px",width:"400px"}} type="text"onChange={props.searchChange} />
+                    <input style={{height:"20px",width:"400px"}}  type="text"onChange={props.searchChange} />
                 </div>
                 <div className={style.button_margin}>
                     <button className={style.button_left}><Link to="/OrderStatus">Order status</Link></button>
