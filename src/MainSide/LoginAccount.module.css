@@ -48,11 +48,10 @@
     -webkit-text-security: disc;
 }
 .checkbox{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 100px;
     width: 70%;
     height: 25px;
-    
 }
 .checkheader{
     margin-top: -45px;
