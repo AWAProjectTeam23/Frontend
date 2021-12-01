@@ -25,6 +25,9 @@ export default function Customerbar(props) {
                     DeliveryLocation={props.DeliveryLocation}
                     ConfirmOrder={props.ConfirmOrder}
                     />
+                    <div className={style.orderwarning}>
+                        {props.OrderWarning}
+                    </div>
             </div>
             <div className={style.button_margin_open}>
                 <Link to="/OrderStatus"><button className={style.button_left}>Order status</button></Link>

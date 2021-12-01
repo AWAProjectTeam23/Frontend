@@ -16,8 +16,17 @@ export default class Mainpage extends React.Component{
             CreateAccountPasswordValue: "",
             productSearchString: "",
             createManagerCheck:false,
+            CreateWarning:""
         }
     }
+
+CreateWarningText=(bool)=>{
+    if(bool==false){
+        this.setState({CreateWarning:"There was a problem in the account creation. Fill both of the boxes and try again"})
+    }else{
+        this.setState({CreateWarning:""})
+    }
+}
 
 componentDidMount=()=>{
     axios.get("http://localhost:4000/hold")
@@ -47,26 +56,28 @@ CreatePasswordInput=(event)=>{
 }
 AccountCreate=()=>{
     if(this.state.createManagerCheck===true){
-        axios.post("http://localhost:4000/hold")
+        /*axios.post("http://localhost:4000/hold")
         .then(Response=>{
-            
+            this.CreateWarningText(false)
         })
         .catch(err=>{
             console.log(err)
-        })
+        })*/
+        
         console.log(this.state.CreateAccountNameValue)
         console.log(this.state.CreateAccountPasswordValue)
         console.log('Restaurant manager account')
         console.log(this.state.createManagerCheck) 
     }
     else{
-        axios.post("http://localhost:4000/hold")
+        /*axios.post("http://localhost:4000/hold")
         .then(Response=>{
 
         })
         .catch((err)=>{
             console.log(err)
-        })
+        })*/
+        this.CreateWarningText(true)
         console.log(this.state.CreateAccountNameValue)
         console.log(this.state.CreateAccountPasswordValue)
     }
@@ -113,6 +124,7 @@ managerCheckChange=()=>{
                     managerCheckChange={this.managerCheckChange}
                     managerLoginCheckChange={this.props.Managercheck}
                     LoginWarning={this.props.LoginWarning}
+                    CreateWarning={this.state.CreateWarning}
                     />
                  </div>
             </div>

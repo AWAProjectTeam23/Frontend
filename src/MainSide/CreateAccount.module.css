@@ -60,3 +60,11 @@
     width: 325px;
     font-size: 18px;
 }
+.warningtext{
+    margin-left: 32%;
+    margin-top: 5%;
+    background-color: lightgreen;
+    width: fit-content;
+    font-size: large;
+    font-weight: bold;
+}

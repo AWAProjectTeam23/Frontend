@@ -10,6 +10,9 @@ export default function CreateAccount(props) {
     
     return (
         <div className={style.back_color}>
+            <div className={style.warningtext}>
+                {props.CreateWarning}
+            </div>
             <div className={style.box}>
                 <div className={style.input_margin}>
                     <div className={style.header}> Create account</div>

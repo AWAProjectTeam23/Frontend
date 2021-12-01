@@ -21,7 +21,15 @@ export default class Customerpage extends Component {
             TotalCost:0,
             ShoppingCartOpen:false,
             CustomerID:"aa",
-            OrderInfo:""
+            OrderWarning:""
+        }
+    }
+
+    OrderWarningText=(bool)=>{
+        if(bool==false){
+            this.setState({OrderWarning:"There was a problem in sending the order. Fill all the info boxes and try again"})
+        }else{
+            this.setState({OrderWarning:""})
         }
     }
 
@@ -71,7 +79,7 @@ export default class Customerpage extends Component {
     }
 
     ConfirmOrder=()=>{
-        axios.post("",{
+        /*axios.post("",{
             CustomerID:this.state.CustomerID,
             DeliveryLocation:this.state.DeliveryLocation,
             TotalCost:this.state.TotalCost,
@@ -79,14 +87,17 @@ export default class Customerpage extends Component {
         })
         .then(Response=>{
             if(Response===true){
-                this.setState({OrderInfo:"Order send succesfully"},()=>this.getActiveOrders())
+                this.getActiveOrders()
+                this.OrderWarningText(true)
             }else{
                 this.setState({OrderInfo:"Order was not send"})
+                this.OrderWarningText(false)
             }
         })
         .catch(err=>{
             console.log(err)
-        })
+        })*/
+        this.OrderWarningText(true)
         console.log(this.state.CustomerID)
         console.log(this.state.DeliveryLocation)
         console.log(this.state.TotalCost)
@@ -184,7 +195,9 @@ export default class Customerpage extends Component {
                     Logout={this.props.Logout}
                     ShoppingCartItems={this.state.ShoppingCartItems}
                     TotalCost={this.state.TotalCost}
-                    ShoppingCartOpen={this.state.ShoppingCartOpen}/>
+                    ShoppingCartOpen={this.state.ShoppingCartOpen}
+                    OrderWarning={this.state.OrderWarning}
+                    />
                 </div>
                     <div>
                         <Customerbody 
