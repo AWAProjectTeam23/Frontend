@@ -16,11 +16,11 @@ export default function Managerbar(props) {
                 </select>
             </div>
             <div className={style.button_margin}>
-                <Link to="/History"><button className={style.button_left}>History</button></Link>
-                <Link to="/CreateCategory"><button className={style.button_left}>CreateCategory</button></Link>
-                <Link to="/CreateProduct"><button className={style.button_left}>Createproduct</button></Link>
-                <Link to="/CreateRestaurant"><button className={style.button_left}>CreateRestaurant</button></Link>
-                <Link to="/"><button className={style.Log_out_margin} onClick={()=>props.Logout()}>Log out</button></Link>
+                <button className={style.button_left}><Link to="/History">History</Link></button>
+                <button className={style.button_left}><Link to="/CreateCategory">CreateCategory</Link></button>
+                <button className={style.button_left}><Link to="/CreateProduct">Createproduct</Link></button>
+                <button className={style.button_left}><Link to="/CreateRestaurant">CreateRestaurant</Link></button>
+                <button className={style.Log_out_margin} onClick={()=>props.Logout()}><Link to="/">Log out</Link></button>
             </div>
            
         </div>
