@@ -1,6 +1,10 @@
 import React from 'react'
 import style from './LoginAccount.module.css';
 import { Link, useNavigate } from 'react-router-dom'
+import { orange } from '@mui/material/colors';
+import Checkbox from '@mui/material/Checkbox';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function LoginAccount(props) {
     let navigate=useNavigate()
@@ -39,11 +43,20 @@ export default function LoginAccount(props) {
                 </div>
                     <div>
                         <div className={style.checkbox}>
-                            <input
+                            <Checkbox
+                            input
                             type="checkbox"
                             checked={checked}
                             onChange={handleChange}
-                            />
+                            {...label}
+                            defaultChecked
+                            sx={{
+                            color: orange[800],
+                            '& .MuiSvgIcon-root': { fontSize: 50 },
+                            '&.Mui-checked': {
+                            color: orange[800],
+                                },
+                            }}/>
                             <div className={style.checkheader}>
                             Create account as a restaurant manager</div>
                         </div>
