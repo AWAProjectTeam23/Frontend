@@ -1,6 +1,10 @@
 import React from 'react'
 import style from './CreateAccount.module.css';
 import { Link } from 'react-router-dom'
+import { orange } from '@mui/material/colors';
+import Checkbox from '@mui/material/Checkbox';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function CreateAccount(props) {
     const [checked, setChecked] = React.useState(false);
@@ -26,14 +30,22 @@ export default function CreateAccount(props) {
                     />
                 </div>
                     <div>
-                        <div className={style.checkbox}>
-                            <input
+                    <div className={style.checkbox}>
+                            <Checkbox
+                            input
                             type="checkbox"
                             checked={checked}
                             onChange={handleChange}
-                            />
+                            {...label}
+                            defaultChecked
+                            sx={{
+                            color: orange[800],
+                            '& .MuiSvgIcon-root': { fontSize: 50 },
+                            '&.Mui-checked': {
+                            color: orange[800],
+                                },
+                            }}/>
                             <div className={style.checkheader}>
-                            {()=>props.createManagerCheck()}
                             Create account as a restaurant manager</div>
                         </div>
                     </div>
