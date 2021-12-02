@@ -14,8 +14,10 @@ export default class Customerpage extends Component {
             items: [],
             history: [],
             ActiveOrders:[],
-            product: products.items,
+            product: [],
             productSearchString: "",
+            categorySearch:"",
+            categories:[],
             DeliveryLocation:"",
             ShoppingCartItems:[],
             TotalCost:0,
@@ -25,8 +27,16 @@ export default class Customerpage extends Component {
         }
     }
 
+    categorySearchChange=(event)=>{
+        if(this.state.categorySearch===event.target.value){
+            this.setState({categorySearch:""})
+        }else{
+            this.setState({categorySearch:event.target.value})
+        }
+    }
+
     OrderWarningText=(bool)=>{
-        if(bool==false){
+        if(bool===false){
             this.setState({OrderWarning:"There was a problem in sending the order. Fill all the info boxes and try again"})
         }else{
             this.setState({OrderWarning:""})
@@ -37,6 +47,17 @@ export default class Customerpage extends Component {
         this.getRestaurants()
         this.getHistory()
         this.getActiveOrders()
+    }
+
+    getcategory=()=>{
+        let Array=[]
+            this.state.product.forEach(element => {
+                if(!Array.includes(element.category)){
+                    Array.push(element.category)
+                    console.log(element.category)
+                }
+            });
+        this.setState({categories:Array})
     }
 
     getRestaurants=()=>{
@@ -149,6 +170,7 @@ export default class Customerpage extends Component {
         console.log(event.target.value);
         this.setState({ productSearchString: event.target.value });
     }
+    
     restaurantMenuButton=(id)=>{
         /*axios.get(""+id)
         .then(Response=>{
@@ -157,6 +179,7 @@ export default class Customerpage extends Component {
         .catch(err=>{
             console.log(err)
         }) */
+        this.setState({product:products.items},()=>this.getcategory())
         this.clearSearchBar()
      }
 
@@ -207,12 +230,15 @@ export default class Customerpage extends Component {
                     <div>
                         <Customerbody 
                         items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
-                        products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase()))}
+                        products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
+                            && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))}
                         history={this.state.history}
                         ActiveOrders={this.state.ActiveOrders}
                         addToShoppingCart={this.addToShoppingCart}
                         restaurantMenuButton={this.restaurantMenuButton}
-                        OrderDelivered={this.OrderDelivered}                    
+                        OrderDelivered={this.OrderDelivered}
+                        categorySearchChange={this.categorySearchChange}
+                        categories={this.state.categories}                  
                         />
                     </div>
             </div>

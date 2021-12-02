@@ -14,6 +14,7 @@ export default function RestaurantMenu(props) {
               <div className={ styles.name }>{ props.name }</div>
               <div className={ styles.restaurant }>{ props.restaurant }</div>
               <div className={styles.description}>{props.description}</div>
+              <div className={styles.category}>{props.category}</div>
               <div className={styles.flex}>
                 <div className={ styles.price}>{ props.price } €</div>
                 <button className={styles.button} onClick={()=>props.addToCart(props.id)}>Add to cart</button> 
