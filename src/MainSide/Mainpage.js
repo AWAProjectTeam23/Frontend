@@ -16,10 +16,20 @@ export default class Mainpage extends React.Component{
             CreateAccountPasswordValue: "",
             productSearchString: "",
             createManagerCheck:false,
-            CreateWarning:""
+            CreateWarning:"",
+            categories: [],
+            categorySearch: ""
+
         }
     }
 
+categorySearchChange=(event)=>{
+    if (this.state.categorySearch===event.target.value){
+        this.setState({categorySearch:""})
+    }else{
+        this.setState({categorySearch:event.target.value})
+    }
+}   
 CreateWarningText=(bool)=>{
     if(bool==false){
         this.setState({CreateWarning:"There was a problem in the account creation. Fill both of the boxes and try again"})
@@ -44,7 +54,6 @@ GetRestaurantProducts=(id)=>{
     })
     .catch((err)=>{console.log(err)})
 }
-
 
 CreateNameAccount=(event)=>{
     this.setState({CreateAccountNameValue:event.target.value})
@@ -91,6 +100,7 @@ onSearchFieldChange=(event)=>{
 restaurantMenuButton=(id)=>{
     this.clearSearchBar()
     this.GetRestaurantProducts(id)
+    this.getCategory()
 }
 managerCheckChange=()=>{
     if(this.state.createManagerCheck===false){
@@ -104,6 +114,17 @@ clearSearchBar=()=>{
     this.setState({ productSearchString:""});
 }
 
+getCategory=()=>{
+    let Array=[]
+        this.state.product.forEach(element=>{
+            if(!Array.includes(element.category)){
+                Array.push(element.category)
+                console.log(element.category)
+            }
+        });
+        this.setState({categories:Array})
+}
+
     render(){
         return (
             <div>
@@ -113,8 +134,10 @@ clearSearchBar=()=>{
                     clearSearchBar={this.clearSearchBar}/>
                 </div>
                 <div>
-                    <Mainbody items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
-                    products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase()))} 
+                    <Mainbody 
+                    items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
+                    products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
+                        && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))} 
                     CreateAccountInputs={this.state.CreateAccountNameValue}
                     CreateAccountPassword={this.state.CreateAccountPasswordValue}
                     AccountCreate={this.AccountCreate}
@@ -131,6 +154,9 @@ clearSearchBar=()=>{
                     managerLoginCheckChange={this.props.Managercheck}
                     LoginWarning={this.props.LoginWarning}
                     CreateWarning={this.state.CreateWarning}
+                    categorySearchChange={this.categorySearchChange}
+                    categories={this.state.categories}
+                    
                     />
                  </div>
             </div>
