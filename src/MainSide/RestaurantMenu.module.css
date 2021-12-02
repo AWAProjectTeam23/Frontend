@@ -13,11 +13,19 @@
     width: 325px;
     font-weight: lighter;
 }
+.category
+{
+    font-weight: 700;
+    font-size: 18px;
+    width: 325px;
+    margin-top: 10px;
+    font-weight:lighter;
+}
 .restaurant
 {
     font-weight: 700;
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 20px;
     width: 325px;
   font-weight: lighter;
   display: -webkit-box;
@@ -46,4 +54,16 @@ input
 {
   width: 200;
   height: 200;
+}
+.button_margin{
+  margin-left: 450px;
+  margin-top: 20px;
+}
+.button
+{
+  font-size: medium;
+  background-color: rgb(255, 190, 68);
+  width: 150px;
+  height: 45px;
+  margin-left: 20px;
 }

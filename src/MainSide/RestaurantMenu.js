@@ -1,5 +1,4 @@
 import React from 'react'
-//import styles from './RestauranMenu.module.css';
 import styles from './RestaurantMenu.module.css';
 export default function RestaurantMenu(props) {
     return (
@@ -13,7 +12,8 @@ export default function RestaurantMenu(props) {
           />
         </div>
           <div className={ styles.name }>{ props.name }</div>
-          <div className={ styles.restaurant }>{ props.restaurant }</div>
+          <div className={ styles.restaurant }>{ props.description }</div>
+          <div className={ styles.category }>{ props.category }</div>
           <div className={ styles.price}>{ props.price }</div>      
       </div>
     </div>
