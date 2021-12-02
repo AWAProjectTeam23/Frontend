@@ -60,3 +60,18 @@ input
   font-size: large;
   width: 200px;
 }
+.category{
+  font-size: large;
+  margin-top: 5px;
+}
+.categoryBox{
+  margin-left: 450px;
+  margin-top: 20px;
+}
+.categoryButton{
+  font-size: medium;
+  background-color: rgb(255, 190, 68);
+  margin-left: 20px;
+  width: 150px;
+  height: 45px;
+}
