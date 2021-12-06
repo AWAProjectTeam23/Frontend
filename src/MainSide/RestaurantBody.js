@@ -9,17 +9,17 @@ export default function RestaurantBody(props) {
       
     <div className= {styles.product}>
     <Link to="/RestaurantMenu" >
-      <button className onClick={()=>props.restaurantMenuButton(props.id)}>
+      <button className onClick={()=>props.restaurantMenuButton(props.restaurantId)}>
         <div> 
-            <img src={`/images/${props.image}`} 
+            <img src={props.imageURL} 
             height={300}
             width={300}/>
             <div>
-              <div className={ styles.name }>{ props.name }</div>
-              <div className={ styles.type }>{ props.type }</div> 
+              <div className={ styles.name }>{ props.restaurantname }</div>
+              <div className={ styles.type }>{ props.restaurantStyle }</div> 
               <div className={ styles.address }>{ props.address }</div>
-              <div className={ styles.price}>{props.price }</div>
-              <div className={ styles.openinghours}>{ props.openinghours }</div>
+              <div className={ styles.price}>{props.priceLevel }</div>
+              <div className={ styles.openinghours}>{ props.operatingHour }</div>
             </div> 
         </div>  
       </button></Link>

@@ -1,7 +1,6 @@
 import React from 'react'
 import Mainbar from './Mainbar'
 import Mainbody from './Mainbody'
-import data from './data.json'
 import products from './datamenu.json'
 import axios from 'axios'
 
@@ -10,8 +9,8 @@ export default class Mainpage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            items: data.items,
-            product: products.items,
+            items: [],
+            product: [],
             CreateAccountNameValue:"",
             CreateAccountPasswordValue: "",
             productSearchString: "",
@@ -34,21 +33,21 @@ CreateWarningText=(bool)=>{
     if(bool==false){
         this.setState({CreateWarning:"There was a problem in the account creation. Fill both of the boxes and try again"})
     }else{
-        this.setState({CreateWarning:""})
+        this.setState({CreateWarning:"Account created succesfully"})
     }
 }
 
 componentDidMount=()=>{
-    axios.get("http://localhost:4000/hold")
+    axios.get("http://localhost:8080/public")
     .then((Response)=>{
-        this.setState({items:Response})
+        this.setState({items:Response.data})
     })
     .catch((err)=>{console.log(err)})
 }
 
 GetRestaurantProducts=(id)=>{
     console.log(id)
-    axios.get("http://localhost:4000/:"+id)
+    axios.get("http://localhost:8080/public/menus/"+id)
     .then((Response)=>{
         this.setState({product:Response})
     })
@@ -57,38 +56,45 @@ GetRestaurantProducts=(id)=>{
 
 CreateNameAccount=(event)=>{
     this.setState({CreateAccountNameValue:event.target.value})
-    console.log(event.target.value)
 }
 CreatePasswordInput=(event)=>{
     this.setState({CreateAccountPasswordValue:event.target.value})
-    console.log(event.target.value)
 }
 AccountCreate=()=>{
     if(this.state.createManagerCheck===true){
-        /*axios.post("http://localhost:4000/hold")
+        axios.post("http://localhost:8080/public/CreateAccount",{
+            username:this.state.CreateAccountNameValue,
+            password:this.state.CreateAccountPasswordValue,
+            role:"ADMIN"
+        })
         .then(Response=>{
-            this.CreateWarningText(false)
+            if(Response.status===200){
+                this.CreateWarningText(true)
+            }else{
+                
+            }
         })
         .catch(err=>{
             console.log(err)
-        })*/
-        
-        console.log(this.state.CreateAccountNameValue)
-        console.log(this.state.CreateAccountPasswordValue)
-        console.log('Restaurant manager account')
-        console.log(this.state.createManagerCheck) 
+            this.CreateWarningText(false)
+        })
     }
     else{
-        /*axios.post("http://localhost:4000/hold")
+        axios.post("http://localhost:8080/public/CreateAccount",{
+            username:this.state.CreateAccountNameValue,
+            password:this.state.CreateAccountPasswordValue,
+            role:"CUSTOMER"
+        })
         .then(Response=>{
-
+            if(Response.status===200){
+                this.CreateWarningText(true)
+            }else{
+                this.CreateWarningText(false)
+            }
         })
         .catch((err)=>{
             console.log(err)
-        })*/
-        this.CreateWarningText(true)
-        console.log(this.state.CreateAccountNameValue)
-        console.log(this.state.CreateAccountPasswordValue)
+        })
     }
 }
 
@@ -135,7 +141,7 @@ getCategory=()=>{
                 </div>
                 <div>
                     <Mainbody 
-                    items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
+                    items={ this.state.items.filter((item) => item.restaurantName.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                     products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
                         && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))} 
                     CreateAccountInputs={this.state.CreateAccountNameValue}

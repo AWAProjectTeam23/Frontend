@@ -16,6 +16,7 @@ import RestaurantBody from './MainSide/RestaurantBody';
 import RestaurantMenu from './MainSide/RestaurantMenu';
 import CreateAccount from './MainSide/CreateAccount';
 import LoginAccount from './MainSide/LoginAccount';
+import axios from "axios";
 
 
 class App extends React.Component{
@@ -23,6 +24,7 @@ class App extends React.Component{
     super(props);
     this.state={
       Token:"",
+      AccountID:"",
       Manager:false,
       LoginNameValue:"",
       LoginPasswordValue: "",
@@ -39,42 +41,60 @@ class App extends React.Component{
   }
 
   Login=()=>{
-    
-    console.log("painettu")
-
+    console.log(this.state.LoginNameValue+" "+this.state.LoginPasswordValue)
     if(this.state.Manager===true){
-        /*axios.post("http://localhost:4000/hold")
+        axios.post("http://localhost:8080/login",{
+          header:{
+            Authorization:"Basic "+this.state.LoginNameValue+":"+this.state.LoginPasswordValue
+          }
+        })
         .then(Response=>{
-            <link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
-            this.LoginWarningText(true)
-            this.LoginWarningText(false)
+          this.setState({Token:Response.data.token},()=>this.getAccountID())
+          this.LoginWarningText(true)
+          return true
         })
         .catch(err=>{
             console.log(err)
-        })*/
-        this.setState({Token:"a"})
-        console.log(this.state.LoginNameValue)
-        console.log(this.state.LoginPasswordValue)
-        console.log('Restaurant manager account')
-        console.log(this.state.Manager)
-        return true
+            this.LoginWarningText(false)
+            return false
+        })
     }
     else{
-        /*axios.post("http://localhost:4000/hold")
+        axios.post("http://localhost:8080/login",{
+          header:{
+            Authorization:"Basic "+this.state.LoginNameValue+":"+this.state.LoginPasswordValue
+          }
+        })
         .then(Response=>{
-          this.LoginWarningText(false)
+          this.setState({Token:Response.data.Token},()=>this.getAccountID())
           this.LoginWarningText(true)
+          return true
         })
         .catch(err=>{
             console.log(err)
-        })*/
-        this.setState({Token:"a"})
-        this.LoginWarningText(true)
-        console.log(this.state.LoginNameValue)
-        console.log(this.state.LoginPasswordValue)
-        return true
+            this.LoginWarningText(false)
+            return false
+        })
     }
-}
+  }
+
+  getAccountID=()=>{
+    axios.get("http://localhost:8080/getAccountId/",{
+      headers:{
+        'Bearer':this.state.Token
+      },
+      info:{
+      username:this.state.LoginNameValue
+      }
+    })
+    .then(Response=>{
+      this.setState({AccountID:Response.data})
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
 LoginName=(event)=>{
   this.setState({LoginNameValue:event.target.value})
   console.log(event.target.value)
@@ -90,7 +110,6 @@ managerLoginCheckChange=()=>{
   else{
       this.setState({Manager:false})
   }
-  console.log(this.state.Manager)
 }
 
 Logout=()=>{
@@ -104,12 +123,16 @@ Logout=()=>{
 render(){
   let manager=this.state.Manager
   let Token=this.state.Token
+  let accountid=this.state.AccountID
   let view;
-  if(manager===false && Token.length>0){
+  if(manager===false && Token.length>0 && accountid.length>0){
     view=
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<Customerpage Logout={this.Logout}/>}>
+        <Route path="/" element={<Customerpage Logout={this.Logout}
+        AccountId={this.state.AccountID}
+        Token={this.state.Token}
+        />}>
             <Route path="/" element={<CRestaurantbody/>}/>
             <Route path="/RestaurantMenu" element={<CRestaurantMenu/>}/>
             <Route path="/OrderHistory" element={<COrderHistory/>}/>
@@ -118,11 +141,14 @@ render(){
         </Routes>
       </BrowserRouter>
   }
-  else if(manager===true && Token.length>0){
+  else if(manager===true && Token.length>0 && accountid.length>0){
     view=
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Managerpage Logout={this.Logout}/>}>
+          <Route path="/" element={<Managerpage Logout={this.Logout} 
+          AccountId={this.state.AccountID}
+          Token={this.state.Token}
+          />}>
               <Route path="/" element={<ReceiveOrder/>}/>
               <Route path="/History" element={<MOrderHistory/>}/>
               <Route path="/CreateProduct" element={<CreateProduct/>}/>
