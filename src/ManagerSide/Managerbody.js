@@ -17,15 +17,22 @@ export default function Managerbody (props) {
                      ProductInputs={props.ProductInputs}
                      InputChange={props.ProductInputChange}
                      SelectValue={props.SelectValue}
-                     CategoryValues={props.CategoryValues}/>}/>
+                     CategoryValues={props.CategoryValues}
+                     filechange={props.filechange}
+                     selectfile={props.selectfile}
+                     />}/>
                     <Route path="/CreateCategory" element={<CreateCategory CategoryCreate={props.CategoryCreate} 
                     CategoryInputs={props.CategoryInputs}
-                    InputChange={props.InputChange}/>}/>
+                    InputChange={props.InputChange}
+                    />}/>
                     <Route path="/CreateRestaurant" element={<CreateRestaurant RestaurantCreate={props.RestaurantCreate} 
                     RestaurantInputs={props.RestaurantInputs}
                     InputChange={props.RestaurantInputChange}
                     RestaurantType={props.RestaurantType}
-                    PriceLevel={props.PriceLevel}/>}/>
+                    PriceLevel={props.PriceLevel}
+                    filechange={props.filechange}
+                    selectfile={props.selectfile}
+                    />}/>
                 </Routes>
             </div>
         );

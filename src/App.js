@@ -41,9 +41,9 @@ class App extends React.Component{
   }
 
   Login=()=>{
-    console.log(this.state.LoginNameValue+" "+this.state.LoginPasswordValue)
+    console.log(this.state.LoginNameValue+" "+this.state.LoginPasswordValue+" "+this.state.Manager)
     if(this.state.Manager===true){
-        axios.post("http://localhost:8080/login",{
+        /*axios.post("http://localhost:8080/login",{
           header:{
             Authorization:"Basic "+this.state.LoginNameValue+":"+this.state.LoginPasswordValue
           }
@@ -57,10 +57,13 @@ class App extends React.Component{
             console.log(err)
             this.LoginWarningText(false)
             return false
-        })
+        })*/
+        this.setState({Token:"a"})
+        this.setState({AccountID:"6a28cc3f-6add-46a2-b610-af16c871e2d6"})
+        return true
     }
     else{
-        axios.post("http://localhost:8080/login",{
+        /*axios.post("http://localhost:8080/login",{
           header:{
             Authorization:"Basic "+this.state.LoginNameValue+":"+this.state.LoginPasswordValue
           }
@@ -74,14 +77,14 @@ class App extends React.Component{
             console.log(err)
             this.LoginWarningText(false)
             return false
-        })
+        })*/
     }
   }
 
   getAccountID=()=>{
     axios.get("http://localhost:8080/getAccountId/",{
       headers:{
-        'Bearer':this.state.Token
+        Authorization:"Bearer "+this.state.Token
       },
       info:{
       username:this.state.LoginNameValue

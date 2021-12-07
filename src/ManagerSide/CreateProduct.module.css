@@ -43,3 +43,7 @@
 .lower_style{
     font-weight: bold;
 }
+.file{
+    margin-top: 2px;
+    border: solid black 1px;
+}

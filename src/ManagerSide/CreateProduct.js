@@ -46,11 +46,10 @@ export default function CreateProduct(props) {
                     </div>
                     <div className={style.input_margin}>
                     <div className={style.lower_style}>Image</div>
-                        <input className={style.input_size} 
-                        type="text"
-                        name="Image" 
-                        value={props.ProductInputs[0].Image}
-                        onChange={props.InputChange}/>
+                        <input className={style.file} 
+                        type="file"
+                        name="Image"
+                        onChange={props.filechange}/>
                     </div>
                 </div>
                 <div className={style.button_margin}>

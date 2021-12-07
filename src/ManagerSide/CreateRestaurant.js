@@ -34,11 +34,10 @@ export default function CreateRestaurant(props) {
                     </div>
                     <div className={style.input_margin}>
                         <div className={style.lower_style}>image</div>
-                        <input className={style.input_size} 
-                        type="text"
-                        name="Image" 
-                        value={props.RestaurantInputs[0].Image}
-                        onChange={props.InputChange}/>
+                        <input className={style.file_input} 
+                        type="file"
+                        name="Image"
+                        onChange={props.filechange}/>
                     </div>
                     <div className={style.input_margin}>
                     <div className={style.lower_style}>restaurant type</div>

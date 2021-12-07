@@ -10,7 +10,7 @@
     margin-top: 5%;
 }
 .input_margin{
-    margin-top: 6%;
+    margin-top: 2%;
     margin-left: 20px;
 }
 .input_size{
@@ -36,4 +36,7 @@
 }
 .lower_style{
     font-weight: bold;
+}
+.file_input{
+    border: solid black 1px;
 }
