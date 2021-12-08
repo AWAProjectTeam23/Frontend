@@ -26,7 +26,7 @@ export default class Managerpage extends Component {
     }
 
     componentDidMount=()=>{
-        this.getRestaurants(this.state.ManagerID)
+        this.getRestaurants()
         if(this.state.CategoryValues.length>=1){
             let Array=[...this.state.ProductInputValue]
             Array[0].Category=this.state.CategoryValues[0].Category
@@ -40,7 +40,7 @@ export default class Managerpage extends Component {
     }
 
     getRestaurants=(id)=>{
-        axios.get("http://localhost:8080/public/restaurants",{params:{"manager_id":id}})
+        axios.get("http://localhost:8080/manager/restaurants",{headers:{Authorization:'Bearer '+sessionStorage.getItem("Token")}})
         .then(Response=>{
             console.log(Response)
             this.setState({selectValue:Response.data}/*,()=>this.getReceiveOrder(this.state.selectValue[0].Id)*/
@@ -128,7 +128,10 @@ export default class Managerpage extends Component {
     }
 
     CategoryCreate=()=>{
-        axios.post("http://localhost:4000/hold")
+        let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
+        let data={restaurantId:this.state.selectValue[0].id,category:this.state.CategoryInputValue}
+        axios.post("http://localhost:8080/manager/addCategory",data,
+        {headers:header})
         .then(Response=>{
             console.log(Response)
         })
@@ -139,15 +142,14 @@ export default class Managerpage extends Component {
     }
 
     ProductCreate=()=>{
-        let body={}
-        axios.post("http://localhost:4000/hold",{
-            Restaurant:this.state.ProductInputValue[0].Restaurant,
+        let body={Restaurant:this.state.ProductInputValue[0].Restaurant,
             Category:this.state.ProductInputValue[0].Category,
             Name:this.state.ProductInputValue[0].Name,
             Description:this.state.ProductInputValue[0].Description,
             Price:this.state.ProductInputValue[0].Price,
-            Image:this.state.ProductInputValue[0].Image
-        })
+            Image:this.state.ProductInputValue[0].Image}
+        let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
+        axios.post("http://localhost:8080/manager/addNewProduct",body,{headers:header})
         .then(Response=>{
             console.log(Response)
         })
@@ -163,15 +165,16 @@ export default class Managerpage extends Component {
     }
 
     RestaurantCreate=()=>{
-        axios.post("http://localhost:8080/public/CreateRestaurant",{
+        let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
+        axios.post("http://localhost:8080/manager/CreateRestaurant",{
             restaurantName:this.state.RestaurantInputValue[0].Name,
             address:this.state.RestaurantInputValue[0].Address,
             open_hour:this.state.RestaurantInputValue[0].OperatingHours,
             image:this.state.selectfile,
             style:this.state.RestaurantInputValue[0].RestaurantType,
-            pricelevel:this.state.RestaurantInputValue[0].PriceLevel,
+            pricelevel:this.state.RestaurantInputValue[0].PriceLevel.length,
             manager_id:this.state.ManagerID
-        })
+        },{headers:header})
         .then(Response=>{
             console.log(Response)
         })
