@@ -40,18 +40,32 @@ CreateWarningText=(bool)=>{
 componentDidMount=()=>{
     axios.get("http://localhost:8080/public")
     .then((Response)=>{
-        this.setState({items:Response.data})
+        let array=Response.data
+        array.forEach(element => {
+            if(element.priceLevel==="1"){
+                element.priceLevel="€"
+            }else if(element.priceLevel==="2"){
+                element.priceLevel="€€"
+            }else if(element.priceLevel==="3"){
+                element.priceLevel="€€€"
+            }else if(element.priceLevel==="4"){
+                element.priceLevel="€€€€"
+            }
+        });
+        
+        this.setState({items:array})
     })
     .catch((err)=>{console.log(err)})
 }
 
 GetRestaurantProducts=(id)=>{
-    console.log(id)
-    axios.get("http://localhost:8080/public/menus/"+id)
-    .then((Response)=>{
-        this.setState({product:Response})
-    })
-    .catch((err)=>{console.log(err)})
+    for(let i=0;i<this.state.items.length;i++){
+        if(id===this.state.items[i].restaurantId){
+            let array=this.state.items[i].category
+            console.log(array)
+            this.setState({product:array},()=>this.getCategory())
+        }
+    }
 }
 
 CreateNameAccount=(event)=>{
@@ -106,7 +120,6 @@ onSearchFieldChange=(event)=>{
 restaurantMenuButton=(id)=>{
     this.clearSearchBar()
     this.GetRestaurantProducts(id)
-    this.getCategory()
 }
 managerCheckChange=()=>{
     if(this.state.createManagerCheck===false){
@@ -121,11 +134,11 @@ clearSearchBar=()=>{
 }
 
 getCategory=()=>{
+    console.log(this.state.product)
     let Array=[]
         this.state.product.forEach(element=>{
-            if(!Array.includes(element.category)){
-                Array.push(element.category)
-                console.log(element.category)
+            if(!Array.includes(element.categoryName)){
+                Array.push(element.categoryName)
             }
         });
         this.setState({categories:Array})
@@ -142,8 +155,8 @@ getCategory=()=>{
                 <div>
                     <Mainbody 
                     items={ this.state.items.filter((item) => item.restaurantName.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
-                    products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
-                        && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))} 
+                    products={ this.state.product/*.filter((item) => item.productTable.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
+                    && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))*/} 
                     CreateAccountInputs={this.state.CreateAccountNameValue}
                     CreateAccountPassword={this.state.CreateAccountPasswordValue}
                     AccountCreate={this.AccountCreate}

@@ -3,6 +3,7 @@ import styles from './RestaurantBody.module.css';
 import { Link } from 'react-router-dom'
 
 export default function RestaurantBody(props) {
+
     return (
  
     <div>
@@ -15,10 +16,10 @@ export default function RestaurantBody(props) {
             height={300}
             width={300}/>
             <div>
-              <div className={ styles.name }>{ props.restaurantname }</div>
+              <div className={ styles.name }>{ props.restaurantName }</div>
               <div className={ styles.type }>{ props.restaurantStyle }</div> 
               <div className={ styles.address }>{ props.address }</div>
-              <div className={ styles.price}>{props.priceLevel }</div>
+              <div className={ styles.price}>{props.priceLevel}</div>
               <div className={ styles.openinghours}>{ props.operatingHour }</div>
             </div> 
         </div>  

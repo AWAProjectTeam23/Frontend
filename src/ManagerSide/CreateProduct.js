@@ -10,14 +10,14 @@ export default function CreateProduct(props) {
                     <div className={style.head_style}>Product information</div>
                     <div className={style.input_margin}>
                         <div className={style.lower_style}>Restaurant</div>
-                        <select className={style.input_size} type="text" name="Restaurant" value={props.ProductInputs[0].Restaurant} onChange={props.InputChange}>
-                            {props.SelectValue.map((option)=>(<option value={option.name}>{option.name}</option>))}
+                        <select className={style.input_size} name={"Restaurant"} onChange={props.InputChange}>
+                            {props.SelectValue.map((option)=>(<option value={option.restaurantId}>{option.restaurantName}</option>))}
                         </select>
                     </div>
                     <div className={style.input_margin}>
                         <div className={style.lower_style}>Category</div>
-                        <select className={style.input_size} name="Category" value={props.ProductInputs[0].Category} onChange={props.InputChange}>
-                            {props.CategoryValues.map((option)=>(<option value={option.Category}>{option.Category}</option>))}
+                        <select className={style.input_size} name={"Category"} onChange={props.InputChange}>
+                            {props.CategoryValues.map((option)=>(<option value={option.category_Id}>{option.categoryName}</option>))}
                         </select>
                     </div>
                     <div className={style.input_margin}>

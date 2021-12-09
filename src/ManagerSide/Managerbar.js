@@ -12,7 +12,7 @@ export default function Managerbar(props) {
                 </div>
             <div className={style.select_margin}>
                 <select className={style.select_size} onChange={props.selectChange}>
-                    {props.selectValue.map((option)=>(<option value={option.Id}>{option.name}</option>))}
+                    {props.selectValue.map((option)=>(<option value={option.restaurantId}>{option.restaurantName}</option>))}
                 </select>
             </div>
             <div className={style.button_margin}>

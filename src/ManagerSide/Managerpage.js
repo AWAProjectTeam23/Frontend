@@ -18,7 +18,8 @@ export default class Managerpage extends Component {
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
             ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:""}],
             RestaurantInputValue:[{Name:"",Address:"",OperatingHours:"",RestaurantType:"",PriceLevel:""}],
-            CategoryInputValue:"",
+            CategoryInputValue:null,
+            RestaurantInputId:null,
             ManagerID:this.props.AccountId,
             Token:this.props.Token,
             selectfile:null
@@ -27,24 +28,15 @@ export default class Managerpage extends Component {
 
     componentDidMount=()=>{
         this.getRestaurants()
-        if(this.state.CategoryValues.length>=1){
-            let Array=[...this.state.ProductInputValue]
-            Array[0].Category=this.state.CategoryValues[0].Category
-            this.setState({ProductInputValue:Array})
-        }
-        if(this.state.selectValue.length>=1){
-            let Array=[...this.state.ProductInputValue]
-            Array[0].Restaurant=this.state.selectValue[0].name
-            this.setState({ProductInputValue:Array})
-        }
+        
     }
 
     getRestaurants=(id)=>{
         axios.get("http://localhost:8080/manager/restaurants",{headers:{Authorization:'Bearer '+sessionStorage.getItem("Token")}})
         .then(Response=>{
             console.log(Response)
-            this.setState({selectValue:Response.data}/*,()=>this.getReceiveOrder(this.state.selectValue[0].Id)*/
-            ,()=>this.getHistory(this.state.selectValue))
+            this.setState({selectValue:Response.data}/*,()=>this.getReceiveOrder(this.state.selectValue[0].Id)
+            ,()=>this.getHistory(this.state.selectValue)*/)
         })
         .catch(err=>{
             console.log(err)
@@ -53,8 +45,8 @@ export default class Managerpage extends Component {
 
     getHistory=(Id)=>{
         console.log(Id)
-        let getid=Id.id
-        axios.get("http://localhost:8080/public/OrderHistory/"+getid)
+        let getid=Id.restaurantId
+        axios.get("http://localhost:8080/public/OrderHistory/",getid)
         .then(Response=>{
             this.setState({history:Response})
         })
@@ -128,12 +120,14 @@ export default class Managerpage extends Component {
     }
 
     CategoryCreate=()=>{
+        console.log(this.state.RestaurantInputValue)
         let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-        let data={restaurantId:this.state.selectValue[0].id,category:this.state.CategoryInputValue}
-        axios.post("http://localhost:8080/manager/addCategory",data,
+        axios.post("http://localhost:8080/manager/addCategory",{restaurantId:this.state.RestaurantInputId,
+        categoryName:this.state.CategoryInputValue},
         {headers:header})
         .then(Response=>{
             console.log(Response)
+            this.getRestaurants()
         })
         .catch(err=>{
             console.log(err)
@@ -142,16 +136,17 @@ export default class Managerpage extends Component {
     }
 
     ProductCreate=()=>{
-        let body={Restaurant:this.state.ProductInputValue[0].Restaurant,
-            Category:this.state.ProductInputValue[0].Category,
-            Name:this.state.ProductInputValue[0].Name,
-            Description:this.state.ProductInputValue[0].Description,
-            Price:this.state.ProductInputValue[0].Price,
-            Image:this.state.ProductInputValue[0].Image}
+        const fd= new FormData();
+        fd.append("image",this.state.selectfile)
+        fd.append('category_uuid',this.state.ProductInputValue[0].Category)
+        fd.append('productName',this.state.ProductInputValue[0].Name)
+        fd.append('product_description',this.state.ProductInputValue[0].Description)
+        fd.append('price',this.state.ProductInputValue[0].Price)
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
-        axios.post("http://localhost:8080/manager/addNewProduct",body,{headers:header})
+        axios.post("http://localhost:8080/manager/addNewProduct",fd,{headers:header})
         .then(Response=>{
             console.log(Response)
+            this.getRestaurants()
         })
         .catch(err=>{
             console.log(err)
@@ -161,22 +156,22 @@ export default class Managerpage extends Component {
         console.log(this.state.ProductInputValue[0].Name)
         console.log(this.state.ProductInputValue[0].Description)
         console.log(this.state.ProductInputValue[0].Price)
-        console.log(this.state.selectfile)
+        console.log(fd)
     }
 
     RestaurantCreate=()=>{
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
-        axios.post("http://localhost:8080/manager/CreateRestaurant",{
-            restaurantName:this.state.RestaurantInputValue[0].Name,
-            address:this.state.RestaurantInputValue[0].Address,
-            open_hour:this.state.RestaurantInputValue[0].OperatingHours,
-            image:this.state.selectfile,
-            style:this.state.RestaurantInputValue[0].RestaurantType,
-            pricelevel:this.state.RestaurantInputValue[0].PriceLevel.length,
-            manager_id:this.state.ManagerID
-        },{headers:header})
+        const fd= new FormData();
+        fd.append("image",this.state.selectfile)
+        fd.append('restaurantName',this.state.RestaurantInputValue[0].Name)
+        fd.append('address',this.state.RestaurantInputValue[0].Address)
+        fd.append('operating_hours',this.state.RestaurantInputValue[0].OperatingHours)
+        fd.append('style',this.state.RestaurantInputValue[0].RestaurantType)
+        fd.append('priceLevel',this.state.RestaurantInputValue[0].PriceLevel.length)
+        axios.post("http://localhost:8080/manager/CreateRestaurant",fd,{headers:header})
         .then(Response=>{
             console.log(Response)
+            this.getRestaurants()
         })
         .catch(err=>{
             console.log(err)
@@ -190,12 +185,28 @@ export default class Managerpage extends Component {
     }
 
     selectChange=(event)=>{
-        this.getReceiveOrder(event.target.value)
-        this.getHistory(event.target.value)
+        this.setState({RestaurantInputId:event.target.value})
+       // this.getReceiveOrder(event.target.value)
+       // this.getHistory(event.target.value)
+        console.log(this.state.selectValue[2].category)
+        for(let i=0;i<this.state.selectValue.length;i++){
+            if(event.target.value===this.state.selectValue[i].restaurantId){
+                let array=this.state.selectValue[i].category
+                this.setState({CategoryValues:array})
+            }
+        }
+        for(let i=0;i<this.state.selectValue.length;i++){
+            if(this.state.selectValue[i].restaurantId===event.target.value){
+                let array=[...this.state.ProductInputValue]
+                array[0].Category=this.state.selectValue[i].category[0].category_Id
+                this.setState({ProductInputValue:array})
+            }
+        }
     }
 
     filechange=(event)=>{
-        this.setState({selectfile:event.target.files[0]})
+        let img=event.target.files[0]
+        this.setState({selectfile:img})
         console.log(this.state.selectfile)
     }
 
