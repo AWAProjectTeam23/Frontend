@@ -16,19 +16,21 @@ import RestaurantBody from './MainSide/RestaurantBody';
 import RestaurantMenu from './MainSide/RestaurantMenu';
 import CreateAccount from './MainSide/CreateAccount';
 import LoginAccount from './MainSide/LoginAccount';
-
+import axios from "axios";
+import { encode } from "base-64";
 
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      Token:"",
       Manager:false,
       LoginNameValue:"",
       LoginPasswordValue: "",
-      LoginWarning:""
+      LoginWarning:"",
+      buttonPressed:false
     }
   }
+
 
   LoginWarningText=(bool)=>{
     if(bool===false){
@@ -39,42 +41,41 @@ class App extends React.Component{
   }
 
   Login=()=>{
-    
-    console.log("painettu")
-
+    console.log(this.state.LoginNameValue+" "+this.state.LoginPasswordValue+" "+this.state.Manager)
+    const encoded=encode(this.state.LoginNameValue+":"+this.state.LoginPasswordValue)
+    const header={Authorization:`Basic ${encoded}`}
     if(this.state.Manager===true){
-        /*axios.post("http://localhost:4000/hold")
+        axios.post("http://localhost:8080/login",null,{headers:header})
         .then(Response=>{
-            <link to="/Customer" element={<Customerpage CustomerID={"aa"}/>}/>
-            this.LoginWarningText(true)
-            this.LoginWarningText(false)
+          sessionStorage.setItem("Token",Response.data.access_token)
+          this.LoginWarningText(true)
+          this.setState({buttonPressed:true})
+          return true
         })
         .catch(err=>{
             console.log(err)
-        })*/
-        this.setState({Token:"a"})
-        console.log(this.state.LoginNameValue)
-        console.log(this.state.LoginPasswordValue)
-        console.log('Restaurant manager account')
-        console.log(this.state.Manager)
-        return true
+            this.LoginWarningText(false)
+            return false
+        })
     }
     else{
-        /*axios.post("http://localhost:4000/hold")
+        const encoded=encode(this.state.LoginNameValue+":"+this.state.LoginPasswordValue)
+        const header={Authorization:`Basic ${encoded}`}
+        axios.post("http://localhost:8080/login",null,{headers:header})
         .then(Response=>{
-          this.LoginWarningText(false)
+          sessionStorage.setItem("Token",Response.data.access_token)
           this.LoginWarningText(true)
+          this.setState({buttonPressed:true})
+          return true
         })
         .catch(err=>{
             console.log(err)
-        })*/
-        this.setState({Token:"a"})
-        this.LoginWarningText(true)
-        console.log(this.state.LoginNameValue)
-        console.log(this.state.LoginPasswordValue)
-        return true
+            this.LoginWarningText(false)
+            return false
+        })
     }
-}
+  }
+
 LoginName=(event)=>{
   this.setState({LoginNameValue:event.target.value})
   console.log(event.target.value)
@@ -90,11 +91,11 @@ managerLoginCheckChange=()=>{
   else{
       this.setState({Manager:false})
   }
-  console.log(this.state.Manager)
 }
 
 Logout=()=>{
-  this.setState({Token:""})
+  sessionStorage.setItem("Token",null)
+  this.setState({buttonPressed:false})
   this.setState({Manager:false})
   this.setState({LoginNameValue:""})
   this.setState({LoginPasswordValue:""})
@@ -103,9 +104,9 @@ Logout=()=>{
   
 render(){
   let manager=this.state.Manager
-  let Token=this.state.Token
+  let press=this.state.buttonPressed
   let view;
-  if(manager===false && Token.length>0){
+  if(manager===false && press===true){
     view=
       <BrowserRouter>
         <Routes>
@@ -118,7 +119,7 @@ render(){
         </Routes>
       </BrowserRouter>
   }
-  else if(manager===true && Token.length>0){
+  else if(manager===true && press===true){
     view=
       <BrowserRouter>
         <Routes>
@@ -145,7 +146,7 @@ render(){
             <Route path="/" element={<RestaurantBody/>}/>
             <Route path="/RestaurantMenu" element={<RestaurantMenu/>}/>
             <Route path="/CreateAccount" element={<CreateAccount/>}/>
-            <Route path="/Login" element={<LoginAccount/>}/>
+            <Route path="/login" element={<LoginAccount/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -22,7 +22,7 @@ export default class Customerpage extends Component {
             ShoppingCartItems:[],
             TotalCost:0,
             ShoppingCartOpen:false,
-            CustomerID:"aa",
+            RestaurantID:"",
             OrderWarning:""
         }
     }
@@ -49,50 +49,67 @@ export default class Customerpage extends Component {
         this.getActiveOrders()
     }
 
-    getcategory=()=>{
+    getcategory=(id)=>{
+            console.log(this.state.product)
         let Array=[]
-            this.state.product.forEach(element => {
-                if(!Array.includes(element.category)){
-                    Array.push(element.category)
-                    console.log(element.category)
-                }
-            });
-        this.setState({categories:Array})
+        for(let i=0;i<this.state.items.length;i++){
+            if(id===this.state.items[i].restaurantId){
+                let arr=this.state.items[i].category
+                arr.forEach(element=>{
+                    if(!Array.includes(element.categoryName)){
+                        console.log(element.categoryName)
+                        Array.push(element.categoryName)
+                    }
+                });
+                this.setState({categories:Array})
+        }
+    }
     }
 
     getRestaurants=()=>{
-        this.setState({items:data.items})
-        /*axios.get()
-        .then(Response=>{
-            this.setState({items:Response})
+        axios.get("http://localhost:8080/public")
+        .then((Response)=>{
+            console.log(Response.data)
+            let array=Response.data
+            array.forEach(element => {
+                if(element.priceLevel==="1"){
+                    element.priceLevel="€"
+                }else if(element.priceLevel==="2"){
+                    element.priceLevel="€€"
+                }else if(element.priceLevel==="3"){
+                    element.priceLevel="€€€"
+                }else if(element.priceLevel==="4"){
+                    element.priceLevel="€€€€"
+                }
+            });
+            
+            this.setState({items:array})
         })
-        .catch(err=>{
-            console.log(err)
-        })*/
+        .catch((err)=>{console.log(err)})
     }
 
     getHistory=()=>{
-        this.setState({history:historyData.history})
-       /* axios.get(""+this.state.CustomerID)
+        let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
+        axios.get("http://localhost:8080/customer/OrderHistory",{headers:header})
         .then(Response=>{
-            this.setState({history:Response})
+            let array=Response.data.filter(element=> element.order_status==5)
+            console.log(array)
+            this.setState({history:array})
         })
         .catch(err=>{
             console.log(err)
-        })*/
+        })
     }
 
     getActiveOrders=()=>{
-        let a=historyData.history.map(i=>{return{...i,OrderDelivered:false}})
-
-        this.setState({ActiveOrders:a})
-        /*axios.get(""+this.state.CustomerID)
+        let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
+        axios.get("http://localhost:8080/customer/OrderStatus",{headers:header})
         .then(Response=>{
-            this.setState({ActiveOrders:Response})
+            this.setState({ActiveOrders:Response.data})
         })
         .catch(err=>{
             console.log(err)
-        })*/
+        })
     }
 
     inputDeliveryLocation=(event)=>{
@@ -100,29 +117,32 @@ export default class Customerpage extends Component {
     }
 
     ConfirmOrder=()=>{
-        /*axios.post("",{
-            CustomerID:this.state.CustomerID,
-            DeliveryLocation:this.state.DeliveryLocation,
-            TotalCost:this.state.TotalCost,
-            Products:this.state.ShoppingCartItems //Array sisältää tuote tiedot
-        })
+        let product=[]
+        for(let i=0;i<this.state.ShoppingCartItems.length;i++){
+            product.push({product_uuid:this.state.ShoppingCartItems[i].item_id,
+                productQuantity:1})
+        }
+        console.log(this.state.RestaurantID)
+        let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
+        axios.post("http://localhost:8080/customer/ShoppingCart",{
+            restaurant_uuid:this.state.RestaurantID,
+            delivery_location:this.state.DeliveryLocation,
+            totalPrice:this.state.TotalCost.toString(),
+            orderProducts:product //Array sisältää tuote tiedot
+        },{headers:header})
         .then(Response=>{
             if(Response===true){
                 this.getActiveOrders()
                 this.OrderWarningText(true)
-            }else{
-                this.setState({OrderInfo:"Order was not send"})
-                this.OrderWarningText(false)
             }
         })
         .catch(err=>{
+            this.setState({OrderInfo:"Order was not send"})
+            this.OrderWarningText(false)
             console.log(err)
-        })*/
+        })
+        console.log(this.state.RestaurantID+this.state.CustomerID)
         this.OrderWarningText(true)
-        console.log(this.state.CustomerID)
-        console.log(this.state.DeliveryLocation)
-        console.log(this.state.TotalCost)
-        console.log(this.state.ShoppingCartItems)
     }
 
     TotalCostCount(){
@@ -136,10 +156,16 @@ export default class Customerpage extends Component {
     }
 
     addToShoppingCart=(Id)=>{
+        console.log(Id)
         for(let i=0;i<this.state.product.length;i++){
-            if(this.state.product[i].id===Id){
+            if(this.state.product[i].item_id===Id){
                 let Array=[...this.state.ShoppingCartItems]
-                Array.push({Id:this.state.product[i].id,image:this.state.product[i].image,Name:this.state.product[i].name,Description:this.state.product[i].description,Price:this.state.product[i].price})
+                Array.push({item_id:this.state.product[i].item_id,
+                    image:this.state.product[i].image,
+                    Name:this.state.product[i].name,
+                    Description:this.state.product[i].productDescription,
+                    Price:this.state.product[i].pricePer,
+                })
                 this.setState({ShoppingCartItems:Array},()=>{this.TotalCostCount()})
             }
         } 
@@ -172,14 +198,15 @@ export default class Customerpage extends Component {
     }
     
     restaurantMenuButton=(id)=>{
-        /*axios.get(""+id)
+        axios.get("http://localhost:8080/public/prod/"+id)
         .then(Response=>{
-            this.setState ({product:Response})            
+            this.setState({product:Response.data})
+            this.getcategory(id)
+            this.setState({RestaurantID:id})
         })
         .catch(err=>{
             console.log(err)
-        }) */
-        this.setState({product:products.items},()=>this.getcategory())
+        })
         this.clearSearchBar()
      }
 
@@ -229,9 +256,9 @@ export default class Customerpage extends Component {
                 </div>
                     <div>
                         <Customerbody 
-                        items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
+                        items={ this.state.items.filter((item) => item.restaurantName.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                         products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
-                            && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))}
+                            && item.categoryName.toLowerCase().includes(this.state.categorySearch.toLowerCase()))}
                         history={this.state.history}
                         ActiveOrders={this.state.ActiveOrders}
                         addToShoppingCart={this.addToShoppingCart}

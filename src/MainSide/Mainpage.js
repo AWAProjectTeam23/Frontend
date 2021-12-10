@@ -1,7 +1,6 @@
 import React from 'react'
 import Mainbar from './Mainbar'
 import Mainbody from './Mainbody'
-import data from './data.json'
 import products from './datamenu.json'
 import axios from 'axios'
 
@@ -10,8 +9,8 @@ export default class Mainpage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            items: data.items,
-            product: products.items,
+            items: [],
+            product: [],
             CreateAccountNameValue:"",
             CreateAccountPasswordValue: "",
             productSearchString: "",
@@ -34,61 +33,84 @@ CreateWarningText=(bool)=>{
     if(bool==false){
         this.setState({CreateWarning:"There was a problem in the account creation. Fill both of the boxes and try again"})
     }else{
-        this.setState({CreateWarning:""})
+        this.setState({CreateWarning:"Account created succesfully"})
     }
 }
 
 componentDidMount=()=>{
-    axios.get("http://localhost:4000/hold")
+    axios.get("http://localhost:8080/public")
     .then((Response)=>{
-        this.setState({items:Response})
+        console.log(Response.data)
+        let array=Response.data
+        array.forEach(element => {
+            if(element.priceLevel==="1"){
+                element.priceLevel="€"
+            }else if(element.priceLevel==="2"){
+                element.priceLevel="€€"
+            }else if(element.priceLevel==="3"){
+                element.priceLevel="€€€"
+            }else if(element.priceLevel==="4"){
+                element.priceLevel="€€€€"
+            }
+        });
+        
+        this.setState({items:array})
     })
     .catch((err)=>{console.log(err)})
 }
 
 GetRestaurantProducts=(id)=>{
-    console.log(id)
-    axios.get("http://localhost:4000/:"+id)
-    .then((Response)=>{
-        this.setState({product:Response})
+    axios.get("http://localhost:8080/public/prod/"+id)
+    .then(Response=>{
+        this.setState({product:Response.data})
+        this.getCategory(id)
     })
-    .catch((err)=>{console.log(err)})
+    .catch(err=>{
+        console.log(err)
+    })
 }
 
 CreateNameAccount=(event)=>{
     this.setState({CreateAccountNameValue:event.target.value})
-    console.log(event.target.value)
 }
 CreatePasswordInput=(event)=>{
     this.setState({CreateAccountPasswordValue:event.target.value})
-    console.log(event.target.value)
 }
 AccountCreate=()=>{
     if(this.state.createManagerCheck===true){
-        /*axios.post("http://localhost:4000/hold")
+        axios.post("http://localhost:8080/public/CreateAccount",{
+            username:this.state.CreateAccountNameValue,
+            password:this.state.CreateAccountPasswordValue,
+            role:"ADMIN"
+        })
         .then(Response=>{
-            this.CreateWarningText(false)
+            if(Response.status===200){
+                this.CreateWarningText(true)
+            }else{
+                
+            }
         })
         .catch(err=>{
             console.log(err)
-        })*/
-        
-        console.log(this.state.CreateAccountNameValue)
-        console.log(this.state.CreateAccountPasswordValue)
-        console.log('Restaurant manager account')
-        console.log(this.state.createManagerCheck) 
+            this.CreateWarningText(false)
+        })
     }
     else{
-        /*axios.post("http://localhost:4000/hold")
+        axios.post("http://localhost:8080/public/CreateAccount",{
+            username:this.state.CreateAccountNameValue,
+            password:this.state.CreateAccountPasswordValue,
+            role:"CUSTOMER"
+        })
         .then(Response=>{
-
+            if(Response.status===200){
+                this.CreateWarningText(true)
+            }else{
+                this.CreateWarningText(false)
+            }
         })
         .catch((err)=>{
             console.log(err)
-        })*/
-        this.CreateWarningText(true)
-        console.log(this.state.CreateAccountNameValue)
-        console.log(this.state.CreateAccountPasswordValue)
+        })
     }
 }
 
@@ -100,7 +122,6 @@ onSearchFieldChange=(event)=>{
 restaurantMenuButton=(id)=>{
     this.clearSearchBar()
     this.GetRestaurantProducts(id)
-    this.getCategory()
 }
 managerCheckChange=()=>{
     if(this.state.createManagerCheck===false){
@@ -114,15 +135,22 @@ clearSearchBar=()=>{
     this.setState({ productSearchString:""});
 }
 
-getCategory=()=>{
+getCategory=(id)=>{
+    console.log(this.state.product)
     let Array=[]
-        this.state.product.forEach(element=>{
-            if(!Array.includes(element.category)){
-                Array.push(element.category)
-                console.log(element.category)
-            }
-        });
-        this.setState({categories:Array})
+    for(let i=0;i<this.state.items.length;i++){
+        if(id===this.state.items[i].restaurantId){
+            let arr=this.state.items[i].category
+            arr.forEach(element=>{
+                if(!Array.includes(element.categoryName)){
+                    console.log(element.categoryName)
+                    Array.push(element.categoryName)
+                }
+            });
+            this.setState({categories:Array})
+        }
+    }
+        
 }
 
     render(){
@@ -135,9 +163,9 @@ getCategory=()=>{
                 </div>
                 <div>
                     <Mainbody 
-                    items={ this.state.items.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
+                    items={ this.state.items.filter((item) => item.restaurantName.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
                     products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
-                        && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))} 
+                    && item.categoryName.toLowerCase().includes(this.state.categorySearch.toLowerCase()))} 
                     CreateAccountInputs={this.state.CreateAccountNameValue}
                     CreateAccountPassword={this.state.CreateAccountPasswordValue}
                     AccountCreate={this.AccountCreate}

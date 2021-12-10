@@ -11,14 +11,14 @@ if (props.OrderDelivered===false){
                 <div className={style.Orderbox}>
                     <div className={style.box_content}>
                             <div>
-                                <span className={style.Order_text}>Order Number {props.OrderNumber}</span>
+                                <span className={style.Order_text}>Order ID {props.order_id}</span>
                             </div>
                                 <div className={style.box_flex}>
                                     <div>
                                         <div style={{marginTop:"20px"}}>
                                             Restaurant name
                                             <div>
-                                              {props.Restaurant}  
+                                              {props.restaurantName}  
                                             </div>
                                             
                                         </div>
@@ -26,15 +26,15 @@ if (props.OrderDelivered===false){
                                     <div className={style.box_products}>
                                         <div style={{marginRight:"15px"}}>Products:</div>
                                     {
-                                        props.Products.map(element=> <Product {...element}/>)
+                                        props.orderproducts.map(element=> <Product {...element}/>)
                                     }
                                     </div>
                                     <div className={style.status_margin}>
                                     <div>
-                                    <OrderStatus OrderStatus={props.OrderStatus}/>
+                                    <OrderStatus OrderStatus={props.order_status}/>
                                         </div>
-                                        <div style={{marginTop:"10px"}}>Order time: </div>
-                                        <div style={{marginTop:"10px"}}>Total Price: {props.TotalPrice}</div>
+                                        <div style={{marginTop:"10px"}}>Order time: {props.completionTime}</div>
+                                        <div style={{marginTop:"10px"}}>Total Price: {props.total_price}</div>
                                         <button className={style.button_margin} onClick={()=>props.ConfirmDelivery(props.OrderNumber)}>Confirm delivery</button>
                                     </div>
                                     </div>
@@ -54,14 +54,14 @@ else{
                 <div className={style.Orderbox}>
                     <div className={style.box_content}>
                             <div>
-                                <span className={style.Order_text}>Order Number {props.OrderNumber}</span>
+                                <span className={style.Order_text}>Order ID {props.order_id}</span>
                             </div>
                                 <div className={style.box_flex}>
                                     <div>
                                         <div style={{marginTop:"20px"}}>
                                             Restaurant name
                                             <div>
-                                              {props.Restaurant}  
+                                              {props.restaurantName}  
                                             </div>
                                             
                                         </div>
@@ -69,15 +69,15 @@ else{
                                     <div className={style.box_products}>
                                         <div style={{marginRight:"15px"}}>Products:</div>
                                     {
-                                        props.Products.map(element=> <Product {...element}/>)
+                                        props.orderproducts.map(element=> <Product {...element}/>)
                                     }
                                     </div>
                                     <div className={style.status_margin}>
                                     <div>
-                                    <OrderStatus OrderStatus={props.OrderStatus}/>
+                                    <OrderStatus OrderStatus={props.order_status}/>
                                         </div>
-                                        <div style={{marginTop:"10px"}}>Order time: </div>
-                                        <div style={{marginTop:"10px"}}>Total Price: {props.TotalPrice}</div>
+                                        <div style={{marginTop:"10px"}}>Order time: {props.completionTime}</div>
+                                        <div style={{marginTop:"10px"}}>Total Price: {props.total_price}</div>
                                     </div>
                                     </div>
                                 </div>
