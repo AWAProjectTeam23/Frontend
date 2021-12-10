@@ -7,10 +7,10 @@ export default function Product(props) {
                 <img style={{maxHeight:"150px",maxWidth:"150px"}} src={"/"+props.Image+".PNG"}/>
             </div>
             <div>
-                {props.Name}
+                Item_id: {props.orderItem_id}
             </div>
             <div>
-                {props.Price}
+                Amount: {props.productQuantity}
             </div>
         </div>
     )

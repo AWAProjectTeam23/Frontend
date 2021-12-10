@@ -7,7 +7,7 @@ export default function ShoppingCartProduct(props) {
             <div className={style.box}>
                 <div className={style.flex}>
                     <div className={style.imageMargin}> 
-                        <img src={`/images/${props.image}`} 
+                        <img src={props.image}
                         height={120}
                         width={120}
                         />
@@ -23,7 +23,7 @@ export default function ShoppingCartProduct(props) {
                     </div>
                 </div>
                 <div>
-                    <button className={style.buttonstyle} onClick={()=>props.removeFromShoppingCart(props.Id)}>X</button>
+                    <button className={style.buttonstyle} onClick={()=>props.removeFromShoppingCart(props.item_id)}>X</button>
                 </div>
             </div>
         </div>

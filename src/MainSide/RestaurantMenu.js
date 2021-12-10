@@ -6,15 +6,15 @@ export default function RestaurantMenu(props) {
     <div>
       <div className= {styles.product}>
         <div> 
-          <img src={`/images/${props.image}`} 
+          <img src={props.image}
           height={300}
           width={300}
           />
         </div>
           <div className={ styles.name }>{ props.name }</div>
-          <div className={ styles.restaurant }>{ props.description }</div>
+          <div className={ styles.restaurant }>{ props.productDescription }</div>
           <div className={ styles.category }>{ props.category }</div>
-          <div className={ styles.price}>{ props.price }</div>      
+          <div className={ styles.price}>{ props.pricePer }€</div>      
       </div>
     </div>
     )

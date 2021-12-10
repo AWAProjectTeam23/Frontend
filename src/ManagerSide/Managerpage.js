@@ -28,15 +28,13 @@ export default class Managerpage extends Component {
 
     componentDidMount=()=>{
         this.getRestaurants()
-        
     }
 
-    getRestaurants=(id)=>{
+    getRestaurants=()=>{
         axios.get("http://localhost:8080/manager/restaurants",{headers:{Authorization:'Bearer '+sessionStorage.getItem("Token")}})
         .then(Response=>{
             console.log(Response)
-            this.setState({selectValue:Response.data}/*,()=>this.getReceiveOrder(this.state.selectValue[0].Id)
-            ,()=>this.getHistory(this.state.selectValue)*/)
+            this.setState({selectValue:Response.data},()=>this.getReceiveOrder())
         })
         .catch(err=>{
             console.log(err)
@@ -44,22 +42,22 @@ export default class Managerpage extends Component {
     }
 
     getHistory=(Id)=>{
-        console.log(Id)
-        let getid=Id.restaurantId
-        axios.get("http://localhost:8080/public/OrderHistory/",getid)
+        let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
+        axios.get("http://localhost:8080/manager/OrderHistory/"+Id,{headers:header})
         .then(Response=>{
-            this.setState({history:Response})
+            this.setState({history:Response.data})
         })
         .catch(err=>{
             console.log(err)
         })
     }
 
-    getReceiveOrder=(id)=>{
-        console.log(id)
-        axios.get("http://localhost:4000/hold")
+    getReceiveOrder=()=>{
+        let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
+        axios.get("http://localhost:8080/manager/OrderStatus",{headers:header})
         .then(Response=>{
-            this.setState({item:Response})
+            console.log(Response.data)
+            this.setState({item:Response.data})
         })
         .catch(err=>{
             console.log(err)
@@ -186,8 +184,8 @@ export default class Managerpage extends Component {
 
     selectChange=(event)=>{
         this.setState({RestaurantInputId:event.target.value})
-       // this.getReceiveOrder(event.target.value)
-       // this.getHistory(event.target.value)
+        this.getReceiveOrder(event.target.value)
+        this.getHistory(event.target.value)
         console.log(this.state.selectValue[2].category)
         for(let i=0;i<this.state.selectValue.length;i++){
             if(event.target.value===this.state.selectValue[i].restaurantId){

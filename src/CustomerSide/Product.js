@@ -11,10 +11,12 @@ export default function Product(props) {
           </div>
             </div>
             <div>
-                {props.Name}
+                item id: 
+                {props.orderItem_id}
             </div>
             <div>
-                {props.Price}
+                amount: 
+                {props.productQuantity}
             </div>
         </div>
     )

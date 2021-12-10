@@ -40,6 +40,7 @@ CreateWarningText=(bool)=>{
 componentDidMount=()=>{
     axios.get("http://localhost:8080/public")
     .then((Response)=>{
+        console.log(Response.data)
         let array=Response.data
         array.forEach(element => {
             if(element.priceLevel==="1"){
@@ -59,13 +60,14 @@ componentDidMount=()=>{
 }
 
 GetRestaurantProducts=(id)=>{
-    for(let i=0;i<this.state.items.length;i++){
-        if(id===this.state.items[i].restaurantId){
-            let array=this.state.items[i].category
-            console.log(array)
-            this.setState({product:array},()=>this.getCategory())
-        }
-    }
+    axios.get("http://localhost:8080/public/prod/"+id)
+    .then(Response=>{
+        this.setState({product:Response.data})
+        this.getCategory(id)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 }
 
 CreateNameAccount=(event)=>{
@@ -133,15 +135,22 @@ clearSearchBar=()=>{
     this.setState({ productSearchString:""});
 }
 
-getCategory=()=>{
+getCategory=(id)=>{
     console.log(this.state.product)
     let Array=[]
-        this.state.product.forEach(element=>{
-            if(!Array.includes(element.categoryName)){
-                Array.push(element.categoryName)
-            }
-        });
-        this.setState({categories:Array})
+    for(let i=0;i<this.state.items.length;i++){
+        if(id===this.state.items[i].restaurantId){
+            let arr=this.state.items[i].category
+            arr.forEach(element=>{
+                if(!Array.includes(element.categoryName)){
+                    console.log(element.categoryName)
+                    Array.push(element.categoryName)
+                }
+            });
+            this.setState({categories:Array})
+        }
+    }
+        
 }
 
     render(){
@@ -155,8 +164,8 @@ getCategory=()=>{
                 <div>
                     <Mainbody 
                     items={ this.state.items.filter((item) => item.restaurantName.toLowerCase().includes(this.state.productSearchString.toLowerCase())) }
-                    products={ this.state.product/*.filter((item) => item.productTable.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
-                    && item.category.toLowerCase().includes(this.state.categorySearch.toLowerCase()))*/} 
+                    products={ this.state.product.filter((item) => item.name.toLowerCase().includes(this.state.productSearchString.toLowerCase())
+                    && item.categoryName.toLowerCase().includes(this.state.categorySearch.toLowerCase()))} 
                     CreateAccountInputs={this.state.CreateAccountNameValue}
                     CreateAccountPassword={this.state.CreateAccountPasswordValue}
                     AccountCreate={this.AccountCreate}
