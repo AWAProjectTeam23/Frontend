@@ -28,12 +28,13 @@ export default class Managerpage extends Component {
 
     componentDidMount=()=>{
         this.getRestaurants()
+        this.getReceiveOrder()
+        this.getHistory()
     }
 
     getRestaurants=()=>{
         axios.get("http://localhost:8080/manager/restaurants",{headers:{Authorization:'Bearer '+sessionStorage.getItem("Token")}})
         .then(Response=>{
-            console.log(Response)
             this.setState({selectValue:Response.data},()=>this.getReceiveOrder())
         })
         .catch(err=>{
@@ -41,11 +42,16 @@ export default class Managerpage extends Component {
         })
     }
 
-    getHistory=(Id)=>{
+    getHistory=()=>{
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
-        axios.get("http://localhost:8080/manager/OrderHistory/"+Id,{headers:header})
+        axios.get("http://localhost:8080/manager/OrderStatus",{headers:header})
         .then(Response=>{
-            this.setState({history:Response.data})
+            console.log(Response.data)
+            let array=Response.data.filter(element=> element.order_status==5)
+            array.forEach(element => {
+                element.order_status="Delivered"
+            });
+            this.setState({history:array})
         })
         .catch(err=>{
             console.log(err)
@@ -56,8 +62,19 @@ export default class Managerpage extends Component {
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
         axios.get("http://localhost:8080/manager/OrderStatus",{headers:header})
         .then(Response=>{
-            console.log(Response.data)
-            this.setState({item:Response.data})
+            let array=Response.data.filter(element=> element.order_status<5)
+            for(let i=0;i<array.length;i++){
+                if(array[i].order_status==1){
+                    array[i].order_status="Received"
+                }else if(array[i].order_status==2){
+                    array[i].order_status="Preparing"
+                }else if(array[i].order_status==3){
+                    array[i].order_status="Ready for delivery"
+                }else if(array[i].order_status==4){
+                    array[i].order_status="Delivering"
+                }
+            }
+            this.setState({item:array})
         })
         .catch(err=>{
             console.log(err)
@@ -86,9 +103,25 @@ export default class Managerpage extends Component {
     OrderConfirmed=(id)=>{
         let Array=[...this.state.item]
         for(let i=0;i<Array.length;i++){
-            if(Array[i].OrderNumber===id){
-                Array[i].OrderConfirmed=true
-                this.setState({item:Array},()=>this.ChangeOrderStatus(id))
+            if(Array[i].order_id===id){
+                let status
+                if(Array[i].order_status==="Received"){
+                    status=2
+                }else if(Array[i].order_status==="Preparing"){
+                    status=3
+                }else if(Array[i].order_status==="Ready for delivery"){
+                    status=4
+                }
+                let data={order_id:Array[i].order_id,orderStatusCode:status}
+                let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
+                axios.post("http://localhost:8080/manager/Orders",data,{headers:header})
+                .then(Response=>{
+                    console.log(Response)
+                    this.getReceiveOrder()
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
             }
         }
     }
@@ -186,7 +219,6 @@ export default class Managerpage extends Component {
         this.setState({RestaurantInputId:event.target.value})
         this.getReceiveOrder(event.target.value)
         this.getHistory(event.target.value)
-        console.log(this.state.selectValue[2].category)
         for(let i=0;i<this.state.selectValue.length;i++){
             if(event.target.value===this.state.selectValue[i].restaurantId){
                 let array=this.state.selectValue[i].category
@@ -196,7 +228,7 @@ export default class Managerpage extends Component {
         for(let i=0;i<this.state.selectValue.length;i++){
             if(this.state.selectValue[i].restaurantId===event.target.value){
                 let array=[...this.state.ProductInputValue]
-                array[0].Category=this.state.selectValue[i].category[0].category_Id
+                array[0].Category=this.state.selectValue[i].category.category_Id
                 this.setState({ProductInputValue:array})
             }
         }

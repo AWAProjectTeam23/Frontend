@@ -4,7 +4,7 @@ import Product from './Product'
 import Orderstatus from './Orderstatus'
 
 export default function ReceiveOrder(props) {
-    if(props.OrderConfirmed===false){
+    if(props.order_status==="Received"){
         return (
             <div className={style.box_margin}>
                 <div className={style.Orderbox}>
@@ -31,7 +31,7 @@ export default function ReceiveOrder(props) {
                                         </div>
                                         <div style={{marginTop:"10px"}}>Time Order Received: {props.completionTime}</div>
                                         <div style={{marginTop:"20px"}}>Total Price: {props.total_price}</div>
-                                        <button className={style.button_margin} onClick={()=>props.ConfirmOrder(props.OrderNumber)}>confirm order</button>
+                                        <button className={style.button_margin} onClick={()=>props.ConfirmOrder(props.order_id)}>confirm order</button>
                                     </div>
                                 </div>
                                 

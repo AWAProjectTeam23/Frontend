@@ -38,7 +38,7 @@ CreateWarningText=(bool)=>{
 }
 
 componentDidMount=()=>{
-    axios.get("http://localhost:8080/public")
+    axios.get("https://awa-project.herokuapp.com/public")
     .then((Response)=>{
         console.log(Response.data)
         let array=Response.data
@@ -60,7 +60,7 @@ componentDidMount=()=>{
 }
 
 GetRestaurantProducts=(id)=>{
-    axios.get("http://localhost:8080/public/prod/"+id)
+    axios.get("https://awa-project.herokuapp.com/public/prod/"+id)
     .then(Response=>{
         this.setState({product:Response.data})
         this.getCategory(id)

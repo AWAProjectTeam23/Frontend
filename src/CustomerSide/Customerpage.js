@@ -93,6 +93,9 @@ export default class Customerpage extends Component {
         axios.get("http://localhost:8080/customer/OrderHistory",{headers:header})
         .then(Response=>{
             let array=Response.data.filter(element=> element.order_status==5)
+            array.forEach(element => {
+                element.order_status="Delivered"
+            });
             console.log(array)
             this.setState({history:array})
         })
@@ -105,7 +108,19 @@ export default class Customerpage extends Component {
         let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
         axios.get("http://localhost:8080/customer/OrderStatus",{headers:header})
         .then(Response=>{
-            this.setState({ActiveOrders:Response.data})
+            let array=Response.data.filter(element=> element.order_status<5)
+            for(let i=0;i<array.length;i++){
+                if(array[i].order_status==1){
+                    array[i].order_status="Received"
+                }else if(array[i].order_status==2){
+                    array[i].order_status="Preparing"
+                }else if(array[i].order_status==3){
+                    array[i].order_status="Ready for delivery"
+                }else if(array[i].order_status==4){
+                    array[i].order_status="Delivering"
+                }
+            }
+            this.setState({ActiveOrders:array})
         })
         .catch(err=>{
             console.log(err)
@@ -212,20 +227,21 @@ export default class Customerpage extends Component {
 
 
     OrderDelivered=(id)=>{
-        axios.post(""+id)
-        .then(Response=>{
-            console.log(Response)
-            this.getActiveOrders()
-            this.getHistory()
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        
         let Array=[...this.state.ActiveOrders]
         for(let i=0;i<Array.length;i++){
-            if(Array[i].OrderNumber===id){
-                Array[i].OrderDelivered=true
-                this.setState({ActiveOrders:Array})
+            if(Array[i].order_id===id){
+                let status={orderStatusCode:5,order_id:Array[i].order_id}
+                let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
+                axios.post("http://localhost:8080/customer/Orders",status,{headers:header})
+                .then(Response=>{
+                    console.log(Response)
+                    this.getActiveOrders()
+                    this.getHistory()
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
             }
         }
     }
