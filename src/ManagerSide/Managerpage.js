@@ -186,7 +186,7 @@ export default class Managerpage extends Component {
         fd.append('address',this.state.RestaurantInputValue[0].Address)
         fd.append('operating_hours',this.state.RestaurantInputValue[0].OperatingHours)
         if(this.state.RestaurantInputValue[0].RestaurantType===""){
-            fd.append('style',this.state.RestaurantType[0])
+            fd.append('style',this.state.RestaurantType[0].Type)
         }else{
             fd.append('style',this.state.RestaurantInputValue[0].RestaurantType)
         }
