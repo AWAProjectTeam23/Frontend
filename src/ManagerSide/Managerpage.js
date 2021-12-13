@@ -14,7 +14,7 @@ export default class Managerpage extends Component {
             CategoryValues:[],
             RestaurantType:[{Type:"Buffet"},{Type:"Fast food"},{Type:"Fast casual"},{Type:"Casual dining"},{Type:"Fine dining"}],
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
-            ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:""}],
+            ProductInputValue:[{Restaurant:" ",Category:" ",Name:" ",Description:" ",Price:" "}],
             RestaurantInputValue:[{Name:"",Address:"",OperatingHours:"",RestaurantType:"",PriceLevel:""}],
             CategoryInputValue:null,
             RestaurantInputId:null,
@@ -25,6 +25,7 @@ export default class Managerpage extends Component {
     }
 
     componentDidMount=()=>{
+        console.log(this.state.ProductInputValue)
         this.getRestaurants()
         this.getReceiveOrder()
         this.getHistory()
@@ -201,15 +202,25 @@ export default class Managerpage extends Component {
         this.getHistory()
         for(let i=0;i<this.state.selectValue.length;i++){
             if(event.target.value===this.state.selectValue[i].restaurantId){
+                if(this.state.selectValue[i].category.length>0){
                 let array=this.state.selectValue[i].category
                 this.setState({CategoryValues:array})
+                }else{
+                    let array=[]
+                    this.setState({CategoryValues:array})
+                }
             }
         }
         for(let i=0;i<this.state.selectValue.length;i++){
             if(this.state.selectValue[i].restaurantId===event.target.value){
+                if(this.state.selectValue[i].category.length>0){
                 let array=[...this.state.ProductInputValue]
-                array[0].Category=this.state.selectValue[i].category[0].category_Id
+                array.Category=this.state.selectValue[i].category[0].category_Id
                 this.setState({ProductInputValue:array})
+                }else{
+                    let array=[...this.state.ProductInputValue]
+                    this.setState({ProductInputValue:array})
+                }
             }
         }
     }
