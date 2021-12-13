@@ -178,14 +178,24 @@ export default class Managerpage extends Component {
     }
 
     RestaurantCreate=()=>{
+        
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
         const fd= new FormData();
         fd.append("image",this.state.selectfile)
         fd.append('restaurantName',this.state.RestaurantInputValue[0].Name)
         fd.append('address',this.state.RestaurantInputValue[0].Address)
         fd.append('operating_hours',this.state.RestaurantInputValue[0].OperatingHours)
-        fd.append('style',this.state.RestaurantInputValue[0].RestaurantType)
-        fd.append('priceLevel',this.state.RestaurantInputValue[0].PriceLevel.length)
+        if(this.state.RestaurantInputValue[0].RestaurantType.length<0){
+            fd.append('style',this.state.RestaurantType[0])
+        }else{
+            fd.append('style',this.state.RestaurantInputValue[0].RestaurantType)
+        }
+        if(this.state.RestaurantInputValue[0].PriceLevel.length<0){
+            fd.append('priceLevel',this.state.PriceLevel[0].Level.length)
+        }else{
+            fd.append('priceLevel',this.state.RestaurantInputValue[0].PriceLevel.length)
+        }
+        
         axios.post("https://awa-project.herokuapp.com/manager/CreateRestaurant",fd,{headers:header})
         .then(Response=>{
             console.log(Response)
