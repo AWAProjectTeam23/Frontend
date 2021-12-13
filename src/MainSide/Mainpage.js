@@ -1,7 +1,6 @@
 import React from 'react'
 import Mainbar from './Mainbar'
 import Mainbody from './Mainbody'
-import products from './datamenu.json'
 import axios from 'axios'
 
 
@@ -30,7 +29,7 @@ categorySearchChange=(event)=>{
     }
 }   
 CreateWarningText=(bool)=>{
-    if(bool==false){
+    if(bool===false){
         this.setState({CreateWarning:"There was a problem in the account creation. Fill both of the boxes and try again"})
     }else{
         this.setState({CreateWarning:"Account created succesfully"})
@@ -40,7 +39,6 @@ CreateWarningText=(bool)=>{
 componentDidMount=()=>{
     axios.get("https://awa-project.herokuapp.com/public")
     .then((Response)=>{
-        console.log(Response.data)
         let array=Response.data
         array.forEach(element => {
             if(element.priceLevel==="1"){
@@ -78,7 +76,7 @@ CreatePasswordInput=(event)=>{
 }
 AccountCreate=()=>{
     if(this.state.createManagerCheck===true){
-        axios.post("http://localhost:8080/public/CreateAccount",{
+        axios.post("https://awa-project.herokuapp.com/public/CreateAccount",{
             username:this.state.CreateAccountNameValue,
             password:this.state.CreateAccountPasswordValue,
             role:"ADMIN"
@@ -96,7 +94,7 @@ AccountCreate=()=>{
         })
     }
     else{
-        axios.post("http://localhost:8080/public/CreateAccount",{
+        axios.post("https://awa-project.herokuapp.com/public/CreateAccount",{
             username:this.state.CreateAccountNameValue,
             password:this.state.CreateAccountPasswordValue,
             role:"CUSTOMER"
@@ -115,8 +113,6 @@ AccountCreate=()=>{
 }
 
 onSearchFieldChange=(event)=>{
-    console.log('Keyboard event');
-    console.log(event.target.value);
     this.setState({ productSearchString: event.target.value });
 }
 restaurantMenuButton=(id)=>{
@@ -136,14 +132,12 @@ clearSearchBar=()=>{
 }
 
 getCategory=(id)=>{
-    console.log(this.state.product)
     let Array=[]
     for(let i=0;i<this.state.items.length;i++){
         if(id===this.state.items[i].restaurantId){
             let arr=this.state.items[i].category
             arr.forEach(element=>{
                 if(!Array.includes(element.categoryName)){
-                    console.log(element.categoryName)
                     Array.push(element.categoryName)
                 }
             });

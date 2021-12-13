@@ -14,10 +14,10 @@ export default function LoginAccount(props) {
     props.managerLoginCheckChange()
     }
 
-    async function handleLogin(){
+    function handleLogin(){
         if(props.Login()){
-            console.log("navigating")
-            navigate("/")
+        console.log("navigating")
+        navigate("/")
         }
     }
 
@@ -58,7 +58,7 @@ export default function LoginAccount(props) {
                                 },
                             }}/>
                             <div className={style.checkheader}>
-                            Create account as a restaurant manager</div>
+                            Login as a restaurant manager</div>
                         </div>
                     </div>
                 <div className={style.button_margin}>
