@@ -50,6 +50,7 @@ class App extends React.Component{
           sessionStorage.setItem("Token",Response.data.access_token)
           this.LoginWarningText(true)
           this.setState({buttonPressed:true})
+          sessionStorage.setItem("Manager",true)
           return true
         })
         .catch(err=>{
@@ -93,6 +94,7 @@ managerLoginCheckChange=()=>{
 
 Logout=()=>{
   sessionStorage.setItem("Token",null)
+  sessionStorage.setItem("Manager",null)
   this.setState({buttonPressed:false})
   this.setState({Manager:false})
   this.setState({LoginNameValue:""})
