@@ -33,7 +33,7 @@ if (props.order_status==="Delivering"){
                                     <div>
                                     <OrderStatus OrderStatus={props.order_status}/>
                                         </div>
-                                        <div style={{marginTop:"10px"}}>Order time: {props.completionTime}</div>
+                                        <div style={{marginTop:"10px"}}>Order time: {props.creationTimeStamp}</div>
                                         <div style={{marginTop:"10px"}}>Total Price: {props.total_price}</div>
                                         <button className={style.button_margin} onClick={()=>props.ConfirmDelivery(props.order_id)}>Confirm delivery</button>
                                     </div>
@@ -76,7 +76,7 @@ else{
                                     <div>
                                     <OrderStatus OrderStatus={props.order_status}/>
                                         </div>
-                                        <div style={{marginTop:"10px"}}>Order time: {props.completionTime}</div>
+                                        <div style={{marginTop:"10px"}}>Order time: {props.creationTimeStamp}</div>
                                         <div style={{marginTop:"10px"}}>Total Price: {props.total_price}</div>
                                     </div>
                                     </div>

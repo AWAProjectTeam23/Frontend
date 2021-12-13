@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Managerbar from './Managerbar'
 import Managerbody from './Managerbody'
-import data from './data.json'
-import historyData from './History.json'
 import axios from 'axios'
 
 
@@ -33,7 +31,7 @@ export default class Managerpage extends Component {
     }
 
     getRestaurants=()=>{
-        axios.get("http://localhost:8080/manager/restaurants",{headers:{Authorization:'Bearer '+sessionStorage.getItem("Token")}})
+        axios.get("https://awa-project.herokuapp.com/manager/restaurants",{headers:{Authorization:'Bearer '+sessionStorage.getItem("Token")}})
         .then(Response=>{
             this.setState({selectValue:Response.data},()=>this.getReceiveOrder())
         })
@@ -44,10 +42,9 @@ export default class Managerpage extends Component {
 
     getHistory=()=>{
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
-        axios.get("http://localhost:8080/manager/OrderStatus",{headers:header})
+        axios.get("https://awa-project.herokuapp.com/manager/OrderStatus",{headers:header})
         .then(Response=>{
-            console.log(Response.data)
-            let array=Response.data.filter(element=> element.order_status==5)
+            let array=Response.data.filter(element=> element.order_status===5)
             array.forEach(element => {
                 element.order_status="Delivered"
             });
@@ -60,17 +57,17 @@ export default class Managerpage extends Component {
 
     getReceiveOrder=()=>{
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
-        axios.get("http://localhost:8080/manager/OrderStatus",{headers:header})
+        axios.get("https://awa-project.herokuapp.com/manager/OrderStatus",{headers:header})
         .then(Response=>{
             let array=Response.data.filter(element=> element.order_status<5)
             for(let i=0;i<array.length;i++){
-                if(array[i].order_status==1){
+                if(array[i].order_status===1){
                     array[i].order_status="Received"
-                }else if(array[i].order_status==2){
+                }else if(array[i].order_status===2){
                     array[i].order_status="Preparing"
-                }else if(array[i].order_status==3){
+                }else if(array[i].order_status===3){
                     array[i].order_status="Ready for delivery"
-                }else if(array[i].order_status==4){
+                }else if(array[i].order_status===4){
                     array[i].order_status="Delivering"
                 }
             }
@@ -114,7 +111,7 @@ export default class Managerpage extends Component {
                 }
                 let data={order_id:Array[i].order_id,orderStatusCode:status}
                 let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-                axios.post("http://localhost:8080/manager/Orders",data,{headers:header})
+                axios.post("https://awa-project.herokuapp.com/manager/Orders",data,{headers:header})
                 .then(Response=>{
                     console.log(Response)
                     this.getReceiveOrder()
@@ -128,7 +125,6 @@ export default class Managerpage extends Component {
 
     InputChange=(event)=>{
         this.setState({CategoryInputValue:event.target.value})
-        console.log(event.target.value)
     }
 
     ProductInputChange=(event)=>{
@@ -137,8 +133,6 @@ export default class Managerpage extends Component {
         let Array=[...this.state.ProductInputValue]
         Array[0][name]=value
         this.setState({ProductInputValue:Array})
-        console.log(name)
-        console.log(event.target.value)
     }
 
     RestaurantInputChange=(event)=>{
@@ -147,13 +141,12 @@ export default class Managerpage extends Component {
         let Array=[...this.state.RestaurantInputValue]
         Array[0][name]=value
         this.setState({RestaurantInputValue:Array})
-        console.log(event.target.value)
     }
 
     CategoryCreate=()=>{
         console.log(this.state.RestaurantInputValue)
         let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-        axios.post("http://localhost:8080/manager/addCategory",{restaurantId:this.state.RestaurantInputId,
+        axios.post("https://awa-project.herokuapp.com/manager/addCategory",{restaurantId:this.state.RestaurantInputId,
         categoryName:this.state.CategoryInputValue},
         {headers:header})
         .then(Response=>{
@@ -163,7 +156,6 @@ export default class Managerpage extends Component {
         .catch(err=>{
             console.log(err)
         })
-        console.log(this.state.CategoryInputValue)
     }
 
     ProductCreate=()=>{
@@ -174,7 +166,7 @@ export default class Managerpage extends Component {
         fd.append('product_description',this.state.ProductInputValue[0].Description)
         fd.append('price',this.state.ProductInputValue[0].Price)
         let header={Authorization:'Bearer '+sessionStorage.getItem("Token")}
-        axios.post("http://localhost:8080/manager/addNewProduct",fd,{headers:header})
+        axios.post("https://awa-project.herokuapp.com/manager/addNewProduct",fd,{headers:header})
         .then(Response=>{
             console.log(Response)
             this.getRestaurants()
@@ -182,12 +174,6 @@ export default class Managerpage extends Component {
         .catch(err=>{
             console.log(err)
         })
-        console.log(this.state.ProductInputValue[0].Restaurant)
-        console.log(this.state.ProductInputValue[0].Category)
-        console.log(this.state.ProductInputValue[0].Name)
-        console.log(this.state.ProductInputValue[0].Description)
-        console.log(this.state.ProductInputValue[0].Price)
-        console.log(fd)
     }
 
     RestaurantCreate=()=>{
@@ -199,7 +185,7 @@ export default class Managerpage extends Component {
         fd.append('operating_hours',this.state.RestaurantInputValue[0].OperatingHours)
         fd.append('style',this.state.RestaurantInputValue[0].RestaurantType)
         fd.append('priceLevel',this.state.RestaurantInputValue[0].PriceLevel.length)
-        axios.post("http://localhost:8080/manager/CreateRestaurant",fd,{headers:header})
+        axios.post("https://awa-project.herokuapp.com/manager/CreateRestaurant",fd,{headers:header})
         .then(Response=>{
             console.log(Response)
             this.getRestaurants()
@@ -207,18 +193,12 @@ export default class Managerpage extends Component {
         .catch(err=>{
             console.log(err)
         })
-        console.log(this.state.RestaurantInputValue[0].Name)
-        console.log(this.state.RestaurantInputValue[0].Address)
-        console.log(this.state.RestaurantInputValue[0].OperatingHours)
-        console.log(this.state.selectfile)
-        console.log(this.state.RestaurantInputValue[0].RestaurantType)
-        console.log(this.state.RestaurantInputValue[0].PriceLevel)
     }
 
     selectChange=(event)=>{
         this.setState({RestaurantInputId:event.target.value})
-        this.getReceiveOrder(event.target.value)
-        this.getHistory(event.target.value)
+        this.getReceiveOrder()
+        this.getHistory()
         for(let i=0;i<this.state.selectValue.length;i++){
             if(event.target.value===this.state.selectValue[i].restaurantId){
                 let array=this.state.selectValue[i].category
@@ -228,7 +208,7 @@ export default class Managerpage extends Component {
         for(let i=0;i<this.state.selectValue.length;i++){
             if(this.state.selectValue[i].restaurantId===event.target.value){
                 let array=[...this.state.ProductInputValue]
-                array[0].Category=this.state.selectValue[i].category.category_Id
+                array[0].Category=this.state.selectValue[i].category[0].category_Id
                 this.setState({ProductInputValue:array})
             }
         }
@@ -237,7 +217,6 @@ export default class Managerpage extends Component {
     filechange=(event)=>{
         let img=event.target.files[0]
         this.setState({selectfile:img})
-        console.log(this.state.selectfile)
     }
 
     

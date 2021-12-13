@@ -21,7 +21,7 @@ export default function OrderHistory(props) {
                                             <div className={style.text_style}>Customers name: {props.customerName}</div>
                                         </div>
                                         <div style={{marginTop:"20px"}}>
-                                            Restaurant ID {props.restaurantID}
+                                            Restaurant ID: {props.restaurantID}
                                         </div>
                                     </div>
                                     <div className={style.box_products}>
@@ -34,7 +34,7 @@ export default function OrderHistory(props) {
                                         <div>
                                             <Orderstatus OrderStatus={props.order_status}/>
                                         </div>
-                                        <div style={{marginTop:"10px"}}>Receive time: {props.completionTime}</div>
+                                        <div style={{marginTop:"10px"}}>Completion time: {props.completionTime}</div>
                                         <div style={{marginTop:"10px"}}>Total Price: {props.total_price}</div>
                                     </div>
                                     </div>

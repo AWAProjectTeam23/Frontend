@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import Customerbar from './Customerbar'
 import Customerbody from './Customerbody'
-import data from './data.json'
-import historyData from './history.json'
-import products from './datamenu.json'
 import RestaurantBodyView from './RestaurantBodyView'
 import axios from 'axios'
 
@@ -50,14 +47,12 @@ export default class Customerpage extends Component {
     }
 
     getcategory=(id)=>{
-            console.log(this.state.product)
         let Array=[]
         for(let i=0;i<this.state.items.length;i++){
             if(id===this.state.items[i].restaurantId){
                 let arr=this.state.items[i].category
                 arr.forEach(element=>{
                     if(!Array.includes(element.categoryName)){
-                        console.log(element.categoryName)
                         Array.push(element.categoryName)
                     }
                 });
@@ -67,9 +62,8 @@ export default class Customerpage extends Component {
     }
 
     getRestaurants=()=>{
-        axios.get("http://localhost:8080/public")
+        axios.get("https://awa-project.herokuapp.com/public")
         .then((Response)=>{
-            console.log(Response.data)
             let array=Response.data
             array.forEach(element => {
                 if(element.priceLevel==="1"){
@@ -90,13 +84,12 @@ export default class Customerpage extends Component {
 
     getHistory=()=>{
         let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-        axios.get("http://localhost:8080/customer/OrderHistory",{headers:header})
+        axios.get("https://awa-project.herokuapp.com/customer/OrderHistory",{headers:header})
         .then(Response=>{
-            let array=Response.data.filter(element=> element.order_status==5)
+            let array=Response.data.filter(element=> element.order_status===5)
             array.forEach(element => {
                 element.order_status="Delivered"
             });
-            console.log(array)
             this.setState({history:array})
         })
         .catch(err=>{
@@ -106,17 +99,17 @@ export default class Customerpage extends Component {
 
     getActiveOrders=()=>{
         let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-        axios.get("http://localhost:8080/customer/OrderStatus",{headers:header})
+        axios.get("https://awa-project.herokuapp.com/customer/OrderStatus",{headers:header})
         .then(Response=>{
             let array=Response.data.filter(element=> element.order_status<5)
             for(let i=0;i<array.length;i++){
-                if(array[i].order_status==1){
+                if(array[i].order_status===1){
                     array[i].order_status="Received"
-                }else if(array[i].order_status==2){
+                }else if(array[i].order_status===2){
                     array[i].order_status="Preparing"
-                }else if(array[i].order_status==3){
+                }else if(array[i].order_status===3){
                     array[i].order_status="Ready for delivery"
-                }else if(array[i].order_status==4){
+                }else if(array[i].order_status===4){
                     array[i].order_status="Delivering"
                 }
             }
@@ -139,7 +132,7 @@ export default class Customerpage extends Component {
         }
         console.log(this.state.RestaurantID)
         let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-        axios.post("http://localhost:8080/customer/ShoppingCart",{
+        axios.post("https://awa-project.herokuapp.com/customer/ShoppingCart",{
             restaurant_uuid:this.state.RestaurantID,
             delivery_location:this.state.DeliveryLocation,
             totalPrice:this.state.TotalCost.toString(),
@@ -166,12 +159,10 @@ export default class Customerpage extends Component {
             Cost+=Number(this.state.ShoppingCartItems[i].Price)
         }
         Cost=Number(Cost.toFixed(2))
-        console.log(Cost)
         this.setState({TotalCost:Cost})
     }
 
     addToShoppingCart=(Id)=>{
-        console.log(Id)
         for(let i=0;i<this.state.product.length;i++){
             if(this.state.product[i].item_id===Id){
                 let Array=[...this.state.ShoppingCartItems]
@@ -207,13 +198,11 @@ export default class Customerpage extends Component {
     }
 
     onSearchFieldChange = (event) => {
-        console.log('Keyboard event');
-        console.log(event.target.value);
         this.setState({ productSearchString: event.target.value });
     }
     
     restaurantMenuButton=(id)=>{
-        axios.get("http://localhost:8080/public/prod/"+id)
+        axios.get("https://awa-project.herokuapp.com/public/prod/"+id)
         .then(Response=>{
             this.setState({product:Response.data})
             this.getcategory(id)
@@ -233,7 +222,7 @@ export default class Customerpage extends Component {
             if(Array[i].order_id===id){
                 let status={orderStatusCode:5,order_id:Array[i].order_id}
                 let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-                axios.post("http://localhost:8080/customer/Orders",status,{headers:header})
+                axios.post("https://awa-project.herokuapp.com/customer/Orders",status,{headers:header})
                 .then(Response=>{
                     console.log(Response)
                     this.getActiveOrders()

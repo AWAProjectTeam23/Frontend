@@ -6,7 +6,7 @@ export default function Managerbar(props) {
     return (
         <div className={style.ManagerBar}>
              <div className={style.Logo_margin}>
-                    <Link to="/"><div style={{color:"white"}}><img src={`/images/logo.png`} 
+                    <Link to="/"><div style={{color:"white"}} onClick={()=>props.getReceiveOrder()}><img src={`/images/logo.png`} 
                     height={50}
                     width={190}/></div></Link>
                 </div>

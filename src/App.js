@@ -22,6 +22,7 @@ import { encode } from "base-64";
 class App extends React.Component{
   constructor(props){
     super(props);
+    let navigate=
     this.state={
       Manager:false,
       LoginNameValue:"",
@@ -41,11 +42,10 @@ class App extends React.Component{
   }
 
   Login=()=>{
-    console.log(this.state.LoginNameValue+" "+this.state.LoginPasswordValue+" "+this.state.Manager)
     const encoded=encode(this.state.LoginNameValue+":"+this.state.LoginPasswordValue)
     const header={Authorization:`Basic ${encoded}`}
     if(this.state.Manager===true){
-        axios.post("http://localhost:8080/login",null,{headers:header})
+        axios.post("https://awa-project.herokuapp.com/login",null,{headers:header})
         .then(Response=>{
           sessionStorage.setItem("Token",Response.data.access_token)
           this.LoginWarningText(true)
@@ -61,7 +61,7 @@ class App extends React.Component{
     else{
         const encoded=encode(this.state.LoginNameValue+":"+this.state.LoginPasswordValue)
         const header={Authorization:`Basic ${encoded}`}
-        axios.post("http://localhost:8080/login",null,{headers:header})
+        axios.post("https://awa-project.herokuapp.com/login",null,{headers:header})
         .then(Response=>{
           sessionStorage.setItem("Token",Response.data.access_token)
           this.LoginWarningText(true)
@@ -78,11 +78,9 @@ class App extends React.Component{
 
 LoginName=(event)=>{
   this.setState({LoginNameValue:event.target.value})
-  console.log(event.target.value)
 }
 LoginPasswordInput=(event)=>{
   this.setState({LoginPasswordValue:event.target.value})
-  console.log(event.target.value)
 }
 managerLoginCheckChange=()=>{
   if(this.state.Manager===false){
