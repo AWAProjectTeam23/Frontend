@@ -34,11 +34,18 @@ export default class Managerpage extends Component {
     getRestaurants=()=>{
         axios.get("https://awa-project.herokuapp.com/manager/restaurants",{headers:{Authorization:'Bearer '+sessionStorage.getItem("Token")}})
         .then(Response=>{
-            this.setState({selectValue:Response.data},()=>this.getReceiveOrder())
+            this.setState({selectValue:Response.data},()=>this.getcategory())
         })
         .catch(err=>{
             console.log(err)
         })
+    }
+
+    getcategory=()=>{
+        if(CategoryValues===[]){
+        let array=this.state.selectValue[0].category
+        this.setState({CategoryValues:array})
+        }
     }
 
     getHistory=()=>{
