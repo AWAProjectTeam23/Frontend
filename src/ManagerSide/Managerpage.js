@@ -42,7 +42,7 @@ export default class Managerpage extends Component {
     }
 
     getcategory=()=>{
-        if(CategoryValues===[]){
+        if(CategoryValues.length===0){
         let array=this.state.selectValue[0].category
         this.setState({CategoryValues:array})
         }
