@@ -45,6 +45,7 @@ export default class Managerpage extends Component {
         if(this.state.CategoryValues===null){
         let array=this.state.selectValue[0].category
         this.setState({CategoryValues:array})
+        }
     }
 
     getHistory=()=>{
