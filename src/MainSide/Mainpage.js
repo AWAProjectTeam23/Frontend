@@ -60,8 +60,7 @@ componentDidMount=()=>{
 GetRestaurantProducts=(id)=>{
     axios.get("https://awa-project.herokuapp.com/public/prod/"+id)
     .then(Response=>{
-        this.setState({product:Response.data})
-        this.getCategory(id)
+        this.setState({product:Response.data},()=>this.getCategory(id))
     })
     .catch(err=>{
         console.log(err)
@@ -129,6 +128,7 @@ managerCheckChange=()=>{
 }
 clearSearchBar=()=>{
     this.setState({ productSearchString:""});
+    this.setState({categorySearch:""})
 }
 
 getCategory=(id)=>{
