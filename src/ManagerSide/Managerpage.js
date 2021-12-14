@@ -14,7 +14,7 @@ export default class Managerpage extends Component {
             CategoryValues:null,
             RestaurantType:[{Type:"Buffet"},{Type:"Fast food"},{Type:"Fast casual"},{Type:"Casual dining"},{Type:"Fine dining"}],
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
-            ProductInputValue:[{Restaurant:" ",Category:" ",Name:" ",Description:" ",Price:" "}],
+            ProductInputValue:[{Restaurant:"",Category:"",Name:"",Description:"",Price:""}],
             RestaurantInputValue:[{Name:"",Address:"",OperatingHours:"",RestaurantType:"",PriceLevel:""}],
             CategoryInputValue:null,
             RestaurantInputId:null,
@@ -45,7 +45,6 @@ export default class Managerpage extends Component {
         if(this.state.CategoryValues===null){
         let array=this.state.selectValue[0].category
         this.setState({CategoryValues:array})
-        }
     }
 
     getHistory=()=>{
@@ -174,7 +173,11 @@ export default class Managerpage extends Component {
     ProductCreate=()=>{
         const fd= new FormData();
         fd.append("image",this.state.selectfile)
-        fd.append('category_uuid',this.state.ProductInputValue[0].Category)
+        if(this.state.ProductInputValue[0].Category.length>0){
+            fd.append('category_uuid',this.state.ProductInputValue[0].Category)
+        }else{
+            fd.append('category_uuid',this.state.CategoryValues[0].category_Id)
+        }
         fd.append('productName',this.state.ProductInputValue[0].Name)
         fd.append('product_description',this.state.ProductInputValue[0].Description)
         fd.append('price',this.state.ProductInputValue[0].Price)
