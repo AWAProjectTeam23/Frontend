@@ -15,7 +15,7 @@ export default class Customerpage extends Component {
             productSearchString: "",
             categorySearch:"",
             categories:[],
-            DeliveryLocation:"",
+            DeliveryLocation:null,
             ShoppingCartItems:[],
             TotalCost:0,
             ShoppingCartOpen:false,

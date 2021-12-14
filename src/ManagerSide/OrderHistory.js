@@ -34,7 +34,7 @@ export default function OrderHistory(props) {
                                         <div>
                                             <Orderstatus OrderStatus={props.order_status}/>
                                         </div>
-                                        <div style={{marginTop:"10px"}}>Completion time: {props.completionTime}</div>
+                                        <div style={{marginTop:"10px"}}>Completion time: {props.completionTimeStamp}</div>
                                         <div style={{marginTop:"10px"}}>Total Price: {props.total_price}</div>
                                     </div>
                                     </div>
