@@ -146,7 +146,7 @@ export default class Managerpage extends Component {
 
     CategoryCreate=()=>{
         let restid
-        if(this.state.selectValue.length===1){
+        if(this.state.selectValue.length<1){
             restid=this.state.selectValue.restaurantId
         }else{
             restid=this.state.RestaurantInputId
