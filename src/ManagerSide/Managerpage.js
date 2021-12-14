@@ -145,9 +145,14 @@ export default class Managerpage extends Component {
     }
 
     CategoryCreate=()=>{
-        console.log(this.state.RestaurantInputValue)
+        let restid
+        if(this.state.selectValue.length===1){
+            restid=this.state.selectValue.restaurantId
+        }else{
+            restid=this.state.RestaurantInputId
+        }
         let header={Authorization:'Bearer '+sessionStorage.getItem('Token')}
-        axios.post("https://awa-project.herokuapp.com/manager/addCategory",{restaurantId:this.state.RestaurantInputId,
+        axios.post("https://awa-project.herokuapp.com/manager/addCategory",{restaurantId:restid,
         categoryName:this.state.CategoryInputValue},
         {headers:header})
         .then(Response=>{
