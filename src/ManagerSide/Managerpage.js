@@ -11,7 +11,7 @@ export default class Managerpage extends Component {
             item: [],
             history: [],
             selectValue: [],
-            CategoryValues:[],
+            CategoryValues:null,
             RestaurantType:[{Type:"Buffet"},{Type:"Fast food"},{Type:"Fast casual"},{Type:"Casual dining"},{Type:"Fine dining"}],
             PriceLevel:[{Level:"€"},{Level:"€€"},{Level:"€€€"},{Level:"€€€€"}],
             ProductInputValue:[{Restaurant:" ",Category:" ",Name:" ",Description:" ",Price:" "}],
@@ -42,7 +42,7 @@ export default class Managerpage extends Component {
     }
 
     getcategory=()=>{
-        if(CategoryValues.length===0){
+        if(CategoryValues===null){
         let array=this.state.selectValue[0].category
         this.setState({CategoryValues:array})
         }
